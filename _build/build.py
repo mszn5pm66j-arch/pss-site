@@ -1,6 +1,7 @@
 # Génère les pages intérieures du site PSS (python3 _build/build.py depuis la racine du dépôt).
 # Le gabarit commun (en-tête, menu, carrousel du bas, avatar, pied de page) est ajouté par js/site.js.
 import os
+import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AR = '<svg viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6"/></svg>'
@@ -20,6 +21,7 @@ def back(label, href):
 
 
 def head(kick, title, lead=None, backto=None):
+    kick = re.sub(r'^\d+(\.\d+)?\s*·\s*', '', kick)
     h = back(*backto) if backto else ''
     h += f'<div class="kick">{kick}</div><h1>{title}</h1>'
     if lead:
@@ -28,6 +30,7 @@ def head(kick, title, lead=None, backto=None):
 
 
 def sec(sub, body='', links=(), first=False):
+    sub = re.sub(r'^\d+\.\d+\s*/\s*', '', sub)
     ls = ''.join(lnk(*l) for l in links)
     return f'<section class="sec{" first" if first else ""}"><div class="sub">{sub}</div>{body}{"<div class=row>" + ls + "</div>" if ls else ""}</section>'
 
@@ -110,9 +113,9 @@ PAGES = {
 
     'academie': ('academie', 'Académie PSS · Apprendre et progresser', 'Formations et accompagnement métier avec Praetorian Sentinel Smart.',
                  head('04 · Académie PSS', 'Apprendre et progresser', 'Des formations et un accompagnement métier.') +
-                 sec('01 / Formation', p('Formations et accompagnement métier.'), [('Parlons de vos besoins', 'contact.html')], first=True) +
-                 sec('02 / Veille', p('Suivi des évolutions de votre métier.'), [('Parlons de vos besoins', 'contact.html')]) +
-                 sec('03 / Mise en pratique', p('Application des connaissances à votre projet.'), [('Parlons de vos besoins', 'contact.html')]) + HUD),
+                 sec('Formation', p('Formations et accompagnement métier.'), [('Parlons de vos besoins', 'contact.html')], first=True) +
+                 sec('Veille', p('Suivi des évolutions de votre métier.'), [('Parlons de vos besoins', 'contact.html')]) +
+                 sec('Mise en pratique', p('Application des connaissances à votre projet.'), [('Parlons de vos besoins', 'contact.html')]) + HUD),
 
     'toutes-les-offres': ('offres', 'Nos offres · Un accompagnement adapté', 'Diagnostic, conseil et pilotage.',
                           head('05 · Nos offres', 'Un accompagnement adapté', 'Diagnostic, conseil et pilotage.') +
@@ -176,7 +179,7 @@ PAGES['faq'] = ('contact', 'Questions fréquentes · Vos questions, nos réponse
                 '<div class="row">' + lnk('Poser une autre question', 'contact.html') + '</div></section>')
 
 PLAN_EXTRA = [('·', 'Espace client', 'espace.html', [('Base documentaire', 'documentation.html')])]
-SECS = [('01', 'Accueil', 'index.html', [('Pour qui ?', 'index.html#pour-qui'), ('Nos services', 'index.html#services'), ('AIT', 'index.html#agent')]),
+SECS = [('01', 'Accueil', 'index.html', [('Pour qui ?', 'index.html#pour-qui'), ('Nos solutions', 'index.html#services'), ('AIT', 'index.html#agent')]),
         ('02', 'Le cabinet', 'cabinet.html', [('Notre méthode', 'methode.html'), ('Nos références', 'references.html'), ('Notre conformité', 'notreconformite.html'), ('Nous rejoindre', 'carrieres.html')]),
         ('03', 'Nos segments', 'divisions.html', [('3.1 Réglementaire &amp; investissement', 'division-2.html'), ('3.2 Maîtrise d\'ouvrage', 'division-3.html'), ('3.3 Ingénierie financière', 'division-4.html'), ('3.4 Architecture intelligente augmentée', 'division-1.html')]),
         ('04', 'Académie PSS', 'academie.html', []),
@@ -185,7 +188,7 @@ SECS = [('01', 'Accueil', 'index.html', [('Pour qui ?', 'index.html#pour-qui'), 
         ('07', 'Contactez-nous', 'contact.html', [('Contact', 'contact.html'), ('Questions fréquentes', 'faq.html')])]
 LEG = [('Mentions légales', 'mentions.html'), ('Confidentialité', 'confidentialite.html'), ('Conditions', 'conditions.html'), ('Conformité', 'notreconformite.html'), ('FAQ', 'faq.html'), ('Plan du site', 'plan.html')]
 tree = '<ul class="tree">' + ''.join(
-    f'<li><a href="{h}"><span>{n}</span>{t}</a>' + ('<ul>' + ''.join(f'<li><a href="{x}">{y}</a></li>' for y, x in s) + '</ul>' if s else '') + '</li>'
+    f'<li><a href="{h}">{t}</a>' + ('<ul>' + ''.join(f'<li><a href="{x}">{re.sub(chr(94) + r"\d+\.\d+ ", "", y)}</a></li>' for y, x in s) + '</ul>' if s else '') + '</li>'
     for n, t, h, s in SECS + PLAN_EXTRA) + '</ul>'
 PAGES['plan'] = ('accueil', 'Plan du site', 'Toutes les pages du site Praetorian Sentinel Smart.',
                  head('Plan du site', 'Toutes les pages') + '<section class="sec first"><div class="sub">Rubriques</div>' + tree + '</section>' +

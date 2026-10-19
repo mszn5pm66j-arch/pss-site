@@ -73,8 +73,8 @@
   var here = location.pathname.split('/').pop() || 'index.html';
   var groups = SECTIONS.concat(EXTRA).map(function (s) {
     var on = s.id === secId;
-    return '<div class="grp"><a class="top' + (on ? ' on' : '') + '" href="' + (isHome && s.id !== 'accueil' && s.id !== 'espace' ? 'index.html#' + s.id : s.href) + '"><span>' + s.n + '</span>' + s.t + '</a>' +
-      (s.subs.length ? '<div class="subs">' + s.subs.map(function (x) { return '<a href="' + x[1] + '"' + (x[1] === here ? ' class="on"' : '') + '>' + x[0] + '</a>'; }).join('') + '</div>' : '') + '</div>';
+    return '<div class="grp"><a class="top' + (on ? ' on' : '') + '" href="' + (isHome && s.id !== 'accueil' && s.id !== 'espace' ? 'index.html#' + s.id : s.href) + '">' + s.t + '</a>' +
+      (s.subs.length ? '<div class="subs">' + s.subs.map(function (x) { return '<a href="' + x[1] + '"' + (x[1] === here ? ' class="on"' : '') + '>' + x[0].replace(/^\d+\.\d+\s+/, '') + '</a>'; }).join('') + '</div>' : '') + '</div>';
   }).join('');
   var ov = el('<nav class="ov" aria-label="Menu principal"><div class="ov-in">' + groups + footer() + '</div></nav>');
   stage.appendChild(ov);
@@ -97,7 +97,7 @@
   var cur = secIdx;
   function drawNav(k, caption) {
     cur = k;
-    var h = '<div class="cap' + (caption ? ' on' : '') + '">' + (caption ? '<div class="t"><b>' + items[k].n + '</b><i>/</i>' + items[k].t.toUpperCase() + '</div><div class="s">' + (items[k].s || '') + '</div>' : '') + '</div><div class="labs">';
+    var h = '<div class="cap' + (caption ? ' on' : '') + '">' + (caption ? '<div class="t">' + items[k].t.toUpperCase() + '</div><div class="s">' + (items[k].s || '') + '</div>' : '') + '</div><div class="labs">';
     [k - 1, k, k + 1].forEach(function (j, p) {
       if (j < 0 || j >= items.length) return;
       h += '<a class="lab p' + p + (p === 1 ? ' on' : '') + '" href="' + items[j].href + '" data-k="' + j + '">' + (p === 1 ? items[j].t : items[j].t.replace('Nos segments', 'Nos<br>segments').replace('Académie PSS', 'Académie<br>PSS').replace('Contactez-nous', 'Contactez-<br>nous')) + '</a>';

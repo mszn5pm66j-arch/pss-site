@@ -159,10 +159,10 @@ button{font-family:inherit}
 .ov-in{position:absolute;left:0;right:0;top:calc(226*var(--u));bottom:0;overflow-y:auto;padding:6px 24px 30px;-webkit-overflow-scrolling:touch}
 .ov .grp{border-top:1px solid var(--line);padding:13px 0 12px}
 .ov .grp:first-child{border-top:0}
-.ov .top{display:flex;gap:14px;align-items:baseline;font-size:18px;line-height:22px;color:var(--ink);font-weight:400}
+.ov .top{display:flex;gap:0;align-items:baseline;font-size:18px;line-height:22px;color:var(--ink);font-weight:400}
 .ov .top span{font-family:'PSS Mono',monospace;font-size:11px;color:var(--mono);letter-spacing:2px;min-width:22px}
 .ov .top.on{color:var(--blue)}
-.ov .subs{margin:8px 0 0 36px;display:flex;flex-direction:column;gap:7px}
+.ov .subs{margin:8px 0 0 14px;display:flex;flex-direction:column;gap:7px}
 .ov .subs a{font-size:13.5px;line-height:17px;color:var(--soft);font-weight:300}
 .ov .subs a:hover,.ov .subs a.on{color:var(--blue)}
 .open .ov .grp{animation:rise .5s both}
@@ -227,7 +227,7 @@ button{font-family:inherit}
 .tree>li{padding:11px 0;border-bottom:1px solid rgba(90,170,210,.12)}
 .tree>li>a{font-size:15px;color:var(--ink)}
 .tree>li>a span{font-family:'PSS Mono',monospace;color:var(--mono);font-size:11px;margin-right:10px;letter-spacing:1px}
-.tree ul{list-style:none;margin:7px 0 0 32px;padding:0;display:flex;flex-direction:column;gap:6px}
+.tree ul{list-style:none;margin:7px 0 0 18px;padding:0;display:flex;flex-direction:column;gap:6px}
 .tree ul a{font-size:13px;color:var(--soft);font-weight:300}
 .tree ul a:hover{color:var(--blue)}
 .ft{margin-top:46px;border-top:1px solid var(--line);padding:18px 0 0}
