@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Praetorian Sentinel Smart</title>
+<meta name="description" content="Votre projet en Algérie : trouvez votre profil, découvrez nos services et échangez avec AIT.">
+<link rel="icon" href="assets/emblem.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="index" data-sec="accueil">
+<div class="stage">
+
+  <!-- Écran 1 : les trois questions -->
+  <section class="screen on" id="s-questions" aria-label="Accueil">
+    <button class="q" data-go="pour-qui" style="left:calc(50% - 150px);width:300px;top:19.8%">Qui accompagnons-nous<b>?</b></button>
+    <span class="dot" style="left:calc(50% + 31px);top:25.7%"></span>
+    <span class="dash" style="left:calc(50% + 57px);top:30%"></span>
+
+    <button class="q" data-go="services" style="left:16px;width:200px;top:50.2%">Serions-nous<br>utiles pour vous<b>?</b></button>
+    <span class="dot" style="left:43px;top:51.3%"></span>
+    <span class="dash" style="left:172px;top:64.3%"></span>
+
+    <button class="q" data-go="agent" style="left:calc(50% - 164px);width:200px;top:65%">Vous n'arrivez<br>pas à vous situer<b>?</b></button>
+    <span class="dot" style="left:calc(50% + 34px);top:68.1%"></span>
+    <span class="dash" style="left:calc(50% - 9px);top:79.1%"></span>
+  </section>
+
+  <!-- Écran 1 bis : Qui accompagnons-nous ? -->
+  <section class="screen" id="s-pour-qui" aria-label="Pour qui ?">
+    <div class="panel">
+      <a class="back" href="#"><svg viewBox="0 0 12 12"><path d="M8 2 4 6l4 4"/></svg> Accueil</a>
+      <div class="kick">1.1 · Pour qui ?</div>
+      <h1 style="margin:18px 0 0;font-size:23px;line-height:26.3px;font-weight:400">Qui accompagnons-nous ?</h1>
+      <p class="lead">Situez-vous en deux choix : nous vous indiquons par où commencer.</p>
+      <section class="sec first">
+        <div class="sub">Vous êtes établi…</div>
+        <div class="fld"><div class="chips" data-k="zone">
+          <button class="chip" data-v="algerie">En Algérie</button>
+          <button class="chip" data-v="diaspora">Dans la diaspora</button>
+          <button class="chip" data-v="etranger">À l'étranger, non algérien</button>
+        </div></div>
+      </section>
+      <section class="sec">
+        <div class="sub">Vous êtes…</div>
+        <div class="fld"><div class="chips" data-k="profil">
+          <button class="chip" data-v="particulier">Particulier</button>
+          <button class="chip" data-v="investisseur">Investisseur</button>
+          <button class="chip" data-v="porteur">Porteur de projet</button>
+          <button class="chip" data-v="entreprise">Entreprise</button>
+          <button class="chip" data-v="pro">Professionnel</button>
+        </div></div>
+        <div id="pq-res"><p class="msg">Choisissez une réponse dans chacune des deux listes.</p></div>
+      </section>
+    </div>
+  </section>
+
+  <!-- Écran 2 : Nos services -->
+  <section class="screen" id="s-services" aria-label="Nos services">
+    <div class="panel">
+      <a class="back" href="#"><svg viewBox="0 0 12 12"><path d="M8 2 4 6l4 4"/></svg> Accueil</a>
+      <div class="kick">1.2 · Nos services</div>
+      <h1 style="margin:18px 0 0;font-size:23px;line-height:26.3px;font-weight:400">Serions-nous utiles pour vous ?</h1>
+      <p class="lead">Cinq façons dont le cabinet intervient sur votre projet.</p>
+      <section class="sec first">
+        <a class="svc" href="diagnostic.html"><span class="n">01</span><span><div class="t">Orienter</div><div class="d">Faire le point et choisir la bonne première étape.</div></span><svg viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6"/></svg></a>
+        <a class="svc" href="division-2.html"><span class="n">02</span><span><div class="t">Monter le dossier</div><div class="d">Foncier, autorisations, montages juridiques et dossiers bancaires.</div></span><svg viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6"/></svg></a>
+        <a class="svc" href="division-3.html"><span class="n">03</span><span><div class="t">Piloter</div><div class="d">Du cahier des charges à la réception des travaux.</div></span><svg viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6"/></svg></a>
+        <a class="svc" href="contact.html"><span class="n">04</span><span><div class="t">Trouver un partenaire</div><div class="d">Mettre en relation porteurs algériens et partenaires étrangers.</div></span><svg viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6"/></svg></a>
+        <a class="svc" href="division-1.html"><span class="n">05</span><span><div class="t">Moderniser par l'IA</div><div class="d">Assistants et automatisations adaptés à votre activité.</div></span><svg viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6"/></svg></a>
+      </section>
+    </div>
+  </section>
+
+  <!-- Écran 3 : AIT -->
+  <section class="screen" id="s-agent" aria-label="AIT">
+    <div class="panel">
+      <a class="back" href="#"><svg viewBox="0 0 12 12"><path d="M8 2 4 6l4 4"/></svg> Accueil</a>
+      <div class="kick">1.3 · AIT</div>
+      <h1 style="margin:18px 0 0;font-size:23px;line-height:26.3px;font-weight:400">Vous n'arrivez pas à vous situer ?</h1>
+      <p class="lead">Décrivez votre situation en une phrase : AIT (Artificial Intelligence Talk) transmet votre demande au cabinet.</p>
+      <section class="sec first">
+        <div class="sub">Parlez à AIT, notre agent</div>
+        <form class="ait" id="ait-f"><input id="ait-i" type="text" placeholder="Ex. : je veux acheter un logement à Oran" autocomplete="off" aria-label="Votre message">
+          <button type="submit" aria-label="Envoyer"><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button></form>
+        <div class="fld"><div class="lb">Ou choisissez une phrase</div><div class="chips" id="ait-s">
+          <button class="chip">Je veux acheter un logement en Algérie</button>
+          <button class="chip">Je lance une entreprise</button>
+          <button class="chip">Je cherche un partenaire algérien</button>
+          <button class="chip">Je veux moderniser mon activité</button>
+        </div></div>
+        <p class="msg" id="ait-m"></p>
+        <p class="dim" style="font-size:12px;line-height:18px;color:var(--soft);padding-left:12px;margin-top:14px">AIT n'est pas encore relié à un service d'intelligence artificielle : votre message s'ouvre dans WhatsApp, où le cabinet vous répond.</p>
+      </section>
+    </div>
+  </section>
+
+</div>
+<script src="js/site.js"></script>
+<script>
+(function(){
+  var MAP={'':0,'pour-qui':0,'services':1,'agent':2};
+  var ids={'':'s-questions','pour-qui':'s-pour-qui','services':'s-services','agent':'s-agent'};
+  function show(){
+    var h=(location.hash||'').replace('#','');
+    if(!(h in ids)) h='';
+    document.querySelectorAll('.screen').forEach(function(s){s.classList.toggle('on',s.id===ids[h]);});
+    PSS.setNav(MAP[h]);
+    PSS.toggleMenu(false);
+  }
+  window.addEventListener('hashchange',show); show();
+  document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){location.hash=b.getAttribute('data-go');});});
+  document.querySelectorAll('.back[href="#"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();history.pushState('',document.title,location.pathname);show();});});
+
+  /* orientation : profil × zone */
+  var sel={zone:null,profil:null};
+  var A='<svg viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6"/></svg>';
+  function L(t,h,ext){return '<a class="lnk" href="'+h+'"'+(ext?' target="_blank" rel="noopener"':'')+'>'+t+' '+A+'</a>';}
+  var HZ='https://mszn5pm66j-arch.github.io/Cr-dit-22/Credittttttt.html#/niveau-1';
+  var P={
+    particulier:{t:'Logement, démarches et autorisations',d:'Le pôle Réglementaire &amp; investissement vous accompagne pour le foncier, les autorisations et vos démarches.',l:[['Réglementaire &amp; investissement','division-2.html']]},
+    investisseur:{t:'Cadre légal et montage financier',d:'Autorisations, structuration de la société et préparation des échanges avec les banques.',l:[['Réglementaire &amp; investissement','division-2.html'],['Ingénierie financière','division-4.html']]},
+    porteur:{t:'Du cahier des charges au chantier',d:'Nous cadrons votre projet puis nous le pilotons jusqu\'à la réception des travaux.',l:[["Maîtrise d'ouvrage",'division-3.html'],['Réglementaire &amp; investissement','division-2.html']]},
+    entreprise:{t:'Structurer et moderniser votre activité',d:'Montages financiers, relations bancaires et assistants intelligents pour votre activité.',l:[['Ingénierie financière','division-4.html'],['Architecture intelligente augmentée','division-1.html']]},
+    pro:{t:'Assistants métier et formation',d:'Des assistants et automatisations adaptés à votre métier, et des formations pour les utiliser.',l:[['Architecture intelligente augmentée','division-1.html'],['Académie PSS','academie.html']]}
+  };
+  var Z={algerie:'Nous vous recevons à Oran ou à distance.',diaspora:'Nous intervenons à distance depuis Oran : France, Espagne, Allemagne, Belgique, Québec.',etranger:'Nous vous aidons aussi à trouver un partenaire algérien pour votre projet.'};
+  function res(){
+    var box=document.getElementById('pq-res');
+    if(!sel.zone||!sel.profil){box.innerHTML='<p class="msg">'+(sel.zone||sel.profil?'Encore un choix dans l\'autre liste.':'Choisissez une réponse dans chacune des deux listes.')+'</p>';return;}
+    var r=P[sel.profil], links=r.l.slice();
+    if(sel.profil==='particulier'&&sel.zone==='diaspora'){r={t:'Logement ou crédit en Algérie depuis l\'étranger',d:'Algérie Horizon prépare votre dossier de crédit logement en quatre étapes, la première étant gratuite.'};links=[['Accéder à Crédit Logement',HZ,1],['Réglementaire &amp; investissement','division-2.html']];}
+    if(sel.zone==='etranger') links.push(['Trouver un partenaire','contact.html']);
+    box.innerHTML='<div class="res"><h3>'+r.t+'</h3><p>'+r.d+'</p><p style="color:var(--soft)">'+Z[sel.zone]+'</p><div class="row">'+links.map(function(x){return L(x[0],x[1],x[2]);}).join('')+L('Commencer par un diagnostic','diagnostic.html')+'</div></div>';
+    var pn=box.closest('.panel');pn.scrollTo({top:box.offsetTop-120,behavior:'smooth'});
+  }
+  document.querySelectorAll('#s-pour-qui .chips').forEach(function(g){
+    g.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;
+      g.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('on',c===b);});
+      sel[g.getAttribute('data-k')]=b.getAttribute('data-v');res();});
+  });
+
+  /* AIT : vers WhatsApp */
+  var inp=document.getElementById('ait-i'),m=document.getElementById('ait-m');
+  document.getElementById('ait-s').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;inp.value=b.textContent;inp.focus();m.textContent='Touchez la flèche pour envoyer.';m.className='msg';});
+  document.getElementById('ait-f').addEventListener('submit',function(e){e.preventDefault();
+    var t=inp.value.trim();
+    if(!t){m.textContent='Écrivez une phrase ou choisissez-en une ci-dessous.';m.className='msg err';return;}
+    m.textContent='WhatsApp s\'ouvre avec votre message.';m.className='msg';
+    window.open(PSS.wa('Bonjour Praetorian Sentinel Smart, '+t),'_blank');
+  });
+})();
+</script>
+</body>
+</html>

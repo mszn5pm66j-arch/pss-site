@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Donner votre avis · Praetorian Sentinel Smart</title>
+<meta name="description" content="Parcours réservé aux anciens clients : sans rédaction, sans inscription.">
+<link rel="icon" href="assets/emblem.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="donner-mon-avis" data-sec="avis">
+<div class="stage">
+<main class="page">
+  <a class="back" href="avis.html"><svg viewBox="0 0 12 12"><path d="M8 2 4 6l4 4"/></svg> Avis clients</a>
+  <div class="kick">6.2 · Donner votre avis</div>
+  <h1>Votre expérience avec PSS</h1>
+  <p class="lead">Parcours réservé aux anciens clients, invités par lien WhatsApp. Sans rédaction. Sans inscription.</p>
+  <div class="prog" id="prog"></div>
+  <div class="phase"><span id="ph1" class="on">Votre expérience</span><span id="ph2">Votre fiche</span><span id="ph3">Merci</span></div>
+  <section class="sec" id="step" style="margin-top:16px"></section>
+</main>
+</div>
+<script src="js/site.js"></script>
+<script>
+(function(){
+  var S={statut:null,presta:null,notes:{},photo:null,ok:false},i=0;
+  var STATUTS=['Particulier','Investisseur','Porteur de projet','Entreprise','Professionnel'];
+  var PRESTA={
+    'Particulier':['Crédit logement depuis l\'étranger','Démarches et autorisations','Suivi de travaux','Autre accompagnement'],
+    'Investisseur':['Cadre légal et autorisations','Montage financier','Pilotage de projet','Autre accompagnement'],
+    'Porteur de projet':['Diagnostic de projet','Cahier des charges','Pilotage de chantier','Autre accompagnement'],
+    'Entreprise':['Plateforme ou assistant IA','Structuration et financement','Formation','Autre accompagnement'],
+    'Professionnel':['Assistant IA métier','Formation','Base documentaire','Autre accompagnement']};
+  var CRIT=[['rea','Réactivité','Le cabinet a-t-il répondu rapidement ?'],['del','Délais','Les délais annoncés ont-ils été tenus ?'],['qua','Qualité','Comment jugez-vous la qualité du travail ?'],['com','Compréhension','Votre besoin a-t-il été bien compris ?']];
+  var LV=['','Insuffisant','Moyen','Bien','Très bien','Excellent'];
+  var STAR='<svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>';
+  var box=document.getElementById('step'),prog=document.getElementById('prog');
+  prog.innerHTML=new Array(8).join('<span></span>');
+  function chips(list,cur,key){return '<div class="fld"><div class="chips">'+list.map(function(v){return '<button type="button" class="chip'+(v===cur?' on':'')+'" data-k="'+key+'" data-v="'+PSS.esc(v)+'">'+v+'</button>';}).join('')+'</div></div>';}
+  function nav(canNext,label){return '<div class="navbtn"><button type="button" class="btn" id="bk">Retour</button><button type="button" class="btn pri" id="nx"'+(canNext?'':' disabled')+'>'+(label||'Suivant')+'</button></div>';}
+  function phase(n){['ph1','ph2','ph3'].forEach(function(id,k){document.getElementById(id).classList.toggle('on',k===n);});}
+  function draw(){
+    prog.querySelectorAll('span').forEach(function(s,k){s.classList.toggle('on',k<=i&&i<7);});
+    if(i>=7) prog.querySelectorAll('span').forEach(function(s){s.classList.add('on');});
+    var h='';
+    if(i===0){phase(0);h='<div class="sub">Étape 1 / 7 · Vous étiez…</div><p class="dim">Choisissez votre statut au moment de la prestation.</p>'+chips(STATUTS,S.statut,'statut')+nav(!!S.statut);}
+    else if(i===1){phase(0);h='<div class="sub">Étape 2 / 7 · La prestation</div><p class="dim">Quelle prestation le cabinet a-t-il réalisée pour vous ?</p>'+chips(PRESTA[S.statut],S.presta,'presta')+nav(!!S.presta);}
+    else if(i>=2&&i<=5){phase(0);var c=CRIT[i-2],n=S.notes[c[0]]||0;
+      h='<div class="sub">Étape '+(i+1)+' / 7 · '+c[1]+'</div><p class="dim">'+c[2]+'</p><div class="stars" data-c="'+c[0]+'">'+[1,2,3,4,5].map(function(k){return '<button type="button" aria-label="'+k+' sur 5" data-n="'+k+'"'+(k<=n?' class="on"':'')+'>'+STAR+'</button>';}).join('')+'</div><div class="lvl">'+LV[n]+'</div>'+nav(n>0);}
+    else if(i===6){phase(0);h='<div class="sub">Étape 7 / 7 · Photo et autorisation</div><p class="dim">Ajoutez une photo du projet (facultatif). Floutez ou recadrez les informations confidentielles avant. La photo reste sur votre appareil.</p>'+
+      '<label class="photo" for="ph">'+(S.photo?'<img src="'+S.photo+'" alt="Photo du projet">Changer la photo':'Ajouter une photo du projet')+'</label><input type="file" id="ph" accept="image/*" hidden>'+
+      '<label class="check"><input type="checkbox" id="ok"'+(S.ok?' checked':'')+'><span>J\'autorise Praetorian Sentinel Smart à publier cette fiche sur sa page professionnelle.</span></label>'+nav(S.ok,'Créer ma fiche');}
+    else if(i===7){phase(1);h='<div class="sub">Votre fiche</div><p class="dim">Enregistrez votre fiche, puis publiez-la sur la page Facebook de PSS.</p><div class="card-prev" id="prev"><p class="msg">Création de la fiche…</p></div>'+
+      '<div class="row" id="acts"></div><div class="navbtn"><button type="button" class="btn" id="bk">Modifier</button><button type="button" class="btn pri" id="nx">J\'ai partagé ma fiche</button></div>';}
+    else {phase(2);h='<div class="sub" id="smart-gift">Merci</div><p>Merci pour votre retour : il aide d\'autres porteurs de projet à nous choisir.</p>'+
+      '<p class="dim">Smart Gift : en remerciement, le cabinet vous offre un diagnostic global de votre page Facebook professionnelle.</p>'+
+      '<div class="row"><a class="lnk" target="_blank" rel="noopener" href="'+PSS.wa('Bonjour PSS, je viens de partager mon avis et je souhaite recevoir mon Smart Gift : le diagnostic de ma page Facebook professionnelle.')+'">Recevoir mon Smart Gift '+PSS.ARROW+'</a><a class="lnk" href="avis.html">Retour aux avis '+PSS.ARROW+'</a></div>';}
+    box.innerHTML=h;
+    if(i===7) card();
+  }
+  box.addEventListener('click',function(e){
+    var c=e.target.closest('.chip');
+    if(c){S[c.dataset.k]=c.dataset.v;if(c.dataset.k==='statut')S.presta=null;draw();return;}
+    var st=e.target.closest('.stars button');
+    if(st){S.notes[st.parentNode.dataset.c]=+st.dataset.n;draw();return;}
+    if(e.target.closest('#bk')){i=Math.max(0,i-1);if(i===7)i=6;draw();return;}
+    if(e.target.closest('#nx')&&!e.target.closest('#nx').disabled){i++;draw();box.parentNode.scrollTop=0;}
+  });
+  box.addEventListener('change',function(e){
+    if(e.target.id==='ok'){S.ok=e.target.checked;document.getElementById('nx').disabled=!S.ok;}
+    if(e.target.id==='ph'&&e.target.files[0]){var r=new FileReader();r.onload=function(){S.photo=r.result;draw();};r.readAsDataURL(e.target.files[0]);}
+  });
+
+  function img(src){return new Promise(function(ok){var im=new Image();im.onload=function(){ok(im);};im.onerror=function(){ok(null);};im.src=src;});}
+  function card(){
+    var W=1080,H=1350,c=document.createElement('canvas');c.width=W;c.height=H;var x=c.getContext('2d');
+    Promise.all([img('assets/fond.jpg'),img('assets/emblem.png'),img('assets/wordmark.png'),S.photo?img(S.photo):null,document.fonts.load('40px Jura')]).then(function(r){
+      var bg=r[0],em=r[1],wm=r[2],ph=r[3];
+      x.fillStyle='#070d15';x.fillRect(0,0,W,H);
+      if(bg){var s=Math.max(W/bg.width,H/bg.height);x.globalAlpha=.85;x.drawImage(bg,(W-bg.width*s)/2,0,bg.width*s,bg.height*s);x.globalAlpha=1;}
+      x.fillStyle='rgba(4,8,13,.55)';x.fillRect(0,0,W,H);
+      if(em)x.drawImage(em,60,52,112,108); if(wm)x.drawImage(wm,190,48,520,116);
+      x.strokeStyle='rgba(129,207,250,.35)';x.lineWidth=2;x.beginPath();x.moveTo(60,196);x.lineTo(W-60,196);x.stroke();
+      x.fillStyle='#81cffa';x.font='30px Jura';x.fillText('RETOUR D\'EXPÉRIENCE CLIENT',60,262);
+      x.fillStyle='#e4edf3';x.font='54px Jura';x.fillText(S.statut,60,336);
+      x.fillStyle='#b9c7d2';x.font='36px Jura';x.fillText(S.presta,60,392);
+      var y=440;
+      if(ph){var bw=W-120,bh=380,s2=Math.max(bw/ph.width,bh/ph.height);x.save();x.beginPath();x.rect(60,y,bw,bh);x.clip();x.drawImage(ph,60+(bw-ph.width*s2)/2,y+(bh-ph.height*s2)/2,ph.width*s2,ph.height*s2);x.restore();
+        x.strokeStyle='rgba(129,207,250,.5)';x.strokeRect(60,y,bw,bh);y+=420;} else y+=30;
+      CRIT.forEach(function(cr){var n=S.notes[cr[0]]||0;x.fillStyle='#e4edf3';x.font='38px Jura';x.fillText(cr[1],60,y+36);
+        for(var k=0;k<5;k++){var cx=640+k*78,cy=y+22;x.beginPath();for(var j=0;j<10;j++){var a=-Math.PI/2+j*Math.PI/5,rr=j%2?12:28;x.lineTo(cx+rr*Math.cos(a),cy+rr*Math.sin(a));}x.closePath();
+          if(k<n){x.fillStyle='#81cffa';x.shadowColor='rgba(129,207,250,.7)';x.shadowBlur=14;x.fill();x.shadowBlur=0;}else{x.strokeStyle='#4b6274';x.lineWidth=2;x.stroke();}}
+        y+=78;});
+      x.fillStyle='#6d7a85';x.font='24px Jura';x.fillText('Publication autorisée par le client · Praetorian Sentinel Smart · Oran',60,H-120);
+      x.fillStyle='#5a8fe0';x.font='28px Jura';x.fillText('WhatsApp Business  +213 555 37 23 45',60,H-72);
+      x.fillStyle='#4f6a9a';x.font='22px Jura';x.fillText('Algérie - France - Espagne - Allemagne - Belgique - Québec',60,H-34);
+      c.toBlob(function(b){
+        var url=URL.createObjectURL(b),f=new File([b],'PSS_avis_client.png',{type:'image/png'});
+        document.getElementById('prev').innerHTML='<img src="'+url+'" alt="Votre fiche d\'avis">';
+        var A=PSS.ARROW,h='<a class="lnk" href="'+url+'" download="PSS_avis_client.png">Enregistrer ma fiche '+A+'</a>';
+        if(navigator.canShare&&navigator.canShare({files:[f]}))h+='<button type="button" class="lnk" id="sh">Partager ma fiche '+A+'</button>';
+        h+='<a class="lnk" href="'+PSS.FB+'" target="_blank" rel="noopener">Ouvrir la page Facebook PSS '+A+'</a>';
+        var acts=document.getElementById('acts');acts.innerHTML=h;
+        var sh=document.getElementById('sh');if(sh)sh.addEventListener('click',function(){navigator.share({files:[f],title:'Mon avis sur PSS'}).catch(function(){});});
+      },'image/png');
+    });
+  }
+  if(location.hash==='#smart-gift'){i=8;}
+  draw();
+})();
+</script>
+</body>
+</html>

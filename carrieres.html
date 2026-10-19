@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Nous rejoindre · Construisons la suite ensemble · Praetorian Sentinel Smart</title>
+<meta name="description" content="Candidatures et partenariats avec Praetorian Sentinel Smart.">
+<link rel="icon" href="assets/emblem.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="carrieres" data-sec="cabinet">
+<div class="stage">
+<main class="page">
+  <a class="back" href="cabinet.html"><svg viewBox="0 0 12 12"><path d="M8 2 4 6l4 4"/></svg> Le cabinet</a>
+  <div class="kick">2.4 · Nous rejoindre</div>
+  <h1>Construisons la suite ensemble</h1>
+  <p class="lead">Candidatures et partenariats avec Praetorian Sentinel Smart.</p>
+
+  <form class="sec first" id="cf" novalidate>
+    <div class="sub">Votre candidature</div>
+    <div class="fld"><div class="lb">Vous êtes</div><div class="chips" id="cf-type">
+      <button type="button" class="chip" data-v="Candidat : poste, candidature spontanée ou stage">Candidat : poste, candidature spontanée ou stage</button>
+      <button type="button" class="chip" data-v="Partenaire indépendant">Partenaire indépendant</button>
+    </div></div>
+    <div class="fld"><label for="cf-n">Nom et prénom</label><input id="cf-n" autocomplete="name"></div>
+    <div class="fld"><label for="cf-c">Courriel ou téléphone</label><input id="cf-c" autocomplete="email"></div>
+    <div class="fld"><label for="cf-d">Domaine</label><select id="cf-d">
+      <option value="">Choisir un domaine</option>
+      <option>Réglementaire &amp; investissement</option><option>Maîtrise d'ouvrage</option><option>Ingénierie financière</option>
+      <option>Architecture intelligente augmentée</option><option>Fonctions transverses</option><option>Autre</option></select></div>
+    <div class="fld"><label for="cf-m">Message</label><textarea id="cf-m"></textarea></div>
+    <label class="check"><input type="checkbox" id="cf-ok"><span>J'accepte que PSS conserve ma candidature et mon CV pour les étudier, selon la <a href="confidentialite.html" style="color:var(--blue)">politique de confidentialité</a>.</span></label>
+    <div class="navbtn"><button class="btn pri" type="submit">Préparer l'envoi</button></div>
+    <p class="msg" id="cf-msg"></p>
+    <div id="cf-out"></div>
+  </form>
+</main>
+</div>
+<script src="js/site.js"></script>
+<script>
+(function(){
+  var type=null,g=document.getElementById('cf-type');
+  g.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;g.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('on',c===b)});type=b.dataset.v;});
+  document.getElementById('cf').addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=function(id){return document.getElementById(id).value.trim();};
+    var msg=document.getElementById('cf-msg'),out=document.getElementById('cf-out'),miss=[];
+    if(!type)miss.push('vous êtes');if(!v('cf-n'))miss.push('nom et prénom');if(!v('cf-c'))miss.push('courriel ou téléphone');if(!v('cf-d'))miss.push('domaine');
+    if(miss.length){msg.textContent='À compléter : '+miss.join(', ')+'.';msg.className='msg err';out.innerHTML='';return;}
+    if(!document.getElementById('cf-ok').checked){msg.textContent='Cochez l\'accord sur la conservation de votre candidature.';msg.className='msg err';out.innerHTML='';return;}
+    var txt='Candidature PSS\n\nVous êtes : '+type+'\nNom et prénom : '+v('cf-n')+'\nContact : '+v('cf-c')+'\nDomaine : '+v('cf-d')+'\n\nMessage :\n'+(v('cf-m')||'—')+'\n\nJ\'accepte que PSS conserve ma candidature et mon CV pour les étudier.';
+    msg.textContent='Votre candidature est prête. Choisissez comment l\'envoyer, puis joignez votre CV au message.';msg.className='msg';
+    var A=PSS.ARROW;
+    out.innerHTML='<div class="row"><a class="lnk" href="'+PSS.mail('Candidature PSS · '+v('cf-n'),txt)+'">Envoyer par e-mail '+A+'</a><a class="lnk" target="_blank" rel="noopener" href="'+PSS.wa(txt)+'">Envoyer sur WhatsApp '+A+'</a></div>';
+  });
+})();
+</script>
+</body>
+</html>
