@@ -198,7 +198,7 @@ TPL = '''<!doctype html>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{title} · Praetorian Sentinel Smart</title>
 <meta name="description" content="{desc}">
-<link rel="icon" href="assets/emblem.png">
+<link rel="icon" href="assets/emblem-cadre.png">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="{name}" data-sec="{sec}">

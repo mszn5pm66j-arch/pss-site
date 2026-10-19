@@ -4,151 +4,197 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Praetorian Sentinel Smart</title>
-<meta name="description" content="Votre projet en Algérie : trouvez votre profil, découvrez nos services et échangez avec AIT.">
-<link rel="icon" href="assets/emblem.png">
+<meta name="description" content="Votre projet en Algérie : trouvez votre profil, découvrez nos solutions et échangez avec AIT.">
+<link rel="icon" href="assets/emblem-cadre.png">
+<link rel="preload" href="media/stop-0.jpg" as="image">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="index" data-sec="accueil">
 <div class="stage">
+ <div class="frame">
 
-  <!-- Écran 1 : les trois questions -->
-  <section class="screen on" id="s-questions" aria-label="Accueil">
-    <button class="q" data-go="pour-qui" style="left:calc(50% - 150px);width:300px;top:19.8%">Qui accompagnons-nous<b>?</b></button>
-    <span class="dot" style="left:calc(50% + 31px);top:25.7%"></span>
-    <span class="dash" style="left:calc(50% + 57px);top:30%"></span>
-
-    <button class="q" data-go="services" style="left:16px;width:200px;top:50.2%">Serions-nous<br>utiles pour vous<b>?</b></button>
-    <span class="dot" style="left:43px;top:51.3%"></span>
-    <span class="dash" style="left:172px;top:64.3%"></span>
-
-    <button class="q" data-go="agent" style="left:calc(50% - 164px);width:200px;top:65%">Vous n'arrivez<br>pas à vous situer<b>?</b></button>
-    <span class="dot" style="left:calc(50% + 34px);top:68.1%"></span>
-    <span class="dash" style="left:calc(50% - 9px);top:79.1%"></span>
-  </section>
-
-  <!-- Écran 1 bis : Qui accompagnons-nous ? -->
-  <section class="screen" id="s-pour-qui" aria-label="Pour qui ?">
-    <div class="panel">
-      <a class="back" href="#"><svg viewBox="0 0 12 12"><path d="M8 2 4 6l4 4"/></svg> Accueil</a>
-      <div class="kick">1.1 · Pour qui ?</div>
-      <h1 style="margin:18px 0 0;font-size:23px;line-height:26.3px;font-weight:400">Qui accompagnons-nous ?</h1>
-      <p class="lead">Situez-vous en deux choix : nous vous indiquons par où commencer.</p>
-      <section class="sec first">
-        <div class="sub">Vous êtes établi…</div>
-        <div class="fld"><div class="chips" data-k="zone">
-          <button class="chip" data-v="algerie">En Algérie</button>
-          <button class="chip" data-v="diaspora">Dans la diaspora</button>
-          <button class="chip" data-v="etranger">À l'étranger, non algérien</button>
-        </div></div>
-      </section>
-      <section class="sec">
-        <div class="sub">Vous êtes…</div>
-        <div class="fld"><div class="chips" data-k="profil">
-          <button class="chip" data-v="particulier">Particulier</button>
-          <button class="chip" data-v="investisseur">Investisseur</button>
-          <button class="chip" data-v="porteur">Porteur de projet</button>
-          <button class="chip" data-v="entreprise">Entreprise</button>
-          <button class="chip" data-v="pro">Professionnel</button>
-        </div></div>
-        <div id="pq-res"><p class="msg">Choisissez une réponse dans chacune des deux listes.</p></div>
-      </section>
+  <!-- ===== Accueil premium ===== -->
+  <section class="home" id="home" aria-label="Accueil">
+   <div class="slides" id="slides">
+    <div class="slide on" data-i="0">
+     <div class="idx">01</div>
+     <h2 class="ttl">Vous êtes <em>?</em></h2>
+     <div class="icons5" id="profils">
+      <button class="ico" data-v="particulier"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><span>Particulier</span></button>
+      <button class="ico" data-v="investisseur"><svg viewBox="0 0 24 24"><path d="M4 20h16M6 20v-5h3v5M11 20v-8h3v8M16 20V9h3v11M5 11l5-4 3 2 6-5M16 4h3v3"/></svg><span>Investisseur</span></button>
+      <button class="ico" data-v="porteur"><svg viewBox="0 0 24 24"><path d="M12 2.5l7 3v5.5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V5.5z"/><path d="M8.8 11.5l2.2 2.2 4.2-4.4M10 22h4"/></svg><span>Porteur<br>de projet</span></button>
+      <button class="ico" data-v="pro"><svg viewBox="0 0 24 24"><rect x="3" y="7.5" width="18" height="12.5" rx="1.5"/><path d="M9 7.5V5.5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5.5v2M3 13h18M10.5 12v2.5h3V12"/></svg><span>Professionnel</span></button>
+     </div>
+     <div class="where">EN ALGÉRIE OU AILLEURS ?</div>
+     <div class="zones" id="zones">
+      <button class="zone" data-v="algerie">ALGÉRIE</button><button class="zone" data-v="diaspora">DIASPORA</button><button class="zone" data-v="etranger">ÉTRANGER</button>
+     </div>
     </div>
-  </section>
-
-  <!-- Écran 2 : Nos services -->
-  <section class="screen" id="s-services" aria-label="Nos services">
-    <div class="panel">
-      <a class="back" href="#"><svg viewBox="0 0 12 12"><path d="M8 2 4 6l4 4"/></svg> Accueil</a>
-      <div class="kick">1.2 · Nos services</div>
-      <h1 style="margin:18px 0 0;font-size:23px;line-height:26.3px;font-weight:400">Serions-nous utiles pour vous ?</h1>
-      <p class="lead">Cinq façons dont le cabinet intervient sur votre projet.</p>
-      <section class="sec first">
-        <a class="svc" href="diagnostic.html"><span class="n">01</span><span><div class="t">Orienter</div><div class="d">Faire le point et choisir la bonne première étape.</div></span><svg viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6"/></svg></a>
-        <a class="svc" href="division-2.html"><span class="n">02</span><span><div class="t">Monter le dossier</div><div class="d">Foncier, autorisations, montages juridiques et dossiers bancaires.</div></span><svg viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6"/></svg></a>
-        <a class="svc" href="division-3.html"><span class="n">03</span><span><div class="t">Piloter</div><div class="d">Du cahier des charges à la réception des travaux.</div></span><svg viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6"/></svg></a>
-        <a class="svc" href="contact.html"><span class="n">04</span><span><div class="t">Trouver un partenaire</div><div class="d">Mettre en relation porteurs algériens et partenaires étrangers.</div></span><svg viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6"/></svg></a>
-        <a class="svc" href="division-1.html"><span class="n">05</span><span><div class="t">Moderniser par l'IA</div><div class="d">Assistants et automatisations adaptés à votre activité.</div></span><svg viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6"/></svg></a>
-      </section>
+    <div class="slide" data-i="1">
+     <div class="idx">02</div>
+     <h2 class="ttl">Qui <em>sommes-nous</em></h2>
+     <p class="para">Un cabinet d'<b>ingénierie</b> à Oran, au service de vos projets en Algérie.</p>
+     <div class="verbs"><a href="division-2.html">CONCEVOIR</a><a href="division-4.html">STRUCTURER</a><a href="division-3.html">PILOTER</a></div>
     </div>
-  </section>
-
-  <!-- Écran 3 : AIT -->
-  <section class="screen" id="s-agent" aria-label="AIT">
-    <div class="panel">
-      <a class="back" href="#"><svg viewBox="0 0 12 12"><path d="M8 2 4 6l4 4"/></svg> Accueil</a>
-      <div class="kick">1.3 · AIT</div>
-      <h1 style="margin:18px 0 0;font-size:23px;line-height:26.3px;font-weight:400">Vous n'arrivez pas à vous situer ?</h1>
-      <p class="lead">Décrivez votre situation en une phrase : AIT (Artificial Intelligence Talk) transmet votre demande au cabinet.</p>
-      <section class="sec first">
-        <div class="sub">Parlez à AIT, notre agent</div>
-        <form class="ait" id="ait-f"><input id="ait-i" type="text" placeholder="Ex. : je veux acheter un logement à Oran" autocomplete="off" aria-label="Votre message">
-          <button type="submit" aria-label="Envoyer"><svg viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button></form>
-        <div class="fld"><div class="lb">Ou choisissez une phrase</div><div class="chips" id="ait-s">
-          <button class="chip">Je veux acheter un logement en Algérie</button>
-          <button class="chip">Je lance une entreprise</button>
-          <button class="chip">Je cherche un partenaire algérien</button>
-          <button class="chip">Je veux moderniser mon activité</button>
-        </div></div>
-        <p class="msg" id="ait-m"></p>
-        <p class="dim" style="font-size:12px;line-height:18px;color:var(--soft);padding-left:12px;margin-top:14px">AIT n'est pas encore relié à un service d'intelligence artificielle : votre message s'ouvre dans WhatsApp, où le cabinet vous répond.</p>
-      </section>
+    <div class="slide" data-i="2">
+     <div class="idx">03</div>
+     <h2 class="ttl">Nos <em>solutions</em></h2>
+     <div class="icons5 n5">
+      <a class="ico" href="diagnostic.html"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg><span>Vous<br>orienter</span></a>
+      <a class="ico" href="division-2.html"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 16h7"/></svg><span>Monter<br>le dossier</span></a>
+      <a class="ico" href="division-3.html"><svg viewBox="0 0 24 24"><path d="M4 20h16M6 20v-6h3v6M11 20V9h3v11M16 20V5h3v15"/></svg><span>Piloter<br>le projet</span></a>
+      <a class="ico" href="contact.html"><svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="2.6"/><circle cx="5" cy="8" r="2.2"/><circle cx="19" cy="8" r="2.2"/><path d="M7.5 19c0-3 2-5 4.5-5s4.5 2 4.5 5M2 17c0-2.4 1.3-4 3-4M22 17c0-2.4-1.3-4-3-4"/></svg><span>Trouver un<br>partenaire</span></a>
+      <a class="ico" href="division-1.html"><svg viewBox="0 0 24 24"><path d="M12 4c-4 0-7 2.6-7 6.5 0 2.4 1 4 2.5 5V20h9v-4.5c1.5-1 2.5-2.6 2.5-5C19 6.6 16 4 12 4z"/><path d="M12 4v16M9 9h-1.5M15 9h1.5M9 13H8M15 13h1"/></svg><span>IA<br>métier</span></a>
+     </div>
     </div>
+   </div>
+   <div class="monument" aria-hidden="true"><img src="assets/monument.png" alt=""></div>
+   <div class="dots" id="dots"><button class="on" aria-label="Diapositive 1"></button><button aria-label="Diapositive 2"></button><button aria-label="Diapositive 3"></button><span id="dotn">01 / 03</span></div>
+   <form class="ait" id="ait">
+    <div class="spark"><svg viewBox="0 0 24 24"><path d="M10 3l1.6 4.9L16.5 9.5l-4.9 1.6L10 16l-1.6-4.9L3.5 9.5l4.9-1.6zM18 13l.8 2.2 2.2.8-2.2.8L18 19l-.8-2.2-2.2-.8 2.2-.8z"/></svg></div>
+    <input id="ait-i" type="text" autocomplete="off" aria-label="Parlez à AIT, notre agent IA" placeholder="Parlez à AIT, notre agent IA…">
+    <button type="submit" aria-label="Envoyer à AIT"><svg viewBox="0 0 18 24"><rect x="5.5" y="2" width="7" height="13" rx="3.5"/><path d="M2 11.5a7 7 0 0 0 14 0M9 18.5V22M5.5 22h7"/></svg></button>
+   </form>
+   <div class="aitmsg" id="ait-m"></div>
+   <button class="go" id="go" aria-label="Commencer l'expérience"><i><svg viewBox="0 0 24 24"><path d="M6 13l6-6 6 6M6 19l6-6 6 6"/></svg></i></button>
+   <div class="golab">COMMENCER L'EXPÉRIENCE</div>
+   <div class="sheet" id="sheet" role="dialog" aria-live="polite"></div>
   </section>
 
+  <!-- ===== Navigation en profondeur ===== -->
+  <section class="scene" id="scene" aria-label="Rubriques">
+   <img id="still" src="media/stop-0.jpg" alt="">
+   <video id="vf" src="media/scene.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
+   <video id="vr" src="media/scene-rev.mp4" muted playsinline preload="metadata" aria-hidden="true"></video>
+   <button class="hot" id="hot" aria-label="Entrer dans la rubrique"></button>
+  </section>
+
+ </div>
 </div>
 <script src="js/site.js"></script>
 <script>
 (function(){
-  var MAP={'':0,'pour-qui':0,'services':1,'agent':2};
-  var ids={'':'s-questions','pour-qui':'s-pour-qui','services':'s-services','agent':'s-agent'};
-  function show(){
-    var h=(location.hash||'').replace('#','');
-    if(!(h in ids)) h='';
-    document.querySelectorAll('.screen').forEach(function(s){s.classList.toggle('on',s.id===ids[h]);});
-    PSS.setNav(MAP[h]);
-    PSS.toggleMenu(false);
+  var S=PSS.SECTIONS, IDS=S.map(function(s){return s.id;});
+  var home=document.getElementById('home'), scene=document.getElementById('scene'), still=document.getElementById('still');
+  var vf=document.getElementById('vf'), vr=document.getElementById('vr');
+  /* temps dans la vidéo de la scène (secondes) : arrêts sur chaque rubrique et mouvements */
+  var STOP=[1.5,8.0,16.0,23.5,31.5,39.5,48.0], MS=[2.4,10.3,18.3,25.8,33.8,41.6], ME=[7.0,14.7,22.3,30.3,37.8,46.8], D=49.5;
+  var k=0, busy=false;
+  for(var j=0;j<6;j++){var im=new Image();im.src='media/stop-'+j+'.jpg';}
+
+  function caption(){PSS.setNav(k,k>0);}
+  function setHash(){history.replaceState(null,'',k===0?location.pathname:'#'+IDS[k]);}
+  function showHome(){home.classList.remove('off');scene.classList.remove('on');}
+  function showScene(){home.classList.add('off');scene.classList.add('on');stopAuto();}
+
+  function play(v,from,to,done){
+    var fin=false;
+    function end(){if(fin)return;fin=true;v.pause();v.removeEventListener('playing',onp);done();}
+    function onp(){v.classList.add('act');scene.classList.add('moving');}
+    function tick(){if(fin)return; if(v.currentTime>=to-0.04)end(); else requestAnimationFrame(tick);}
+    var started=false;
+    function start(){
+      if(started)return;started=true;v.removeEventListener('seeked',start);
+      v.addEventListener('playing',onp);
+      var p=v.play();
+      if(p&&p.then)p.then(function(){requestAnimationFrame(tick);}).catch(function(){end();});
+      else requestAnimationFrame(tick);
+      setTimeout(end,(to-from)*1000+2500);
+    }
+    if(Math.abs(v.currentTime-from)<0.05)start();
+    else{v.addEventListener('seeked',start);try{v.currentTime=from;}catch(e){}setTimeout(start,1500);}
   }
-  window.addEventListener('hashchange',show); show();
-  document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){location.hash=b.getAttribute('data-go');});});
-  document.querySelectorAll('.back[href="#"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();history.pushState('',document.title,location.pathname);show();});});
+  function arrive(s){
+    still.src='media/stop-'+s+'.jpg';
+    var f=function(){scene.classList.remove('moving');vf.classList.remove('act');vr.classList.remove('act');busy=false;};
+    if(still.decode)still.decode().then(f,f);else f();
+  }
+  function fadeTo(s){scene.style.opacity='0';setTimeout(function(){still.src='media/stop-'+s+'.jpg';scene.style.opacity='';busy=false;},450);}
+
+  function goTo(n,anim){
+    if(busy||n===k)return;
+    var from=k; k=n; caption(); setHash();
+    if(n===0){showHome();return;}
+    if(from===0){still.src='media/stop-'+(n-1)+'.jpg';showScene();return;}
+    var a=from-1,b=n-1; busy=true;
+    if(anim!==false&&b===a+1){play(vf,MS[a],STOP[a+1],function(){arrive(b);});}
+    else if(anim!==false&&a===5&&b===0){play(vf,MS[5],STOP[6],function(){arrive(0);});}
+    else if(anim!==false&&b===a-1){vr.preload='auto';play(vr,D-ME[b],D-STOP[b]-0.05,function(){arrive(b);});}
+    else fadeTo(b);
+  }
+  PSS.go=function(d){
+    if(k===6&&d===1)return goTo(1);      /* après « Contactez-nous », retour au cabinet comme dans la vidéo */
+    if(k===0&&d===-1)return goTo(6,false);
+    goTo(Math.max(0,Math.min(6,k+d)));
+  };
+  document.querySelector('.nav').addEventListener('click',function(e){
+    var a=e.target.closest('.lab');if(!a)return;e.preventDefault();
+    var n=+a.getAttribute('data-k'); if(n===k){if(k>0)location.href=S[k].href;}else goTo(n);
+  });
+  document.getElementById('hot').addEventListener('click',function(){if(!busy&&k>0)location.href=S[k].href;});
+  document.querySelector('.nav').addEventListener('click',function(e){if(e.target.closest('.cap')&&k>0)location.href=S[k].href;});
+  document.getElementById('go').addEventListener('click',function(){goTo(1);});
+
+  /* gestes sur la scène */
+  var x0=null,y0=null;
+  scene.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY;},{passive:true});
+  scene.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;x0=null;
+    if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy))PSS.go(dx<0?1:-1);else if(Math.abs(dy)>60)PSS.go(dy<0?1:-1);});
+  var wl=0;
+  document.querySelector('.stage').addEventListener('wheel',function(e){if(document.querySelector('.stage.open'))return;var t=Date.now();if(t-wl<900||Math.abs(e.deltaY)<20)return;wl=t;PSS.go(e.deltaY>0?1:-1);},{passive:true});
+
+  /* diapositives de l'accueil */
+  var sl=[].slice.call(document.querySelectorAll('.slide')),dots=[].slice.call(document.querySelectorAll('#dots button')),si=0,auto=null;
+  function slide(i){si=(i+3)%3;sl.forEach(function(s,j){s.classList.toggle('on',j===si);});dots.forEach(function(d,j){d.classList.toggle('on',j===si);});document.getElementById('dotn').textContent='0'+(si+1)+' / 03';}
+  function startAuto(){stopAuto();auto=setInterval(function(){slide(si+1);},6500);}
+  function stopAuto(){if(auto)clearInterval(auto);auto=null;}
+  dots.forEach(function(d,j){d.addEventListener('click',function(){slide(j);stopAuto();});});
+  var sx=null,sel=document.getElementById('slides');
+  sel.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+  sel.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;sx=null;if(Math.abs(dx)>45){slide(si+(dx<0?1:-1));stopAuto();}});
 
   /* orientation : profil × zone */
-  var sel={zone:null,profil:null};
-  var A='<svg viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6"/></svg>';
-  function L(t,h,ext){return '<a class="lnk" href="'+h+'"'+(ext?' target="_blank" rel="noopener"':'')+'>'+t+' '+A+'</a>';}
+  var pick={profil:null,zone:null},sheet=document.getElementById('sheet');
   var HZ='https://mszn5pm66j-arch.github.io/Cr-dit-22/Credittttttt.html#/niveau-1';
-  var P={
-    particulier:{t:'Logement, démarches et autorisations',d:'Le pôle Réglementaire &amp; investissement vous accompagne pour le foncier, les autorisations et vos démarches.',l:[['Réglementaire &amp; investissement','division-2.html']]},
-    investisseur:{t:'Cadre légal et montage financier',d:'Autorisations, structuration de la société et préparation des échanges avec les banques.',l:[['Réglementaire &amp; investissement','division-2.html'],['Ingénierie financière','division-4.html']]},
-    porteur:{t:'Du cahier des charges au chantier',d:'Nous cadrons votre projet puis nous le pilotons jusqu\'à la réception des travaux.',l:[["Maîtrise d'ouvrage",'division-3.html'],['Réglementaire &amp; investissement','division-2.html']]},
-    entreprise:{t:'Structurer et moderniser votre activité',d:'Montages financiers, relations bancaires et assistants intelligents pour votre activité.',l:[['Ingénierie financière','division-4.html'],['Architecture intelligente augmentée','division-1.html']]},
-    pro:{t:'Assistants métier et formation',d:'Des assistants et automatisations adaptés à votre métier, et des formations pour les utiliser.',l:[['Architecture intelligente augmentée','division-1.html'],['Académie PSS','academie.html']]}
-  };
-  var Z={algerie:'Nous vous recevons à Oran ou à distance.',diaspora:'Nous intervenons à distance depuis Oran : France, Espagne, Allemagne, Belgique, Québec.',etranger:'Nous vous aidons aussi à trouver un partenaire algérien pour votre projet.'};
-  function res(){
-    var box=document.getElementById('pq-res');
-    if(!sel.zone||!sel.profil){box.innerHTML='<p class="msg">'+(sel.zone||sel.profil?'Encore un choix dans l\'autre liste.':'Choisissez une réponse dans chacune des deux listes.')+'</p>';return;}
-    var r=P[sel.profil], links=r.l.slice();
-    if(sel.profil==='particulier'&&sel.zone==='diaspora'){r={t:'Logement ou crédit en Algérie depuis l\'étranger',d:'Algérie Horizon prépare votre dossier de crédit logement en quatre étapes, la première étant gratuite.'};links=[['Accéder à Crédit Logement',HZ,1],['Réglementaire &amp; investissement','division-2.html']];}
-    if(sel.zone==='etranger') links.push(['Trouver un partenaire','contact.html']);
-    box.innerHTML='<div class="res"><h3>'+r.t+'</h3><p>'+r.d+'</p><p style="color:var(--soft)">'+Z[sel.zone]+'</p><div class="row">'+links.map(function(x){return L(x[0],x[1],x[2]);}).join('')+L('Commencer par un diagnostic','diagnostic.html')+'</div></div>';
-    var pn=box.closest('.panel');pn.scrollTo({top:box.offsetTop-120,behavior:'smooth'});
+  var P={particulier:['Logement, démarches et autorisations','Le pôle Réglementaire &amp; investissement vous accompagne pour le foncier, les autorisations et vos démarches.',[['Réglementaire &amp; investissement','division-2.html']]],
+    investisseur:['Cadre légal et montage financier','Autorisations, structuration de la société et préparation des échanges avec les banques.',[['Réglementaire &amp; investissement','division-2.html'],['Ingénierie financière','division-4.html']]],
+    porteur:['Du cahier des charges au chantier','Nous cadrons votre projet puis nous le pilotons jusqu\'à la réception des travaux.',[["Maîtrise d'ouvrage",'division-3.html'],['Réglementaire &amp; investissement','division-2.html']]],
+    pro:['Assistants métier et formation','Des assistants et automatisations adaptés à votre métier, et des formations pour les utiliser.',[['Architecture intelligente augmentée','division-1.html'],['Académie PSS','academie.html']]]};
+  var Z={algerie:'Nous vous recevons à Oran ou à distance.',diaspora:'Nous intervenons à distance depuis Oran : France, Espagne, Allemagne, Belgique, Québec.',etranger:'Nous vous aidons aussi à trouver un partenaire algérien.'};
+  function L(t,h,x){return '<a class="lnk" href="'+h+'"'+(x?' target="_blank" rel="noopener"':'')+'>'+t+' '+PSS.ARROW+'</a>';}
+  function result(){
+    if(!pick.profil||!pick.zone)return;
+    var r=P[pick.profil],t=r[0],d=r[1],ls=r[2].slice();
+    if(pick.profil==='particulier'&&pick.zone==='diaspora'){t='Logement ou crédit en Algérie depuis l\'étranger';d='Algérie Horizon prépare votre dossier de crédit logement en quatre étapes, la première étant gratuite.';ls=[['Accéder à Crédit Logement',HZ,1],['Réglementaire &amp; investissement','division-2.html']];}
+    if(pick.zone==='etranger')ls.push(['Trouver un partenaire','contact.html']);
+    ls.push(['Commencer par un diagnostic','diagnostic.html']);
+    sheet.innerHTML='<button class="x" aria-label="Fermer">×</button><h3>'+t+'</h3><p>'+d+'</p><p style="color:#a9b8c4">'+Z[pick.zone]+'</p><div class="row">'+ls.map(function(x){return L(x[0],x[1],x[2]);}).join('')+'</div>';
+    sheet.classList.add('on');
   }
-  document.querySelectorAll('#s-pour-qui .chips').forEach(function(g){
-    g.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;
-      g.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('on',c===b);});
-      sel[g.getAttribute('data-k')]=b.getAttribute('data-v');res();});
-  });
+  sheet.addEventListener('click',function(e){if(e.target.closest('.x'))sheet.classList.remove('on');});
+  function group(id,key){var g=document.getElementById(id);g.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;stopAuto();
+    g.querySelectorAll('button').forEach(function(c){c.classList.toggle('on',c===b);});pick[key]=b.getAttribute('data-v');
+    if(!pick.profil||!pick.zone){var m=document.getElementById('ait-m');m.textContent=pick.profil?'Et vous êtes établi : Algérie, diaspora ou étranger ?':'Et vous êtes : particulier, investisseur, porteur de projet ou professionnel ?';}
+    else{document.getElementById('ait-m').textContent='';result();}});}
+  group('profils','profil');group('zones','zone');
 
-  /* AIT : vers WhatsApp */
-  var inp=document.getElementById('ait-i'),m=document.getElementById('ait-m');
-  document.getElementById('ait-s').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;inp.value=b.textContent;inp.focus();m.textContent='Touchez la flèche pour envoyer.';m.className='msg';});
-  document.getElementById('ait-f').addEventListener('submit',function(e){e.preventDefault();
-    var t=inp.value.trim();
-    if(!t){m.textContent='Écrivez une phrase ou choisissez-en une ci-dessous.';m.className='msg err';return;}
-    m.textContent='WhatsApp s\'ouvre avec votre message.';m.className='msg';
-    window.open(PSS.wa('Bonjour Praetorian Sentinel Smart, '+t),'_blank');
-  });
+  /* AIT : texte qui s'écrit puis envoi sur WhatsApp */
+  var inp=document.getElementById('ait-i'),msg=document.getElementById('ait-m'),PH='Parlez à AIT, notre agent IA…',pi=0;
+  setInterval(function(){if(document.activeElement===inp||inp.value)return;pi=(pi+1)%(PH.length+18);inp.setAttribute('placeholder',PH.slice(0,Math.min(pi,PH.length))+(pi<PH.length?'|':''));},110);
+  document.getElementById('ait').addEventListener('submit',function(e){e.preventDefault();var t=inp.value.trim();
+    if(!t){inp.focus();msg.textContent='Écrivez votre situation en une phrase, puis touchez le micro pour l\'envoyer.';return;}
+    msg.textContent='WhatsApp s\'ouvre avec votre message : le cabinet vous répond.';window.open(PSS.wa('Bonjour Praetorian Sentinel Smart, '+t),'_blank');});
+
+  /* adresse de la page */
+  function route(){
+    var h=(location.hash||'').slice(1);PSS.toggleMenu(false);
+    var n=IDS.indexOf(h);
+    if(n>0){if(k===0){k=n;still.src='media/stop-'+(n-1)+'.jpg';showScene();caption();}else goTo(n,false);return;}
+    if(k!==0){k=0;caption();showHome();}
+    if(h==='services'){slide(2);stopAuto();}else if(h==='pour-qui'){slide(0);stopAuto();}else if(h==='agent'){stopAuto();setTimeout(function(){inp.focus();},400);}
+  }
+  window.addEventListener('hashchange',route);
+  caption(); slide(0); startAuto(); route();
 })();
 </script>
 </body>
