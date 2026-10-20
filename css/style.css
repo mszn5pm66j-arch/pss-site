@@ -163,6 +163,30 @@ button{font-family:inherit}
 .sheet .row{display:flex;flex-wrap:wrap;gap:0 calc(30*var(--u))}
 .sheet .lnk{font-size:calc(24*var(--u));margin:calc(18*var(--u)) 0 0}
 
+/* page Le cabinet : domaines, cadre de mission, engagement */
+.dgrid{display:flex;flex-direction:column;gap:10px;margin:14px 0 0 12px}
+.dcard{display:flex;align-items:flex-start;gap:14px;padding:14px 14px 14px 14px;border:1px solid var(--edge);border-radius:10px;background:var(--panel);position:relative}
+.dcard .dico{flex:0 0 26px;width:26px;height:26px;stroke:#8fe0ff;fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;margin-top:2px}
+.dcard span{flex:1;min-width:0}
+.dcard b{display:block;font-weight:500;font-size:14px;line-height:19px;color:var(--ink)}
+.dcard i{display:block;font-style:normal;font-weight:300;font-size:12.5px;line-height:18px;color:var(--soft);margin-top:5px}
+.dcard>svg:last-child{flex:0 0 12px;width:12px;height:12px;stroke:var(--blue);fill:none;stroke-width:1.6;margin-top:5px}
+.dcard:active{border-color:var(--cyan)}
+.cadre{margin:16px 0 0 12px;border-left:2px solid #2f7fa8;padding:2px 0 2px 14px}
+.cadre .ct{font-size:12.5px;line-height:18px;color:var(--blue);letter-spacing:.3px}
+.c4{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.c4 span{position:relative;padding:10px 10px 10px 22px;border:1px solid rgba(90,170,210,.28);border-radius:8px;font-size:12px;line-height:16px;color:var(--ink);background:rgba(4,12,22,.55)}
+.c4 span::before{content:"";position:absolute;left:9px;top:50%;width:5px;height:5px;margin-top:-2.5px;border-radius:50%;background:var(--cyan);box-shadow:0 0 6px var(--glow)}
+.callout{display:flex;gap:12px;align-items:flex-start;margin:16px 0 0 12px;padding:13px 14px;border-radius:10px;background:linear-gradient(90deg,rgba(57,195,255,.10),rgba(57,195,255,.02));border:1px solid rgba(57,195,255,.22)}
+.callout .dico{flex:0 0 22px;width:22px;height:22px;stroke:#8fe0ff;fill:none;stroke-width:1.4;margin-top:2px}
+.callout p{margin:0;font-size:13px;line-height:20px;font-weight:300}
+.flow{list-style:none;margin:14px 0 0 12px;padding:0 0 0 18px;position:relative}
+.flow::before{content:"";position:absolute;left:4px;top:8px;bottom:8px;width:1px;background:linear-gradient(#39c3ff,rgba(57,195,255,.15))}
+.flow li{position:relative;padding:6px 0 12px}
+.flow li::before{content:"";position:absolute;left:-18px;top:11px;width:9px;height:9px;border-radius:50%;background:#02060b;border:1.5px solid var(--cyan);box-shadow:0 0 6px var(--glow)}
+.flow b{display:block;font-weight:400;font-size:11.5px;letter-spacing:3px;text-transform:uppercase;color:var(--blue)}
+.flow span{display:block;font-size:14px;line-height:20px;font-weight:300;margin-top:3px}
+
 /* ---------- scène de navigation en profondeur : cartes réelles, caméra pilotée par la position ---------- */
 .scene{position:absolute;left:0;right:0;top:calc(150*var(--u));height:calc(1345*var(--u) + var(--ex));opacity:0;visibility:hidden;touch-action:none;
   -webkit-mask-image:linear-gradient(transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(transparent,#000 9%,#000 91%,transparent)}

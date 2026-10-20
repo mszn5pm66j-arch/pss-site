@@ -55,17 +55,41 @@ CREDIT = sec('Crédit Logement · Algérie Horizon',
                     ('04', 'Banque', 'Dépôt du dossier, directement ou par procuration, jusqu\'à un accord de principe écrit. La décision revient à la banque.')]),
              [('Accéder à Crédit Logement', HORIZON, True)])
 
+
+# ---- page « Le cabinet » : domaines, approche, engagement ----
+def ico(path):
+    return f'<svg class="dico" viewBox="0 0 24 24">{path}</svg>'
+
+DOMAINES = [
+    ('Stratégie &amp; développement', 'Création, croissance et relance d\'activités.', 'diagnostic.html', '<path d="M3 17l6-6 4 4 7-8"/><path d="M14 7h6v6"/>'),
+    ('Investissement &amp; ingénierie financière', 'Structuration des projets, montages et préparation des dossiers de financement.', 'division-4.html', '<path d="M4 20h16M6 20v-6h3v6M11 20V9h3v11M16 20V5h3v15"/>'),
+    ('Structuration &amp; opérations internationales', 'Démarches administratives, coordination des besoins juridiques, implantations et commerce extérieur.', 'division-2.html', '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/>'),
+    ('Architecture &amp; maîtrise de projet', 'Conception d\'espaces, maquettes, diagnostics et organisation de la réalisation.', 'division-3.html', '<path d="M4 21 12 3l8 18M7.6 13h8.8M12 3v3"/>'),
+    ('Veille &amp; systèmes IA', 'Intelligence artificielle (IA) : dispositifs de veille métier, organisation documentaire et automatisation des circuits de travail.', 'division-1.html', '<rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/>'),
+]
+CAB_DOMAINES = ('<section class="sec first"><div class="sub">Nos domaines d\'intervention</div><div class="dgrid">' +
+                ''.join(f'<a class="dcard" href="{h}">{ico(i)}<span><b>{t}</b><i>{d}</i></span>{AR}</a>' for t, d, h, i in DOMAINES) +
+                '</div></section>')
+CAB_APPROCHE = ('<section class="sec"><div class="sub">Notre approche</div>' +
+                p('Relier la connaissance des métiers, la vision stratégique et la conception opérationnelle.') +
+                '<div class="cadre"><div class="ct">Chaque mission s\'inscrit dans un cadre défini</div>'
+                '<div class="c4"><span>Objectifs</span><span>Livrables</span><span>Responsabilités</span><span>Compétences à mobiliser</span></div></div>'
+                '<div class="callout">' + ico('<rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/>') +
+                '<p>L\'intelligence artificielle s\'intègre à cette démarche comme un outil de travail et un levier de conception, au service des besoins réels du projet.</p></div></section>')
+CAB_ENGAGEMENT = ('<section class="sec"><div class="sub">Notre engagement</div><ol class="flow">'
+                  '<li><b>Concevoir</b><span>Donner une direction claire.</span></li>'
+                  '<li><b>Structurer</b><span>Construire une réponse adaptée.</span></li>'
+                  '<li><b>Piloter</b><span>Préparer les conditions de sa mise en œuvre.</span></li></ol></section>')
+
 DIAG_CONTACT = [('Commencer par un diagnostic', 'diagnostic.html'), ('Parlons de votre projet', 'contact.html')]
 
 PAGES = {
-    'cabinet': ('cabinet', 'Le cabinet · Qui sommes-nous ?', 'Cabinet privé de conseil basé à Oran, qui accompagne les investisseurs et porteurs de projets en Algérie et à l\'international.',
-                head('02 · Le cabinet', 'Qui sommes-nous ?', 'Cabinet privé de conseil basé à Oran, qui accompagne les investisseurs et porteurs de projets en Algérie et à l\'international.') +
-                sec('Accompagnement de A à Z', p('Le cabinet couvre le foncier, les autorisations, les montages juridiques et le pilotage opérationnel.'), first=True) +
-                sec('Cabinet privé indépendant', p('Société de droit algérien, non affiliée à une institution publique.')) +
-                sec('2.1 / Notre méthode', '', [('Notre méthode', 'methode.html')]) +
-                sec('2.2 / Nos références', '', [('Nos références', 'references.html')]) +
-                sec('2.3 / Notre conformité', '', [('Notre conformité', 'notreconformite.html')]) +
-                sec('2.4 / Nous rejoindre', '', [('Nous rejoindre', 'carrieres.html')])),
+    'cabinet': ('cabinet', 'Le cabinet · Qui sommes-nous ?', 'Praetorian Sentinel Smart (PSS) est un cabinet de conseil stratégique et d\'ingénierie de projets, en Algérie et à l\'international.',
+                head('Le cabinet', 'Qui sommes-nous ?', 'Praetorian Sentinel Smart (PSS) est un cabinet de conseil stratégique et d\'ingénierie de projets, au service des particuliers, des entrepreneurs, des investisseurs et des organisations, en Algérie et à l\'international.') +
+                '<p class="lead">Nous concevons des solutions, structurons les moyens et organisons les interventions nécessaires pour faire avancer les projets et développer les activités.</p>' +
+                CAB_DOMAINES + CAB_APPROCHE + CAB_ENGAGEMENT +
+                sec('Pour aller plus loin', '', [('Notre méthode', 'methode.html'), ('Nos références', 'references.html'), ('Notre conformité', 'notreconformite.html'), ('Nous rejoindre', 'carrieres.html')]) +
+                sec('Votre projet', p('Le plus simple est de commencer par un diagnostic : nous faisons le point avec vous et définissons la première étape.'), DIAG_CONTACT)),
 
     'methode': ('cabinet', 'Notre méthode · De votre projet à sa réalisation', 'Diagnostic, conseil et pilotage opérationnel en Algérie.',
                 head('2.1 · Notre méthode', 'De votre projet à sa réalisation', 'Le cabinet propose un diagnostic, du conseil et un pilotage opérationnel en Algérie.', ('Le cabinet', 'cabinet.html')) +

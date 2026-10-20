@@ -150,9 +150,9 @@
   function proj(X,Y,Z,c){var dz=Z-c[2];if(dz<40)return null;var s=F/dz;return [(geo.ppX+(X-c[0])*s)*geo.u,(geo.ppY+(Y-c[1])*s)*geo.u,s,dz];}
   function sm(t){t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);}
 
-  var P=0, C=[0,0,0], vis=0, cop=[];
+  var camP=0, C=[0,0,0], vis=0, cop=[];
   function place(p){
-    P=p; C=cam(p);
+    camP=p; C=cam(p);
     var hp=Math.max(0,Math.min(1,p)), ho=1-sm(hp*1.5);
     home.style.opacity=ho.toFixed(3); home.style.visibility=ho<0.01?'hidden':'visible'; home.style.pointerEvents=hp>0.3?'none':'';
     home.style.transform=hp>0?'scale('+(1+hp*0.05).toFixed(4)+')':'';
