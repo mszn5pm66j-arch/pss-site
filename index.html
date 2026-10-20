@@ -140,28 +140,19 @@
   /* titres longs : on réduit la taille pour tenir dans le cadre */
   function fitTitles(){cards.forEach(function(c){if(!c)return;var t=c.el.querySelector('.rt');t.style.fontSize='';var k=0;while(t.scrollWidth>t.clientWidth+1&&k<12){t.style.fontSize=(parseFloat(getComputedStyle(t).fontSize)*0.94)+'px';k++;}});}
 
-  /* liaisons entre socles : pistes rectilignes à angles cassés (45°), comme le tracé de la carte ; pastilles aux angles */
-  var LINKS=[[1,2],[2,3],[3,4],[4,5],[5,6],[3,5]], PATHS=[];
-  function chamfer(co,r){var out=[co[0]];
-    for(var i=1;i<co.length-1;i++){var p=co[i],a=co[i-1],b=co[i+1],l1=Math.hypot(p[0]-a[0],p[1]-a[1])||1,l2=Math.hypot(b[0]-p[0],b[1]-p[1])||1,k=Math.min(r,l1/2,l2/2);
-      out.push([p[0]+(a[0]-p[0])/l1*k,p[1]+(a[1]-p[1])/l1*k]);out.push([p[0]+(b[0]-p[0])/l2*k,p[1]+(b[1]-p[1])/l2*k]);}
-    out.push(co[co.length-1]);return out;}
-  LINKS.forEach(function(l,i){
-    var a=cards[l[0]], b=cards[l[1]], A=[a.x,a.y+DISK], B=[b.x,b.y+DISK], dx=B[0]-A[0];
-    /* départ à l'horizontale depuis le socle, montée verticale dans l'intervalle entre les cartes, arrivée à l'horizontale dans le socle suivant */
-    var X=Math.abs(dx)>400?A[0]+dx*(0.5+(i%2?0.06:-0.06)):Math.max(A[0],B[0])+380;
-    var pl=chamfer([A,[X,A[1]],[X,B[1]],B],70), L=[0];
-    for(var n=1;n<pl.length;n++)L.push(L[n-1]+Math.hypot(pl[n][0]-pl[n-1][0],pl[n][1]-pl[n-1][1]));
-    /* les paliers horizontaux restent à la profondeur de leur socle : ils restent horizontaux à l'écran ; la profondeur change dans la montée */
-    var tot=L[L.length-1]||1, Ls=L[1], Le=L[L.length-2], pts=[], kinks=[];
-    for(var n=0;n<pl.length-1;n++){
-      if(n>0)kinks.push(pts.length);
-      var seg=L[n+1]-L[n], m=Math.max(1,Math.round(seg/40));
-      for(var q=0;q<m;q++){var t=q/m, f=Math.max(0,Math.min(1,(L[n]+seg*t-Ls)/((Le-Ls)||1)));pts.push([pl[n][0]+(pl[n+1][0]-pl[n][0])*t, pl[n][1]+(pl[n+1][1]-pl[n][1])*t, a.z+(b.z-a.z)*f]);}
-    }
-    pts.push([B[0],B[1],b.z]);
-    PATHS.push({a:l[0],b:l[1],pts:pts,kinks:kinks,ph:(i*0.37)%1});
-  });
+  /* liaisons entre socles : tracées à l'écran à chaque image. Depuis le socle de la rubrique la plus éloignée,
+     la piste descend à la verticale dans le vide, tourne à angle cassé (45°) puis file à l'horizontale
+     jusqu'au flanc de la carte plus proche. Elle reste dans les espaces libres, sans traverser les cartes. */
+  var LINKS=[[1,2],[2,3],[3,4],[4,5],[5,6]];
+  var IW=810, IH=1085, PED=[389,900], PEDRX=259, PORTY=680, EDGE_R=745, EDGE_L=35;
+  function i2s(c,x,y){var q=c.sq,w=CW*geo.u*q[2],h=CH*geo.u*q[2];return [q[0]+(x/IW-0.5)*w,q[1]+(y/IH-0.5)*h,w];}
+  function trace(A,B){
+    var pb=i2s(B,PED[0],PED[1]), pa=i2s(A,PED[0],PED[1]), side=pb[0]>=pa[0]?1:-1;
+    var sx=pb[0]+side*0.45*(PEDRX/IW)*pb[2], sy=pb[1];
+    var po=i2s(A,side>0?EDGE_R:EDGE_L,PORTY), ex=po[0], py=po[1];
+    var r=Math.min(30*geo.u*Math.sqrt(B.sq[2]),Math.abs(py-sy)/2,Math.abs(ex-sx)/2), dy=py>=sy?1:-1, dx=ex>=sx?1:-1;
+    return [[sx,sy],[sx,py-dy*r],[sx+dx*r,py],[ex,py]];
+  }
 
   /* ---- caméra ---- */
   var geo={W:0,H:0,u:1,Hu:1,ppX:583,ppY:600,fY:1000,dpr:1};
@@ -200,7 +191,7 @@
         var near=sm((q[3]-450)/450), far=sm((5200-q[3])/1400), dd=Math.abs(j-p), foc=1-Math.min(0.5,Math.max(0,dd-0.15)*0.38);
         op=near*far*foc;
       }
-      cop[j]=op;
+      cop[j]=op; c.sq=(q&&op>=0.01)?q:null;
       if(op<0.01){if(c.vis){c.el.style.visibility='hidden';c.vis=false;}continue;}
       if(!c.vis){c.el.style.visibility='visible';c.vis=true;}
       c.el.style.transform='translate3d('+(q[0]-cw/2).toFixed(1)+'px,'+(q[1]-ch/2).toFixed(1)+'px,0) scale('+q[2].toFixed(4)+')';
@@ -212,23 +203,24 @@
     var d=geo.dpr; ctx.setTransform(1,0,0,1,0,0); ctx.clearRect(0,0,cv.width,cv.height);
     if(vis<0.01)return;
     ctx.setTransform(d,0,0,d,0,0); ctx.globalCompositeOperation='lighter'; ctx.lineJoin='miter'; ctx.miterLimit=3; ctx.lineCap='butt';
-    PATHS.forEach(function(pa){
-      var al=Math.min(cop[pa.a]||0,cop[pa.b]||0); if(al<0.02)return;
-      var pts=[],ss=0,ok=true;
-      for(var i=0;i<pa.pts.length;i++){var q=proj(pa.pts[i][0],pa.pts[i][1],pa.pts[i][2],C);if(!q){ok=false;break;}pts.push(q);ss+=q[2];}
-      if(!ok)return; ss=ss/pts.length*geo.u;
-      function line(){ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);for(var i=1;i<pts.length;i++)ctx.lineTo(pts[i][0],pts[i][1]);ctx.stroke();}
-      ctx.strokeStyle='rgba(57,170,255,'+(0.10*al)+')';ctx.lineWidth=16*ss;line();
-      ctx.strokeStyle='rgba(80,205,255,'+(0.38*al)+')';ctx.lineWidth=4.5*ss;line();
-      ctx.strokeStyle='rgba(225,248,255,'+(0.85*al)+')';ctx.lineWidth=1.6*ss;line();
-      pa.kinks.forEach(function(k){var p=pts[k],r=3.2*ss;
+    LINKS.forEach(function(l,i){
+      var A=cards[l[0]], B=cards[l[1]], al=Math.min(cop[l[0]]||0,cop[l[1]]||0);
+      if(al<0.02||!A.sq||!B.sq)return;
+      var pts=trace(A,B), ss=Math.sqrt(A.sq[2]*B.sq[2])*geo.u*2.2;
+      function line(){ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);for(var k=1;k<pts.length;k++)ctx.lineTo(pts[k][0],pts[k][1]);ctx.stroke();}
+      ctx.strokeStyle='rgba(57,170,255,'+(0.10*al)+')';ctx.lineWidth=Math.max(5,10*ss);line();
+      ctx.strokeStyle='rgba(80,205,255,'+(0.38*al)+')';ctx.lineWidth=Math.max(1.6,3*ss);line();
+      ctx.strokeStyle='rgba(225,248,255,'+(0.85*al)+')';ctx.lineWidth=Math.max(0.8,1.1*ss);line();
+      /* pastilles : à l'angle et au branchement sur la carte */
+      [[(pts[1][0]+pts[2][0])/2,(pts[1][1]+pts[2][1])/2],pts[3]].forEach(function(p){var r=Math.max(1.6,2.4*ss);
         ctx.fillStyle='rgba(80,205,255,'+(0.35*al)+')';ctx.beginPath();ctx.arc(p[0],p[1],r*2.4,0,6.2832);ctx.fill();
         ctx.fillStyle='rgba(230,248,255,'+(0.9*al)+')';ctx.beginPath();ctx.arc(p[0],p[1],r,0,6.2832);ctx.fill();});
-      /* impulsion qui parcourt la liaison */
-      var t=((now/2400)+pa.ph)%1, f=t*(pts.length-1), i0=Math.floor(f), fr=f-i0, a=pts[i0], b=pts[Math.min(pts.length-1,i0+1)];
-      var x=a[0]+(b[0]-a[0])*fr, y=a[1]+(b[1]-a[1])*fr, r=14*ss;
-      var g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,'rgba(235,250,255,'+(0.95*al)+')');g.addColorStop(0.35,'rgba(90,210,255,'+(0.5*al)+')');g.addColorStop(1,'rgba(57,195,255,0)');
-      ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,6.2832);ctx.fill();
+      /* impulsion qui parcourt la piste, du socle éloigné vers la carte proche */
+      var seg=[],tot=0;for(var k=1;k<pts.length;k++){var d=Math.hypot(pts[k][0]-pts[k-1][0],pts[k][1]-pts[k-1][1]);seg.push(d);tot+=d;}
+      var t=(((now/2600)+i*0.37)%1)*tot,k2=0;while(k2<seg.length-1&&t>seg[k2]){t-=seg[k2];k2++;}
+      var f=seg[k2]?t/seg[k2]:0, x=pts[k2][0]+(pts[k2+1][0]-pts[k2][0])*f, y=pts[k2][1]+(pts[k2+1][1]-pts[k2][1])*f, rr=Math.max(5,9*ss);
+      var g=ctx.createRadialGradient(x,y,0,x,y,rr);g.addColorStop(0,'rgba(235,250,255,'+(0.95*al)+')');g.addColorStop(0.35,'rgba(90,210,255,'+(0.5*al)+')');g.addColorStop(1,'rgba(57,195,255,0)');
+      ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,rr,0,6.2832);ctx.fill();
     });
     ctx.globalCompositeOperation='source-over';
   }
