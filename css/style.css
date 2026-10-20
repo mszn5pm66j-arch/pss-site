@@ -346,5 +346,11 @@ button{font-family:inherit}
 .res p{margin:8px 0 0;font-size:13.5px;line-height:20px;font-weight:300}
 .res .lnk{margin-left:0}
 .hint{margin:10px 0 0 12px;font-size:12.5px;line-height:18px;color:var(--soft);min-height:18px}
+/* plateformes intégrées */
+.page.app{padding:0;overflow:hidden;display:flex;flex-direction:column;-webkit-mask-image:none;mask-image:none}
+.apphead{flex:none;display:flex;align-items:center;gap:12px;padding:2px 16px 8px}
+.apphead .back{margin:0}
+.appt{margin-left:auto;font-family:'PSS',sans-serif;font-size:10.5px;letter-spacing:2px;color:var(--mono);text-transform:uppercase;text-align:right}
+.appframe{flex:1;display:block;width:100%;min-height:0;border:0;background:transparent;color-scheme:normal}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media (min-width:600px){body{background:#000 url('../assets/fond-profond.jpg') center/cover fixed}body::before{content:"";position:fixed;inset:0;background:rgba(0,3,6,.85)}.stage{box-shadow:0 0 60px rgba(0,0,0,.7)}}

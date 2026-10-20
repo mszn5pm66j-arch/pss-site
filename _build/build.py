@@ -8,7 +8,7 @@ AR = '<svg viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6"/></svg>'
 BK = '<svg viewBox="0 0 12 12"><path d="M8 2 4 6l4 4"/></svg>'
 WA = 'https://wa.me/213555372345'
 MAIL = 'men-ay_pro-managment@outlook.fr'
-HORIZON = 'https://mszn5pm66j-arch.github.io/Cr-dit-22/Credittttttt.html#/niveau-1'
+HORIZON = 'credit.html?r=niveau-1'   # plateforme crédit intégrée au site
 
 
 def lnk(label, href, ext=False):
@@ -53,7 +53,7 @@ CREDIT = sec('Crédit Logement · Algérie Horizon',
                     ('02', 'Diagnostic', 'Consultation en visioconférence et rapport écrit : documents à réunir et plan d\'action personnalisé.'),
                     ('03', 'Pré-dépôt', 'Préparation d\'un dossier complet (pièces, revenus, apostilles et traductions) selon votre situation.'),
                     ('04', 'Banque', 'Dépôt du dossier, directement ou par procuration, jusqu\'à un accord de principe écrit. La décision revient à la banque.')]),
-             [('Accéder à Crédit Logement', HORIZON, True)])
+             [('Accéder à Crédit Logement', HORIZON)])
 
 
 # ---- page « Le cabinet » : domaines, approche, engagement ----
@@ -114,9 +114,9 @@ PAGES = {
 
     'divisions': ('cabinet', 'Nos domaines d\'expertise · Quatre pôles d\'excellence', 'Des expertises combinées pour piloter un projet de bout en bout en Algérie.',
                   head('Le cabinet · Nos domaines d\'expertise', 'Quatre pôles d\'excellence', 'Des expertises combinées pour piloter un projet de bout en bout en Algérie.', ('Le cabinet', 'cabinet.html')) +
-                  sec('3.1 / Réglementaire &amp; investissement', p('Cadre légal &amp; autorisations.'), [('Découvrir ce pôle', 'division-2.html'), ('Algérie Horizon · logement &amp; crédit diaspora', HORIZON, True)], first=True) +
+                  sec('3.1 / Réglementaire &amp; investissement', p('Cadre légal &amp; autorisations.'), [('Découvrir ce pôle', 'division-2.html'), ('Crédit logement depuis l\'étranger', HORIZON)], first=True) +
                   sec('3.2 / Maîtrise d\'ouvrage', p('Pilotage opérationnel.'), [('Découvrir ce pôle', 'division-3.html')]) +
-                  sec('3.3 / Ingénierie financière', p('Montages &amp; banques.'), [('Découvrir ce pôle', 'division-4.html'), ('Algérie Horizon · logement &amp; crédit diaspora', HORIZON, True)]) +
+                  sec('3.3 / Ingénierie financière', p('Montages &amp; banques.'), [('Découvrir ce pôle', 'division-4.html'), ('Crédit logement depuis l\'étranger', HORIZON)]) +
                   sec('3.4 / Architecture intelligente augmentée', p('Assistants &amp; automatisation.'), [('Découvrir ce pôle', 'division-1.html')])),
 
     'division-2': ('cabinet', 'Réglementaire & investissement', 'Foncier, autorisations et montages juridiques pour votre projet en Algérie.',
@@ -193,7 +193,7 @@ PAGES = {
 
 
 # ---- Votre parcours · À qui nous adressons-nous ? ----
-INV = 'https://mszn5pm66j-arch.github.io/Cr-dit-22/Invvv.html'
+INV = 'diagnostic-initial.html'   # plateforme investissement intégrée au site
 
 
 def card(href, icon, title, text):
@@ -220,17 +220,17 @@ PARCOURS = (head('Votre parcours', 'À qui nous adressons-nous ?', 'Quatre profi
                    ('02', 'Diagnostic', 'Consultation en visioconférence et rapport écrit : documents à réunir, plan d\'action.'),
                    ('03', 'Pré-dépôt', 'Dossier complet selon votre pays : pièces, revenus, apostilles, traductions.'),
                    ('04', 'Banque', 'Dépôt du dossier jusqu\'à l\'accord de principe écrit. La décision revient à la banque.')]) +
-            '<div class="row">' + lnk('Commencer gratuitement · niveau 1', HORIZON, True) + '</div></section>' +
+            '<div class="row">' + lnk('Commencer gratuitement · niveau 1', HORIZON) + '</div></section>' +
             '<section class="sec" id="investisseurs"><div class="sub">Investisseurs · diagnostic initial</div>' +
             p('Vous disposez de fonds sans projet arrêté, ou vous avez un projet identifié et voulez savoir comment le réaliser en Algérie.') +
             '<div class="cadre"><div class="ct">Le diagnostic initial couvre</div><div class="c4"><span>Cadre légal et autorisations</span><span>Institutions : AAPI, banques, CNRC, impôts, douanes</span><span>Structure de la société</span><span>Pistes de financement</span></div></div>' +
             p('AAPI : Agence algérienne de promotion de l\'investissement. CNRC : Centre national du registre du commerce.', True) +
-            '<div class="row">' + lnk('Obtenir ma fiche de diagnostic initial (PDF)', INV, True) + '</div></section>' +
+            '<div class="row">' + lnk('Obtenir ma fiche de diagnostic initial (PDF)', INV + '?profil=investNat') + '</div></section>' +
             '<section class="sec" id="porteurs"><div class="sub">Porteurs de projet · diagnostic de lancement</div>' +
             p('Vous préparez le lancement d\'une activité, ou votre activité existe et doit franchir une étape.') +
             steps([('01', 'Pré-lancement', 'Faisabilité, démarches légales avec lien direct vers l\'institution, budget et calendrier.'),
                    ('02', 'Développement', 'Points bloquants, organisation, financement de l\'étape suivante.')]) +
-            '<div class="row"><button type="button" class="lnk" data-wa="Je souhaite mon diagnostic de lancement (PDF).">Demander mon diagnostic de lancement (PDF) ' + AR + '</button></div></section>' +
+            '<div class="row">' + lnk('Obtenir mon diagnostic de lancement (PDF)', INV + '?profil=entrepreneur') + '</div></section>' +
             '<section class="sec" id="professionnels"><div class="sub">Professionnels et entreprises · IA métier</div>' +
             p('Vous voulez que l\'intelligence artificielle travaille pour votre métier : documenter, surveiller les évolutions, automatiser les tâches répétitives.') +
             '<div class="row">' + lnk('Découvrir IA métier', 'ia-metier.html') + '</div></section>' +
@@ -249,19 +249,17 @@ PARCOURS = (head('Votre parcours', 'À qui nous adressons-nous ?', 'Quatre profi
 
 PARCOURS_JS = """<script>
 (function(){
-var HZ='""" + HORIZON + """',INV='""" + INV + """';
 var S2={particulier:['Je vis à l\\u2019étranger','Je vis en Algérie'],investisseur:['Fonds disponibles, sans projet arrêté','Projet identifié'],porteur:['Pré-lancement','Activité en développement'],pro:['Professionnel indépendant','Entreprise en développement']};
 var S3={particulier:['Acheter un logement avec un crédit','Démarches et autorisations'],investisseur:['Connaître le cadre légal','Structurer la société','Préparer le financement'],porteur:['Valider la faisabilité','Monter le dossier','Piloter le projet'],pro:['Documenter','Surveiller les évolutions','Automatiser']};
 var PRIO=['documenter','surveiller','automatiser'];
 var f1=document.getElementById('f1'),f2=document.getElementById('f2'),f3=document.getElementById('f3'),fh=document.getElementById('fh'),fr=document.getElementById('fr'),st={p:null,a:null,b:null};
 function chips(el,list,cur){el.innerHTML=list.map(function(t,i){return '<button type="button" class="chip'+(i===cur?' on':'')+'" data-i="'+i+'">'+t+'</button>';}).join('');}
 function L(t,h,x){return '<a class="lnk" href="'+h+'"'+(x?' target="_blank" rel="noopener"':'')+'>'+t+' '+PSS.ARROW+'</a>';}
-function wa(t){return '<button type="button" class="lnk" data-wa="'+t.replace(/"/g,'&quot;')+'">Demander par WhatsApp '+PSS.ARROW+'</button>';}
 function result(){var p=st.p,a=st.a,b=st.b,r;
-  if(p==='particulier'){r=(a===0&&b===0)?['Plateforme crédit · 5 pays','Depuis la France, l\\u2019Espagne, l\\u2019Allemagne, la Belgique ou le Québec : quatre niveaux, le premier gratuit, jusqu\\u2019à l\\u2019accord de principe de la banque.',L('Commencer gratuitement · niveau 1',HZ,1)+L('Voir les quatre niveaux','#particuliers')]
-    :['Diagnostic','Nous faisons le point sur votre logement ou vos démarches et vous indiquons la première étape.',L('Faire le point sur votre projet','diagnostic.html')+L('Réglementaire &amp; investissement','division-2.html')];}
-  else if(p==='investisseur')r=['Diagnostic initial investisseur (PDF)','Cadre légal, institutions, structure de la société et financement : votre fiche de diagnostic initial, générée par notre plateforme investissement.',L('Obtenir ma fiche de diagnostic initial (PDF)',INV,1)+L('Ce que couvre le diagnostic','#investisseurs')];
-  else if(p==='porteur')r=['Diagnostic de lancement (PDF)',(a===0?'Faisabilité, démarches légales, budget et calendrier.':'Points bloquants, organisation et financement de l\\u2019étape suivante.')+' Il précède l\\u2019accompagnement sur devis.',wa('Je souhaite mon diagnostic de lancement (PDF). Situation : '+S2.porteur[a]+'. Besoin : '+S3.porteur[b]+'.')+L('Voir l\\u2019accompagnement sur devis','#devis')];
+  if(p==='particulier'){r=(a===0)?['Plateforme crédit · 5 pays','Depuis la France, l\\u2019Espagne, l\\u2019Allemagne, la Belgique ou le Québec : quatre niveaux, le premier gratuit, jusqu\\u2019à l\\u2019accord de principe de la banque.',L(b===0?'Commencer gratuitement · niveau 1':'Ouvrir la plateforme crédit',b===0?'credit.html?r=niveau-1':'credit.html')+L('Voir les quatre niveaux','#particuliers')]
+    :['Diagnostic gratuit (PDF)','Notre plateforme réglementaire identifie les démarches, les institutions concernées et les documents à préparer, puis génère votre rapport en PDF.',L('Obtenir mon diagnostic gratuit (PDF)','diagnostic-initial.html')];}
+  else if(p==='investisseur')r=['Diagnostic initial investisseur (PDF)','Cadre légal, institutions, structure de la société et financement : votre rapport gratuit, généré par notre plateforme investissement.',L('Obtenir ma fiche de diagnostic initial (PDF)','diagnostic-initial.html?profil='+(a===0?'holding':'investNat'))+L('Ce que couvre le diagnostic','#investisseurs')];
+  else if(p==='porteur')r=['Diagnostic de lancement (PDF)',(a===0?'Faisabilité, démarches légales, budget et calendrier.':'Points bloquants, organisation et financement de l\\u2019étape suivante.')+' Gratuit, généré par notre plateforme ; il précède l\\u2019accompagnement sur devis.',L('Obtenir mon diagnostic de lancement (PDF)','diagnostic-initial.html?profil='+(a===0?'entrepreneur':'entrepriseDev'))+L('Voir l\\u2019accompagnement sur devis','#devis')];
   else r=['IA métier','Votre priorité : '+S3.pro[b].toLowerCase()+'. Le schéma de principe de votre dispositif se prépare sur la page IA métier.',L('Préparer mon schéma de principe','ia-metier.html#'+PRIO[b])];
   fr.innerHTML='<h3>'+r[0]+'</h3><p>'+r[1]+'</p><div class="row">'+r[2]+'</div>';fr.classList.remove('on');void fr.offsetWidth;fr.classList.add('on');fh.textContent='';}
 function draw(){chips(f2,st.p?S2[st.p]:[],st.a);chips(f3,st.p&&st.a!==null?S3[st.p]:[],st.b);
@@ -270,7 +268,6 @@ function draw(){chips(f2,st.p?S2[st.p]:[],st.a);chips(f3,st.p&&st.a!==null?S3[st
 f1.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;st={p:b.getAttribute('data-v'),a:null,b:null};f1.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('on',c===b);});draw();});
 f2.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;st.a=+b.getAttribute('data-i');st.b=null;draw();});
 f3.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;st.b=+b.getAttribute('data-i');draw();});
-document.addEventListener('click',function(e){var b=e.target.closest('[data-wa]');if(!b)return;window.open(PSS.wa('Bonjour Praetorian Sentinel Smart, '+b.getAttribute('data-wa')),'_blank');});
 draw();
 })();
 </script>"""
@@ -300,7 +297,7 @@ function update(){sel.profil=txt('profil');sel.metier=txt('metier');sel.prio=txt
   var miss=['profil','metier','prio'].filter(function(k){return !sel[k];});
   if(miss.length){ih.textContent=miss.length===3?'Trois choix, puis votre schéma de principe se télécharge en PDF.':'Encore '+miss.length+' choix.';ir.classList.remove('on');return;}
   ih.textContent='';var i=['Documenter','Surveiller','Automatiser'].indexOf(sel.prio);
-  ir.innerHTML='<h3>Votre schéma de principe</h3><p>Socle commun + '+OPT[i][0].toLowerCase()+' ('+OPT[i][1]+'), pour le métier : '+sel.metier.toLowerCase()+'.</p><div class="row"><button type="button" class="lnk" id="ipdf">Télécharger mon schéma de principe (PDF) '+PSS.ARROW+'</button><button type="button" class="lnk" id="iwa">Demander une démonstration '+PSS.ARROW+'</button></div>';
+  ir.innerHTML='<h3>Votre schéma de principe</h3><p>Socle commun + '+OPT[i][0].toLowerCase()+' ('+OPT[i][1]+'), pour le métier : '+sel.metier.toLowerCase()+'.</p><div class="row"><button type="button" class="lnk" id="ipdf">Télécharger mon schéma de principe (PDF) '+PSS.ARROW+'</button></div>';
   ir.classList.remove('on');void ir.offsetWidth;ir.classList.add('on');}
 groups.forEach(function(g){g.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;g.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('on',c===b);});update();});});
 function pick(i){var g=document.querySelector('#filtre-ia [data-g="prio"]');g.querySelectorAll('.chip').forEach(function(c,j){c.classList.toggle('on',j===i);});update();}
@@ -350,7 +347,6 @@ function pdf(jpeg,w,h){var b=atob(jpeg.split(',')[1]),im=new Uint8Array(b.length
   var x=len,t='xref\\n0 6\\n0000000000 65535 f \\n';for(var k=1;k<=5;k++)t+=String(off[k]).padStart(10,'0')+' 00000 n \\n';
   add(t+'trailer<</Size 6/Root 1 0 R>>\\nstartxref\\n'+x+'\\n%%EOF');return new Blob(parts,{type:'application/pdf'});}
 ir.addEventListener('click',async function(e){
-  if(e.target.closest('#iwa')){window.open(PSS.wa('Bonjour Praetorian Sentinel Smart, je souhaite une démonstration IA métier. Profil : '+sel.profil+'. Métier : '+sel.metier+'. Priorité : '+sel.prio+'.'),'_blank');return;}
   if(!e.target.closest('#ipdf'))return;
   var c=await schema(),blob=pdf(c.toDataURL('image/jpeg',.92),c.width,c.height),a=document.createElement('a');
   a.href=URL.createObjectURL(blob);a.download='PSS-schema-de-principe-'+sel.metier.toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9]+/g,'-')+'.pdf';document.body.appendChild(a);a.click();
@@ -361,6 +357,29 @@ ir.addEventListener('click',async function(e){
 PAGES['parcours'] = ('parcours', 'Votre parcours · À qui nous adressons-nous ?', 'Particuliers, investisseurs, porteurs de projet, professionnels : votre profil, votre livrable.', PARCOURS)
 PAGES['ia-metier'] = ('ia', 'IA métier · L\'intelligence artificielle adaptée à votre métier', 'Documentaire interactif, veille métier, assistants et automatisation : un socle commun et des options selon votre métier.', IA)
 EXTRA_JS = {'parcours': PARCOURS_JS, 'ia-metier': IA_JS}
+
+
+
+# ---- plateformes intégrées (crédit, investissement) : elles s'ouvrent dans le site, dans la charte PSS ----
+def app(kind, src, title, back):
+    return (f'<div class="apphead"><a class="back" href="{back[1]}">{BK} {back[0]}</a><span class="appt">{title}</span></div>'
+            f'<iframe class="appframe" id="app" data-kind="{kind}" data-src="{src}" title="{title}"></iframe>')
+
+
+APP_JS = """<script>
+(function(){var f=document.getElementById('app'),q=new URLSearchParams(location.search),src=f.getAttribute('data-src');
+if(f.getAttribute('data-kind')==='credit'){var r=(q.get('r')||'').replace(/[^a-z0-9-]/g,'');if(r)src+='#/'+r;}
+else{var p=(q.get('profil')||'').replace(/[^A-Za-z]/g,'');if(p)src+='?profil='+p;}
+f.src=src;})();
+</script>"""
+
+PAGES['credit'] = ('parcours', 'Crédit depuis l\'étranger · Plateforme crédit', 'Logement et crédit en Algérie depuis la France, l\'Espagne, l\'Allemagne, la Belgique ou le Québec : quatre niveaux, le premier gratuit.',
+                   app('credit', 'plateformes/credit.html', 'Crédit · 5 pays', ('Votre parcours', 'parcours.html#particuliers')))
+PAGES['diagnostic-initial'] = ('parcours', 'Diagnostic initial · Plateforme investissement', 'Votre diagnostic gratuit en PDF : cadre légal, institutions, structure et financement de votre projet en Algérie.',
+                               app('invest', 'plateformes/investissement.html', 'Diagnostic gratuit · PDF', ('Votre parcours', 'parcours.html#investisseurs')))
+EXTRA_JS['credit'] = APP_JS
+EXTRA_JS['diagnostic-initial'] = APP_JS
+APP_PAGES = ('credit', 'diagnostic-initial')
 
 FAQ = [('Où intervenez-vous ?', 'Le cabinet accompagne les projets liés à l\'Algérie, depuis l\'Algérie et depuis l\'étranger : France, Espagne, Allemagne, Belgique, Québec.'),
        ('Faut-il créer un compte ?', 'Non. Le parcours d\'avis fonctionne sans inscription.'),
@@ -402,7 +421,7 @@ TPL = '''<!doctype html>
 </head>
 <body data-page="{name}" data-sec="{sec}">
 <div class="stage">
-<main class="page">
+<main class="page{mcls}">
 {content}
 </main>
 </div>
@@ -417,7 +436,7 @@ document.querySelectorAll('.qa button').forEach(function(b){b.addEventListener('
 </script>'''
 
 for name, (s, title, desc, content) in PAGES.items():
-    html = TPL.format(title=title.replace('&amp;', '&'), desc=desc.replace('"', '&quot;'), name=name, sec=s, content=content,
+    html = TPL.format(title=title.replace('&amp;', '&'), desc=desc.replace('"', '&quot;'), name=name, sec=s, content=content, mcls=' app' if name in APP_PAGES else '',
                       extra=FAQ_JS if name == 'faq' else EXTRA_JS.get(name, ''))
     open(os.path.join(ROOT, name + '.html'), 'w', encoding='utf-8').write(html)
     print('ok', name)

@@ -1,0 +1,61 @@
+/* Praetorian Sentinel Smart — habillage des plateformes intégrées (crédit, investissement) dans la charte du site.
+   Le contenu et le fonctionnement des plateformes restent inchangés : seules les couleurs, la police et l'en-tête sont repris. */
+@font-face{font-family:'PSS';src:url('../fonts/LexendExa.woff') format('woff');font-weight:100 900;font-display:swap}
+:root{
+  /* plateforme crédit */
+  --navy:#071423;--navy-2:#0b2036;--navy-3:#123a5e;
+  --ice:rgba(57,195,255,.07);--ice-2:rgba(57,195,255,.04);
+  --gold:#5acef6;--gold-soft:rgba(57,195,255,.12);--gold-line:rgba(90,190,240,.45);
+  --paper:transparent;--surface:rgba(6,14,24,.84);--surface-2:rgba(8,18,30,.88);
+  --ink:#e6eef4;--ink-soft:#b3c2cd;--ink-faint:#8597a6;
+  --line:rgba(90,170,210,.24);--line-soft:rgba(90,170,210,.13);
+  --ok:#5ff0b0;--ok-bg:rgba(95,240,176,.08);--ok-line:rgba(95,240,176,.35);
+  --warn:#f0c070;--warn-bg:rgba(240,192,112,.08);
+  --stop:#f2a6a6;--stop-bg:rgba(242,166,166,.08);
+  --shadow:0 0 0 1px rgba(90,190,240,.10),0 8px 24px rgba(0,0,0,.35);
+  /* plateforme investissement */
+  --paper-raised:rgba(6,14,24,.84);--paper-sunk:rgba(10,24,38,.88);
+  --rule:rgba(90,170,210,.24);--rule-strong:rgba(90,170,210,.45);
+  --brass:#5acef6;--brass-wash:rgba(57,195,255,.12);
+  --verified:#5ff0b0;--transitional:#f0c070;--missing:#f2a6a6;--official:#cfe0ea;
+  --serif:'PSS',sans-serif;--sans:'PSS',sans-serif;
+}
+html,body{background:transparent!important;color:var(--ink)}
+*{font-family:'PSS',sans-serif!important}
+body{letter-spacing:.1px}
+h1,h2,h3{font-weight:400!important}
+input,select,textarea{background:rgba(4,12,22,.92)!important;color:var(--ink)!important;border-color:var(--line)!important}
+select option{background:#06101b;color:#e6eef4}
+a{color:#5acef6}
+::selection{background:rgba(57,195,255,.35)}
+
+/* ----- crédit : l'en-tête PSS du site remplace la marque et le menu propres à la plateforme ----- */
+.nav .brand,.nav .burger,.nav .pill,.nav .drawer,.skip{display:none!important}
+.nav{background:rgba(3,9,16,.88)!important;border-bottom:1px solid var(--line)!important;backdrop-filter:blur(6px)}
+.nav .nav-in{padding:8px 12px!important;min-height:0!important}
+.nav .navlinks{display:flex!important;gap:6px;overflow-x:auto;white-space:nowrap;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin:0!important;width:100%}
+.nav .navlinks::-webkit-scrollbar{display:none}
+.nav .navlinks a{flex:none;font-size:11.5px!important;letter-spacing:1px;text-transform:uppercase;color:#d7dde2!important;border:1.5px solid #34505f;border-radius:20px;padding:7px 12px!important;background:rgba(3,10,18,.6);text-decoration:none}
+.nav .navlinks a.on,.nav .navlinks a[aria-current]{color:#5acef6!important;border-color:#39c3ff;box-shadow:0 0 10px rgba(57,195,255,.35)}
+.hero{background:linear-gradient(rgba(3,9,16,.55),rgba(3,9,16,.25))!important}
+.hero .bg{opacity:.35}
+
+/* ----- investissement : marque masquée (l'en-tête du site est au-dessus), langues conservées ----- */
+.masthead{background:rgba(3,9,16,.88)!important;border-bottom:1px solid var(--rule)!important}
+.masthead .sigil,.masthead .wordmark{display:none!important}
+.masthead-in{padding:8px 14px!important}
+
+/* ----- boutons et pastilles dans le style du site ----- */
+.act,.cta{background:rgba(57,195,255,.14)!important;color:#e6f6ff!important;border:1.5px solid #39b9ec!important;border-radius:22px!important;box-shadow:0 0 10px rgba(57,195,255,.30);letter-spacing:1px}
+.act:hover,.cta:hover{background:rgba(57,195,255,.24)!important}
+.act.ghost,.cta.ghost{background:rgba(3,10,18,.6)!important;border-color:#34505f!important;box-shadow:none;color:#d7dde2!important}
+.chip,.slot{background:rgba(3,10,18,.6);border-color:#34505f;color:#d7dde2}
+.chip[aria-pressed="true"],.slot[aria-pressed="true"]{background:rgba(57,195,255,.14)!important;border-color:#39c3ff!important;color:#5acef6!important;box-shadow:0 0 10px rgba(57,195,255,.35)}
+.assist-top{background:rgba(3,9,16,.92)!important}
+.assist-top b{color:#e6eef4!important}
+
+/* ----- crédit : textes et liens qui utilisaient le bleu marine, rendus lisibles sur fond nuit ----- */
+.reg .s,.doc .ref,th,.score,.chk .ref,.from,.lnk,.pp-sec h5,.cta.ghost,.more,.bkc-s,.simhyp summary,.lnkbtn,.basecard b,.ckref,.btn-portail,.regsoc h4,.nivp,.lvx a{color:#5acef6!important}
+.lvx span,.lvx .tag,.lv .tag{color:#8fd8fb}
+/* ----- crédit : marges latérales des sections sur téléphone ----- */
+.wrap.pad,section.wrap{padding-left:16px!important;padding-right:16px!important}

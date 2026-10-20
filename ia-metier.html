@@ -26,7 +26,7 @@ function update(){sel.profil=txt('profil');sel.metier=txt('metier');sel.prio=txt
   var miss=['profil','metier','prio'].filter(function(k){return !sel[k];});
   if(miss.length){ih.textContent=miss.length===3?'Trois choix, puis votre schéma de principe se télécharge en PDF.':'Encore '+miss.length+' choix.';ir.classList.remove('on');return;}
   ih.textContent='';var i=['Documenter','Surveiller','Automatiser'].indexOf(sel.prio);
-  ir.innerHTML='<h3>Votre schéma de principe</h3><p>Socle commun + '+OPT[i][0].toLowerCase()+' ('+OPT[i][1]+'), pour le métier : '+sel.metier.toLowerCase()+'.</p><div class="row"><button type="button" class="lnk" id="ipdf">Télécharger mon schéma de principe (PDF) '+PSS.ARROW+'</button><button type="button" class="lnk" id="iwa">Demander une démonstration '+PSS.ARROW+'</button></div>';
+  ir.innerHTML='<h3>Votre schéma de principe</h3><p>Socle commun + '+OPT[i][0].toLowerCase()+' ('+OPT[i][1]+'), pour le métier : '+sel.metier.toLowerCase()+'.</p><div class="row"><button type="button" class="lnk" id="ipdf">Télécharger mon schéma de principe (PDF) '+PSS.ARROW+'</button></div>';
   ir.classList.remove('on');void ir.offsetWidth;ir.classList.add('on');}
 groups.forEach(function(g){g.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;g.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('on',c===b);});update();});});
 function pick(i){var g=document.querySelector('#filtre-ia [data-g="prio"]');g.querySelectorAll('.chip').forEach(function(c,j){c.classList.toggle('on',j===i);});update();}
@@ -76,7 +76,6 @@ function pdf(jpeg,w,h){var b=atob(jpeg.split(',')[1]),im=new Uint8Array(b.length
   var x=len,t='xref\n0 6\n0000000000 65535 f \n';for(var k=1;k<=5;k++)t+=String(off[k]).padStart(10,'0')+' 00000 n \n';
   add(t+'trailer<</Size 6/Root 1 0 R>>\nstartxref\n'+x+'\n%%EOF');return new Blob(parts,{type:'application/pdf'});}
 ir.addEventListener('click',async function(e){
-  if(e.target.closest('#iwa')){window.open(PSS.wa('Bonjour Praetorian Sentinel Smart, je souhaite une démonstration IA métier. Profil : '+sel.profil+'. Métier : '+sel.metier+'. Priorité : '+sel.prio+'.'),'_blank');return;}
   if(!e.target.closest('#ipdf'))return;
   var c=await schema(),blob=pdf(c.toDataURL('image/jpeg',.92),c.width,c.height),a=document.createElement('a');
   a.href=URL.createObjectURL(blob);a.download='PSS-schema-de-principe-'+sel.metier.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-')+'.pdf';document.body.appendChild(a);a.click();

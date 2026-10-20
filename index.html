@@ -274,7 +274,7 @@
 
   /* orientation : profil × zone */
   var pick={profil:null,zone:null},sheet=document.getElementById('sheet');
-  var HZ='https://mszn5pm66j-arch.github.io/Cr-dit-22/Credittttttt.html#/niveau-1';
+  var HZ='credit.html?r=niveau-1';
   var P={particulier:['Logement, démarches et autorisations','Votre parcours vous indique les démarches et, depuis l\'étranger, la plateforme crédit en quatre niveaux.',[['Votre parcours · Particuliers','parcours.html#particuliers']]],
     investisseur:['Cadre légal et montage financier','Le diagnostic initial fait le point sur les autorisations, la structure de la société et le financement.',[['Votre parcours · Investisseurs','parcours.html#investisseurs']]],
     porteur:['Du pré-lancement au développement','Le diagnostic de lancement cadre votre projet avant l\'accompagnement sur devis.',[['Votre parcours · Porteurs de projet','parcours.html#porteurs']]],
@@ -284,7 +284,7 @@
   function result(){
     if(!pick.profil||!pick.zone)return;
     var r=P[pick.profil],t=r[0],d=r[1],ls=r[2].slice();
-    if(pick.profil==='particulier'&&pick.zone==='diaspora'){t='Logement ou crédit en Algérie depuis l\'étranger';d='Algérie Horizon prépare votre dossier de crédit logement en quatre étapes, la première étant gratuite.';ls=[['Commencer gratuitement · niveau 1',HZ,1],['Votre parcours · Particuliers','parcours.html#particuliers']];}
+    if(pick.profil==='particulier'&&pick.zone==='diaspora'){t='Logement ou crédit en Algérie depuis l\'étranger';d='Algérie Horizon prépare votre dossier de crédit logement en quatre étapes, la première étant gratuite.';ls=[['Commencer gratuitement · niveau 1',HZ],['Votre parcours · Particuliers','parcours.html#particuliers']];}
     ls.push(['Trouver mon offre en 3 étapes','parcours.html#filtre']);
     sheet.innerHTML='<button class="x" aria-label="Fermer">×</button><h3>'+t+'</h3><p>'+d+'</p><p style="color:#a9b8c4">'+Z[pick.zone]+'</p><div class="row">'+ls.map(function(x){return L(x[0],x[1],x[2]);}).join('')+'</div>';
     sheet.classList.add('on');

@@ -65,7 +65,7 @@
   }
   window.PSS.footer = footer;
   var pageEl = document.querySelector('.page');
-  if (pageEl) pageEl.insertAdjacentHTML('beforeend', footer());
+  if (pageEl && !pageEl.classList.contains('app')) pageEl.insertAdjacentHTML('beforeend', footer());
 
   /* ---- menu plein écran ---- */
   var here = location.pathname.split('/').pop() || 'index.html';

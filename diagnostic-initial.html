@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="theme-color" content="#02060b">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Diagnostic initial · Plateforme investissement · Praetorian Sentinel Smart</title>
+<meta name="description" content="Votre diagnostic gratuit en PDF : cadre légal, institutions, structure et financement de votre projet en Algérie.">
+<link rel="icon" href="assets/emblem-cadre.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="diagnostic-initial" data-sec="parcours">
+<div class="stage">
+<main class="page app">
+<div class="apphead"><a class="back" href="parcours.html#investisseurs"><svg viewBox="0 0 12 12"><path d="M8 2 4 6l4 4"/></svg> Votre parcours</a><span class="appt">Diagnostic gratuit · PDF</span></div><iframe class="appframe" id="app" data-kind="invest" data-src="plateformes/investissement.html" title="Diagnostic gratuit · PDF"></iframe>
+</main>
+</div>
+<script src="js/site.js"></script>
+<script>
+(function(){var f=document.getElementById('app'),q=new URLSearchParams(location.search),src=f.getAttribute('data-src');
+if(f.getAttribute('data-kind')==='credit'){var r=(q.get('r')||'').replace(/[^a-z0-9-]/g,'');if(r)src+='#/'+r;}
+else{var p=(q.get('profil')||'').replace(/[^A-Za-z]/g,'');if(p)src+='?profil='+p;}
+f.src=src;})();
+</script>
+</body>
+</html>

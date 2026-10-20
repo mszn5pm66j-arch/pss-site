@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Praetorian Sentinel Smart — Intelligence réglementaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16242E;
+  --ink-soft:#3E515C;
+  --ink-faint:#6F818B;
+  --paper:#EDEBE4;
+  --paper-raised:#F6F5F0;
+  --paper-sunk:#E3E0D6;
+  --rule:#CFCBBF;
+  --rule-strong:#AEA893;
+  --brass:#9A7233;
+  --brass-wash:#EFE6D2;
+  --verified:#3A6B4D;
+  --transitional:#B3701F;
+  --missing:#9B3B2E;
+  --official:#2F3B42;
+  --serif:'Spectral',Georgia,'Times New Roman',serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:15px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.2;margin:0}
+p{margin:0}
+button,select,input{font-family:inherit;font-size:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+
+/* ---------- header ---------- */
+.masthead{
+  border-bottom:1px solid var(--rule);
+  background:var(--paper-raised);
+  position:sticky;top:0;z-index:20;
+}
+.masthead-in{
+  max-width:1180px;margin:0 auto;padding:14px 22px;
+  display:flex;align-items:center;gap:14px;
+}
+.sigil{
+  width:34px;height:34px;flex:none;border:1px solid var(--brass);
+  display:grid;place-items:center;background:var(--brass-wash);
+}
+.sigil svg{width:18px;height:18px}
+.wordmark{font-family:var(--serif);font-size:17px;font-weight:600;letter-spacing:.01em}
+.wordmark span{display:block;font-family:var(--sans);font-size:11px;font-weight:400;color:var(--ink-faint);letter-spacing:.02em}
+.langs{margin-left:auto;display:flex;gap:2px}
+.langs button{
+  background:none;border:1px solid transparent;padding:4px 9px;font-size:12px;
+  color:var(--ink-faint);cursor:pointer;
+}
+.langs button[aria-pressed="true"]{border-color:var(--rule-strong);color:var(--ink);background:var(--paper)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;padding:0 22px 70px;display:grid;grid-template-columns:264px 1fr;gap:38px}
+@media(max-width:880px){.shell{grid-template-columns:1fr;gap:0;padding-bottom:40px}}
+
+/* ---------- depth rail ---------- */
+.rail{padding:30px 0 0}
+.rail-lede{font-size:12.5px;color:var(--ink-faint);margin-bottom:16px;max-width:30ch}
+.strata{position:relative;list-style:none;margin:0;padding:0}
+.strata::before{
+  content:"";position:absolute;left:13px;top:12px;bottom:44px;width:1px;background:var(--rule-strong);
+}
+.stratum{position:relative;padding-left:34px;margin-bottom:2px}
+.stratum button{
+  width:100%;text-align:left;background:none;border:none;cursor:pointer;
+  padding:8px 10px;display:block;border:1px solid transparent;
+}
+.stratum button:hover{background:var(--paper-raised)}
+.stratum[data-on="1"] button{background:var(--paper-raised);border-color:var(--rule)}
+.dot{
+  position:absolute;left:8px;top:15px;width:11px;height:11px;border-radius:50%;
+  background:var(--paper);border:1px solid var(--rule-strong);
+}
+.stratum[data-on="1"] .dot{background:var(--brass);border-color:var(--brass)}
+.s-name{font-size:14px;font-weight:500;display:block}
+.s-logic{font-size:11.5px;color:var(--ink-faint);display:block}
+.depthbar{height:3px;background:var(--paper-sunk);margin-top:6px}
+.depthbar i{display:block;height:100%;background:var(--rule-strong)}
+.stratum[data-on="1"] .depthbar i{background:var(--brass)}
+.socle{
+  margin-left:34px;margin-top:14px;border:1px solid var(--rule-strong);
+  background:var(--paper-sunk);padding:10px 12px;
+}
+.s-price{font-family:var(--serif);font-size:12.5px;color:var(--brass);display:block;margin-top:1px}
+.p-price{
+  display:inline-block;font-family:var(--serif);font-size:15px;color:var(--brass);
+  border:1px solid var(--brass);background:var(--brass-wash);padding:3px 11px;margin-top:11px;
+}
+.socle b{font-size:13px;font-weight:600;display:block}
+.socle span{font-size:11.5px;color:var(--ink-soft)}
+
+/* ---------- panel ---------- */
+.panel{padding:30px 0 0;min-width:0}
+.panel-head{border-bottom:1px solid var(--rule);padding-bottom:16px;margin-bottom:22px}
+.panel-head h1{font-size:30px;letter-spacing:-.01em}
+.panel-head .logic{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--brass);margin-top:2px}
+.panel-head .deliv{font-size:13px;color:var(--ink-soft);margin-top:9px;max-width:62ch}
+.view{display:none}
+.view[data-on="1"]{display:block}
+
+.fieldlabel{display:block;font-size:12.5px;color:var(--ink-soft);margin-bottom:5px}
+select,input[type=text]{
+  width:100%;padding:9px 10px;background:var(--paper-raised);
+  border:1px solid var(--rule-strong);border-radius:0;
+}
+.act{
+  background:var(--ink);color:var(--paper);border:1px solid var(--ink);
+  padding:10px 16px;cursor:pointer;font-size:14px;font-weight:500;
+}
+.act:hover{background:#0D1920}
+.act.ghost{background:none;color:var(--ink);border-color:var(--rule-strong)}
+.act.ghost:hover{background:var(--paper-raised)}
+.act.full{width:100%}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.err{color:var(--missing);font-size:13px;margin-top:9px;display:none}
+.err[data-on="1"]{display:block}
+
+.checks{margin:0;padding:0;list-style:none;border-top:1px solid var(--rule)}
+.checks li{border-bottom:1px solid var(--rule)}
+.checks label{display:flex;gap:10px;align-items:flex-start;padding:9px 2px;cursor:pointer;font-size:14px}
+.checks input{margin-top:3px;flex:none;accent-color:var(--brass)}
+
+/* branching */
+.branch{display:flex;flex-direction:column;gap:7px;margin-top:4px}
+.branch button{
+  text-align:left;background:var(--paper-raised);border:1px solid var(--rule-strong);
+  padding:11px 13px;cursor:pointer;font-size:14px;
+}
+.branch button:hover{border-color:var(--brass);background:var(--brass-wash)}
+.trail{font-size:12px;color:var(--ink-faint);min-height:17px;margin-bottom:12px}
+.qtext{font-family:var(--serif);font-size:19px;margin-bottom:14px}
+
+/* deliverable block */
+.deliverable{border:1px solid var(--rule-strong);background:var(--paper-raised);margin-top:24px;display:none}
+.deliverable[data-on="1"]{display:block}
+.deliv-top{
+  display:flex;align-items:center;gap:10px;padding:11px 15px;
+  border-bottom:1px solid var(--rule);background:var(--paper-sunk);
+}
+.deliv-top b{font-size:12.5px;font-weight:600;flex:1}
+.deliv-body{padding:15px}
+.seg{padding-bottom:13px;margin-bottom:13px;border-bottom:1px solid var(--rule)}
+.seg:last-child{border:none;padding-bottom:0;margin-bottom:0}
+.seg h4{margin:0 0 4px;font-family:var(--sans);font-size:12.5px;font-weight:600}
+.seg p{font-size:14px;color:var(--ink-soft)}
+.nextstep{background:var(--brass-wash);border:1px solid var(--brass);padding:11px 13px;font-size:13.5px;margin-top:14px}
+.axis{border-left:2px solid var(--brass);padding-left:13px;margin:16px 0}
+.axis h5{font-family:var(--serif);font-size:16px;font-weight:600;margin:0 0 7px}
+.axis .sub{font-size:12px;font-weight:600;color:var(--ink);margin:9px 0 3px}
+.axis p{font-size:13.5px;color:var(--ink-soft)}
+.axis ul{margin:3px 0 0;padding-left:17px;font-size:13.5px;color:var(--ink-soft)}
+.axis li{margin-bottom:2px}
+.circuit{
+  font-size:12.5px;color:var(--ink);background:var(--paper-sunk);
+  border:1px solid var(--rule);padding:9px 11px;margin-top:4px;line-height:1.7;
+}
+.circuit b{font-weight:500}
+
+/* files */
+.dropzone{border:1px dashed var(--rule-strong);padding:22px;text-align:center;color:var(--ink-faint);font-size:13.5px}
+.filelist{margin:12px 0 0;padding:0;list-style:none}
+.filelist li{display:flex;gap:10px;align-items:center;border:1px solid var(--rule);background:var(--paper-raised);padding:8px 11px;margin-bottom:6px;font-size:13.5px}
+.filelist button{margin-left:auto;background:none;border:none;cursor:pointer;color:var(--ink-faint);font-size:16px;line-height:1;padding:0 3px}
+
+/* chain */
+.chain{margin:0;padding:0;list-style:none;counter-reset:step}
+.chain li{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--rule)}
+.chain .num{
+  width:23px;height:23px;flex:none;border:1px solid var(--brass);color:var(--brass);
+  display:grid;place-items:center;font-size:12px;font-weight:600;
+}
+.chain .lab{font-size:14px;font-weight:500}
+.chain .sub{font-size:12px;color:var(--ink-faint)}
+.chain .tag{margin-left:auto;font-size:11px;color:var(--ink-soft);border:1px solid var(--rule);padding:1px 7px;height:fit-content;white-space:nowrap}
+
+/* kpi */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px}
+@media(max-width:640px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{border:1px solid var(--rule);background:var(--paper-raised);padding:11px 12px}
+.kpi .k{font-size:11px;color:var(--ink-faint)}
+.kpi .v{font-family:var(--serif);font-size:25px;font-weight:600;line-height:1.1;margin-top:2px}
+.kpi .n{font-size:11px;color:var(--ink-soft);margin-top:3px}
+
+/* milestones */
+.miles{margin:0;padding:0;list-style:none;border-top:1px solid var(--rule)}
+.miles li{border-bottom:1px solid var(--rule);padding:11px 0;display:grid;grid-template-columns:1fr auto;gap:8px 12px;align-items:center}
+.miles .lab{font-size:14px;font-weight:500}
+.miles .inst{font-size:11.5px;color:var(--ink-faint)}
+.miles select{width:auto;min-width:135px;padding:5px 8px;font-size:13px}
+.crit{color:var(--brass);font-weight:500}
+.st{font-size:11.5px;padding:1px 8px;border:1px solid var(--rule-strong);white-space:nowrap}
+.st[data-v="Terminé"]{color:var(--verified);border-color:var(--verified)}
+.st[data-v="Bloqué"]{color:var(--missing);border-color:var(--missing)}
+.st[data-v="En cours"]{color:var(--transitional);border-color:var(--transitional)}
+
+/* tools */
+.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:640px){.tools{grid-template-columns:repeat(2,1fr)}}
+.tool{border:1px solid var(--rule);background:var(--paper-raised);padding:13px 11px;text-align:center;font-size:12.5px}
+.tool em{display:block;font-style:normal;font-size:11px;color:var(--ink-faint);margin-top:3px}
+
+/* actors */
+.actors{margin:0;padding:0;list-style:none}
+.actors li{display:grid;grid-template-columns:auto 1fr auto;gap:11px;align-items:center;padding:9px 0;border-bottom:1px solid var(--rule)}
+.pip{width:8px;height:8px;border-radius:50%;background:var(--brass)}
+.actors .who{font-size:14px;font-weight:500}
+.actors .link{font-size:11.5px;color:var(--ink-faint)}
+.actors .doc{font-size:11.5px;color:var(--ink-soft);border:1px solid var(--rule);padding:1px 7px;white-space:nowrap}
+
+.sectitle{font-family:var(--serif);font-size:19px;margin:26px 0 10px}
+.note{font-size:12.5px;color:var(--ink-faint);margin-top:10px;max-width:64ch}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;color:var(--ink-soft);margin-top:12px}
+.legend i{font-style:normal;display:inline-block;width:8px;height:8px;margin-right:5px}
+footer{border-top:1px solid var(--rule);margin-top:50px;padding-top:16px;font-size:12px;color:var(--ink-faint);max-width:1180px;margin-left:auto;margin-right:auto;padding-left:22px;padding-right:22px}
+
+/* ---------- assistant ---------- */
+.assist{border:1px solid var(--rule-strong);background:var(--paper-raised);margin-top:34px}
+.assist-top{display:flex;align-items:center;gap:10px;padding:11px 15px;border-bottom:1px solid var(--rule);background:var(--ink)}
+.assist-top b{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--paper);flex:1}
+.assist-top .sc{font-size:11px;color:var(--rule)}
+.assist-body{padding:15px}
+.assist-lede{font-size:12.5px;color:var(--ink-faint);margin-bottom:11px}
+.qlist{display:flex;flex-direction:column;gap:7px}
+.qlist button{
+  text-align:left;background:var(--paper);border:1px solid var(--rule);
+  padding:10px 12px;cursor:pointer;font-size:13.5px;
+}
+.qlist button:hover{border-color:var(--brass);background:var(--brass-wash)}
+.qlist button::before{content:"? ";color:var(--brass);font-weight:600}
+.answer{border-top:1px solid var(--rule);margin-top:15px;padding-top:14px;display:none}
+.answer[data-on="1"]{display:block}
+.answer h5{font-family:var(--serif);font-size:16px;font-weight:600;margin:0 0 11px}
+.afield{margin-bottom:11px}
+.afield .k{font-size:11.5px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.afield .t{font-size:13.5px;color:var(--ink-soft)}
+.badge{display:inline-block;font-size:11px;padding:1px 7px;border:1px solid;margin-right:5px;vertical-align:1px}
+.b-ok{color:var(--verified);border-color:var(--verified)}
+.b-tr{color:var(--transitional);border-color:var(--transitional)}
+.b-no{color:var(--missing);border-color:var(--missing)}
+.askbox{display:flex;gap:8px;margin-top:14px}
+.askbox input{flex:1}
+.askmsg{font-size:12.5px;color:var(--ink-faint);margin-top:9px;display:none}
+.askmsg[data-on="1"]{display:block}
+
+/* ---------- livrable Free — cartographie institutionnelle ---------- */
+.carto-meta{display:grid;grid-template-columns:minmax(110px,190px) 1fr;gap:6px 14px;background:var(--paper);border:1px solid var(--rule);padding:11px 13px;margin:11px 0 0;font-size:13.5px}
+.carto-meta dt{color:var(--ink-faint);font-size:12px}
+.carto-meta dd{margin:0;font-weight:600}
+.carto-call{background:var(--brass-wash);border:1px solid var(--brass);padding:11px 13px}
+.carto-call b{display:block;font-family:var(--serif);font-size:15.5px;font-weight:600;margin-bottom:4px}
+.carto-call p{font-size:13.5px;color:var(--ink-soft)}
+.carto-ph{margin-top:12px;border:1px solid var(--rule)}
+.carto-ph h5{margin:0;background:var(--brass);color:#fff;font-family:var(--sans);font-size:13px;font-weight:600;padding:6px 11px;display:flex;gap:12px}
+.carto-ph h5 span{font-weight:400;min-width:54px;opacity:.9}
+.carto-inst{padding:9px 11px;border-top:1px solid var(--rule);background:var(--paper-raised)}
+.carto-ph h5+.carto-inst{border-top:none}
+.carto-inst .nm{font-weight:600;font-size:13.5px}
+.carto-inst .dbl{color:var(--brass);font-weight:600;font-size:12px;margin-left:6px}
+.carto-inst .rl{font-size:13px;color:var(--ink-soft);margin-top:2px}
+.carto-inst .tx{font-size:12px;color:var(--ink-faint);margin-top:2px}
+.carto-inst .pc{font-size:12px;color:var(--brass);margin-top:2px}
+.carto-inst .pc i{display:inline-block;width:36px;height:9px;vertical-align:-1px;margin-right:6px;background:repeating-linear-gradient(90deg,var(--brass) 0 5px,transparent 5px 7.5px)}
+.carto .circuit b{background:var(--brass-wash);color:var(--brass);font-weight:600;padding:0 4px}
+.carto-ess{margin:6px 0 0;padding-left:18px;font-size:13.5px;color:var(--ink-soft)}
+.carto-ess li{margin-bottom:3px}
+.carto-msg{font-size:12.5px;color:var(--ink-faint);margin-top:9px}
+.carto-msg[data-ok="0"]{color:var(--missing)}
+</style>
+<script src="jspdf.umd.min.js"></script>
+<link rel="stylesheet" href="pss-integration.css">
+<script src="pss-integration.js"></script>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-in">
+    <span class="sigil" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#9A7233" stroke-width="1.6"><path d="M12 2.5 4 6v6.5c0 5 3.4 8.1 8 9.5 4.6-1.4 8-4.5 8-9.5V6z"/><path d="M12 8.5v7"/></svg>
+    </span>
+    <span class="wordmark">Praetorian Sentinel Smart
+      <span>Intelligence réglementaire, contractuelle et de pilotage — Algérie</span>
+    </span>
+    <nav class="langs" aria-label="Langue">
+      <button aria-pressed="true">FR</button>
+      <button aria-pressed="false">EN</button>
+      <button aria-pressed="false">AR</button>
+    </nav>
+  </div>
+</header>
+
+<div class="shell">
+
+  <nav class="rail" aria-label="Paliers">
+    <p class="rail-lede">Un socle documentaire unique, interrogé à des profondeurs croissantes.</p>
+    <ul class="strata" id="strata"></ul>
+    <div class="socle">
+      <b>Socle commun</b>
+      <span>21 axes réglementaires, institutions, documents et procédures — écrits une seule fois.</span>
+    </div>
+  </nav>
+
+  <main class="panel">
+    <div class="panel-head">
+      <h1 id="pTitle">Free</h1>
+      <p class="logic" id="pLogic">Je m'oriente</p>
+      <p class="deliv" id="pDeliv"></p>
+      <p class="p-price" id="pPrice"></p>
+    </div>
+
+    <!-- ================= FREE ================= -->
+    <section class="view" data-view="free" data-on="1">
+      <label class="fieldlabel" for="profil">Vous êtes</label>
+      <select id="profil">
+        <option value="">Choisir un profil</option>
+        <optgroup label="Porteur de projet">
+          <option value="promoteur">Promoteur immobilier</option>
+          <option value="industriel">Industriel</option>
+          <option value="investNat">Investisseur national ou étranger, en partenariat</option>
+          <option value="entrepriseDev">Entreprise installée, en litige ou en développement</option>
+          <option value="betMarches">Bureau d'études répondant à un marché public</option>
+          <option value="importateur">Importateur ou société de négoce</option>
+          <option value="entrepreneur">Entrepreneur en création</option>
+          <option value="diaspora">Algérien de la diaspora</option>
+          <option value="holding">Family office ou holding</option>
+        </optgroup>
+        <optgroup label="Professionnel intermédiaire">
+          <option value="avocat">Avocat</option>
+          <option value="expertComptable">Expert-comptable</option>
+          <option value="notaire">Notaire</option>
+          <option value="conseilFDI">Conseil en implantation internationale</option>
+          <option value="courtier">Courtier assurance ou financement</option>
+          <option value="betConseil">Architecte ou bureau d'études (conseil)</option>
+        </optgroup>
+        <optgroup label="Partenaire institutionnel">
+          <option value="cci">Chambre de commerce</option>
+          <option value="banque">Banque</option>
+          <option value="agenceDev">Agence de développement</option>
+        </optgroup>
+        <optgroup label="Partenaire international">
+          <option value="societeEtrangere">Société étrangère investissant en Algérie</option>
+          <option value="consultantEtranger">Consultant étranger</option>
+        </optgroup>
+      </select>
+
+      <div id="needsWrap" style="display:none;margin-top:20px">
+        <p class="fieldlabel">Vos besoins — cochez ce qui s'applique</p>
+        <ul class="checks" id="needs"></ul>
+      </div>
+
+      <div class="row" style="margin-top:18px"><button class="act full" id="freeGo">Générer le rapport d'orientation</button></div>
+      <p class="err" id="freeErr">Choisissez un profil, puis au moins un besoin.</p>
+
+      <div class="deliverable" id="freeOut">
+        <div class="deliv-top"><b>Rapport d'orientation</b><button class="act ghost" data-dl="freeOut" data-name="Rapport-orientation-Free">Télécharger</button></div>
+        <div class="deliv-body" id="freeBody"></div>
+      </div>
+    </section>
+
+    <!-- ================= PALIERS RÉSERVÉS ================= -->
+    <section class="view" data-view="locked">
+      <div class="deliverable" data-on="1" style="margin-top:0">
+        <div class="deliv-top"><b id="lockHead">Sur devis</b></div>
+        <div class="deliv-body">
+          <div class="seg"><h4>Ce que comprend ce palier</h4><p id="lockDeliv"></p></div>
+          <div class="seg"><h4>Comment y accéder</h4><p>Les outils, analyses et livrables de ce palier ne sont pas accessibles en ligne. Ils vous sont ouverts après un premier échange, selon votre projet.</p></div>
+          <div class="row" style="margin-top:14px">
+            <a class="act" href="../contact.html" target="_top" style="text-decoration:none">Demander un devis</a>
+            <a class="act ghost" href="mailto:men-ay_pro-managment@outlook.fr" style="text-decoration:none">Par courriel</a>
+          </div>
+          <p class="note">WhatsApp +213 555 37 23 45 · men-ay_pro-managment@outlook.fr</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ASSISTANT ================= -->
+    <section class="assist">
+      <div class="assist-top">
+        <b>Assistant</b>
+        <span class="sc" id="assistScope">Palier Free</span>
+      </div>
+      <div class="assist-body">
+        <p class="assist-lede">Questions proposées pour ce palier. Chaque réponse distingue le fait, le texte, le risque et l'action, et porte le statut de fiabilité de sa source.</p>
+        <div class="qlist" id="qlist"></div>
+
+        <div class="answer" id="answer">
+          <h5 id="aQ"></h5>
+          <div class="afield"><p class="k">Ce que dit le cadre</p><p class="t" id="aF"></p></div>
+          <div class="afield"><p class="k">Textes et statut</p><p class="t" id="aT"></p></div>
+          <div class="afield"><p class="k">Risque à surveiller</p><p class="t" id="aR"></p></div>
+          <div class="afield"><p class="k">Action logique</p><p class="t" id="aA"></p></div>
+          <div class="row"><button class="act ghost" data-dl="answer" data-name="Reponse-assistant">Télécharger la réponse</button></div>
+        </div>
+
+        <div class="askbox">
+          <input type="text" id="askIn" placeholder="Poser une autre question…" aria-label="Poser une autre question">
+          <button class="act" id="askGo">Envoyer</button>
+        </div>
+        <p class="askmsg" id="askMsg">Les questions libres nécessitent le moteur connecté à la base documentaire. Dans cette maquette, seules les questions proposées ci-dessus sont traitées.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  Maquette fonctionnelle. Les contenus réglementaires affichés sont des exemples de structure : chaque référence devra être vérifiée sur source officielle avant mise en production.
+</footer>
+
+<script>
+/* QRCode for JavaScript — Copyright (c) 2009 Kazuhiko Arase — MIT license. Utilisé pour le QR WhatsApp des livrables PDF. */
+(()=>{var E=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports);var N=E((E1,G)=>{G.exports={MODE_NUMBER:1,MODE_ALPHA_NUM:2,MODE_8BIT_BYTE:4,MODE_KANJI:8}});var X=E((m1,U)=>{var s1=N();function K(t){this.mode=s1.MODE_8BIT_BYTE,this.data=t}K.prototype={getLength:function(){return this.data.length},write:function(t){for(var e=0;e<this.data.length;e++)t.put(this.data.charCodeAt(e),8)}};U.exports=K});var I=E((T1,Y)=>{var v={glog:function(t){if(t<1)throw new Error("glog("+t+")");return v.LOG_TABLE[t]},gexp:function(t){for(;t<0;)t+=255;for(;t>=256;)t-=255;return v.EXP_TABLE[t]},EXP_TABLE:new Array(256),LOG_TABLE:new Array(256)};for(h=0;h<8;h++)v.EXP_TABLE[h]=1<<h;var h;for(h=8;h<256;h++)v.EXP_TABLE[h]=v.EXP_TABLE[h-4]^v.EXP_TABLE[h-5]^v.EXP_TABLE[h-6]^v.EXP_TABLE[h-8];var h;for(h=0;h<255;h++)v.LOG_TABLE[v.EXP_TABLE[h]]=h;var h;Y.exports=v});var b=E((d1,J)=>{var A=I();function c(t,e){if(t.length===void 0)throw new Error(t.length+"/"+e);for(var a=0;a<t.length&&t[a]===0;)a++;this.num=new Array(t.length-a+e);for(var r=0;r<t.length-a;r++)this.num[r]=t[r+a]}c.prototype={get:function(t){return this.num[t]},getLength:function(){return this.num.length},multiply:function(t){for(var e=new Array(this.getLength()+t.getLength()-1),a=0;a<this.getLength();a++)for(var r=0;r<t.getLength();r++)e[a+r]^=A.gexp(A.glog(this.get(a))+A.glog(t.get(r)));return new c(e,0)},mod:function(t){if(this.getLength()-t.getLength()<0)return this;for(var e=A.glog(this.get(0))-A.glog(t.get(0)),a=new Array(this.getLength()),r=0;r<this.getLength();r++)a[r]=this.get(r);for(var n=0;n<t.getLength();n++)a[n]^=A.gexp(A.glog(t.get(n))+e);return new c(a,0).mod(t)}};J.exports=c});var F=E((B1,x)=>{x.exports={PATTERN000:0,PATTERN001:1,PATTERN010:2,PATTERN011:3,PATTERN100:4,PATTERN101:5,PATTERN110:6,PATTERN111:7}});var Z=E((L1,W)=>{var g=N(),V=b(),u1=I(),d=F(),f={PATTERN_POSITION_TABLE:[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],G15:1335,G18:7973,G15_MASK:21522,getBCHTypeInfo:function(t){for(var e=t<<10;f.getBCHDigit(e)-f.getBCHDigit(f.G15)>=0;)e^=f.G15<<f.getBCHDigit(e)-f.getBCHDigit(f.G15);return(t<<10|e)^f.G15_MASK},getBCHTypeNumber:function(t){for(var e=t<<12;f.getBCHDigit(e)-f.getBCHDigit(f.G18)>=0;)e^=f.G18<<f.getBCHDigit(e)-f.getBCHDigit(f.G18);return t<<12|e},getBCHDigit:function(t){for(var e=0;t!==0;)e++,t>>>=1;return e},getPatternPosition:function(t){return f.PATTERN_POSITION_TABLE[t-1]},getMask:function(t,e,a){switch(t){case d.PATTERN000:return(e+a)%2===0;case d.PATTERN001:return e%2===0;case d.PATTERN010:return a%3===0;case d.PATTERN011:return(e+a)%3===0;case d.PATTERN100:return(Math.floor(e/2)+Math.floor(a/3))%2===0;case d.PATTERN101:return e*a%2+e*a%3===0;case d.PATTERN110:return(e*a%2+e*a%3)%2===0;case d.PATTERN111:return(e*a%3+(e+a)%2)%2===0;default:throw new Error("bad maskPattern:"+t)}},getErrorCorrectPolynomial:function(t){for(var e=new V([1],0),a=0;a<t;a++)e=e.multiply(new V([1,u1.gexp(a)],0));return e},getLengthInBits:function(t,e){if(1<=e&&e<10)switch(t){case g.MODE_NUMBER:return 10;case g.MODE_ALPHA_NUM:return 9;case g.MODE_8BIT_BYTE:return 8;case g.MODE_KANJI:return 8;default:throw new Error("mode:"+t)}else if(e<27)switch(t){case g.MODE_NUMBER:return 12;case g.MODE_ALPHA_NUM:return 11;case g.MODE_8BIT_BYTE:return 16;case g.MODE_KANJI:return 10;default:throw new Error("mode:"+t)}else if(e<41)switch(t){case g.MODE_NUMBER:return 14;case g.MODE_ALPHA_NUM:return 13;case g.MODE_8BIT_BYTE:return 16;case g.MODE_KANJI:return 12;default:throw new Error("mode:"+t)}else throw new Error("type:"+e)},getLostPoint:function(t){var e=t.getModuleCount(),a=0,r=0,n=0;for(r=0;r<e;r++)for(n=0;n<e;n++){for(var i=0,o=t.isDark(r,n),s=-1;s<=1;s++)if(!(r+s<0||e<=r+s))for(var u=-1;u<=1;u++)n+u<0||e<=n+u||s===0&&u===0||o===t.isDark(r+s,n+u)&&i++;i>5&&(a+=3+i-5)}for(r=0;r<e-1;r++)for(n=0;n<e-1;n++){var l=0;t.isDark(r,n)&&l++,t.isDark(r+1,n)&&l++,t.isDark(r,n+1)&&l++,t.isDark(r+1,n+1)&&l++,(l===0||l===4)&&(a+=3)}for(r=0;r<e;r++)for(n=0;n<e-6;n++)t.isDark(r,n)&&!t.isDark(r,n+1)&&t.isDark(r,n+2)&&t.isDark(r,n+3)&&t.isDark(r,n+4)&&!t.isDark(r,n+5)&&t.isDark(r,n+6)&&(a+=40);for(n=0;n<e;n++)for(r=0;r<e-6;r++)t.isDark(r,n)&&!t.isDark(r+1,n)&&t.isDark(r+2,n)&&t.isDark(r+3,n)&&t.isDark(r+4,n)&&!t.isDark(r+5,n)&&t.isDark(r+6,n)&&(a+=40);var L=0;for(n=0;n<e;n++)for(r=0;r<e;r++)t.isDark(r,n)&&L++;var p=Math.abs(100*L/e/e-50)/5;return a+=p*10,a}};W.exports=f});var O=E((A1,$)=>{$.exports={L:1,M:0,Q:3,H:2}});var q=E((p1,z)=>{var w=O();function m(t,e){this.totalCount=t,this.dataCount=e}m.RS_BLOCK_TABLE=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]];m.getRSBlocks=function(t,e){var a=m.getRsBlockTable(t,e);if(a===void 0)throw new Error("bad rs block @ typeNumber:"+t+"/errorCorrectLevel:"+e);for(var r=a.length/3,n=[],i=0;i<r;i++)for(var o=a[i*3+0],s=a[i*3+1],u=a[i*3+2],l=0;l<o;l++)n.push(new m(s,u));return n};m.getRsBlockTable=function(t,e){switch(e){case w.L:return m.RS_BLOCK_TABLE[(t-1)*4+0];case w.M:return m.RS_BLOCK_TABLE[(t-1)*4+1];case w.Q:return m.RS_BLOCK_TABLE[(t-1)*4+2];case w.H:return m.RS_BLOCK_TABLE[(t-1)*4+3];default:return}};z.exports=m});var e1=E((P1,t1)=>{function j(){this.buffer=[],this.length=0}j.prototype={get:function(t){var e=Math.floor(t/8);return(this.buffer[e]>>>7-t%8&1)==1},put:function(t,e){for(var a=0;a<e;a++)this.putBit((t>>>e-a-1&1)==1)},getLengthInBits:function(){return this.length},putBit:function(t){var e=Math.floor(this.length/8);this.buffer.length<=e&&this.buffer.push(0),t&&(this.buffer[e]|=128>>>this.length%8),this.length++}};t1.exports=j});var i1=E((D1,a1)=>{var h1=X(),B=Z(),f1=b(),r1=q(),n1=e1();function T(t,e){this.typeNumber=t,this.errorCorrectLevel=e,this.modules=null,this.moduleCount=0,this.dataCache=null,this.dataList=[]}T.prototype={addData:function(t){var e=new h1(t);this.dataList.push(e),this.dataCache=null},isDark:function(t,e){if(t<0||this.moduleCount<=t||e<0||this.moduleCount<=e)throw new Error(t+","+e);return this.modules[t][e]},getModuleCount:function(){return this.moduleCount},make:function(){if(this.typeNumber<1){var t=1;for(t=1;t<40;t++){for(var e=r1.getRSBlocks(t,this.errorCorrectLevel),a=new n1,r=0,n=0;n<e.length;n++)r+=e[n].dataCount;for(var i=0;i<this.dataList.length;i++){var o=this.dataList[i];a.put(o.mode,4),a.put(o.getLength(),B.getLengthInBits(o.mode,t)),o.write(a)}if(a.getLengthInBits()<=r*8)break}this.typeNumber=t}this.makeImpl(!1,this.getBestMaskPattern())},makeImpl:function(t,e){this.moduleCount=this.typeNumber*4+17,this.modules=new Array(this.moduleCount);for(var a=0;a<this.moduleCount;a++){this.modules[a]=new Array(this.moduleCount);for(var r=0;r<this.moduleCount;r++)this.modules[a][r]=null}this.setupPositionProbePattern(0,0),this.setupPositionProbePattern(this.moduleCount-7,0),this.setupPositionProbePattern(0,this.moduleCount-7),this.setupPositionAdjustPattern(),this.setupTimingPattern(),this.setupTypeInfo(t,e),this.typeNumber>=7&&this.setupTypeNumber(t),this.dataCache===null&&(this.dataCache=T.createData(this.typeNumber,this.errorCorrectLevel,this.dataList)),this.mapData(this.dataCache,e)},setupPositionProbePattern:function(t,e){for(var a=-1;a<=7;a++)if(!(t+a<=-1||this.moduleCount<=t+a))for(var r=-1;r<=7;r++)e+r<=-1||this.moduleCount<=e+r||(0<=a&&a<=6&&(r===0||r===6)||0<=r&&r<=6&&(a===0||a===6)||2<=a&&a<=4&&2<=r&&r<=4?this.modules[t+a][e+r]=!0:this.modules[t+a][e+r]=!1)},getBestMaskPattern:function(){for(var t=0,e=0,a=0;a<8;a++){this.makeImpl(!0,a);var r=B.getLostPoint(this);(a===0||t>r)&&(t=r,e=a)}return e},createMovieClip:function(t,e,a){var r=t.createEmptyMovieClip(e,a),n=1;this.make();for(var i=0;i<this.modules.length;i++)for(var o=i*n,s=0;s<this.modules[i].length;s++){var u=s*n,l=this.modules[i][s];l&&(r.beginFill(0,100),r.moveTo(u,o),r.lineTo(u+n,o),r.lineTo(u+n,o+n),r.lineTo(u,o+n),r.endFill())}return r},setupTimingPattern:function(){for(var t=8;t<this.moduleCount-8;t++)this.modules[t][6]===null&&(this.modules[t][6]=t%2===0);for(var e=8;e<this.moduleCount-8;e++)this.modules[6][e]===null&&(this.modules[6][e]=e%2===0)},setupPositionAdjustPattern:function(){for(var t=B.getPatternPosition(this.typeNumber),e=0;e<t.length;e++)for(var a=0;a<t.length;a++){var r=t[e],n=t[a];if(this.modules[r][n]===null)for(var i=-2;i<=2;i++)for(var o=-2;o<=2;o++)Math.abs(i)===2||Math.abs(o)===2||i===0&&o===0?this.modules[r+i][n+o]=!0:this.modules[r+i][n+o]=!1}},setupTypeNumber:function(t){for(var e=B.getBCHTypeNumber(this.typeNumber),a,r=0;r<18;r++)a=!t&&(e>>r&1)===1,this.modules[Math.floor(r/3)][r%3+this.moduleCount-8-3]=a;for(var n=0;n<18;n++)a=!t&&(e>>n&1)===1,this.modules[n%3+this.moduleCount-8-3][Math.floor(n/3)]=a},setupTypeInfo:function(t,e){for(var a=this.errorCorrectLevel<<3|e,r=B.getBCHTypeInfo(a),n,i=0;i<15;i++)n=!t&&(r>>i&1)===1,i<6?this.modules[i][8]=n:i<8?this.modules[i+1][8]=n:this.modules[this.moduleCount-15+i][8]=n;for(var o=0;o<15;o++)n=!t&&(r>>o&1)===1,o<8?this.modules[8][this.moduleCount-o-1]=n:o<9?this.modules[8][15-o-1+1]=n:this.modules[8][15-o-1]=n;this.modules[this.moduleCount-8][8]=!t},mapData:function(t,e){for(var a=-1,r=this.moduleCount-1,n=7,i=0,o=this.moduleCount-1;o>0;o-=2)for(o===6&&o--;;){for(var s=0;s<2;s++)if(this.modules[r][o-s]===null){var u=!1;i<t.length&&(u=(t[i]>>>n&1)===1);var l=B.getMask(e,r,o-s);l&&(u=!u),this.modules[r][o-s]=u,n--,n===-1&&(i++,n=7)}if(r+=a,r<0||this.moduleCount<=r){r-=a,a=-a;break}}}};T.PAD0=236;T.PAD1=17;T.createData=function(t,e,a){for(var r=r1.getRSBlocks(t,e),n=new n1,i=0;i<a.length;i++){var o=a[i];n.put(o.mode,4),n.put(o.getLength(),B.getLengthInBits(o.mode,t)),o.write(n)}for(var s=0,u=0;u<r.length;u++)s+=r[u].dataCount;if(n.getLengthInBits()>s*8)throw new Error("code length overflow. ("+n.getLengthInBits()+">"+s*8+")");for(n.getLengthInBits()+4<=s*8&&n.put(0,4);n.getLengthInBits()%8!==0;)n.putBit(!1);for(;!(n.getLengthInBits()>=s*8||(n.put(T.PAD0,8),n.getLengthInBits()>=s*8));)n.put(T.PAD1,8);return T.createBytes(n,r)};T.createBytes=function(t,e){for(var a=0,r=0,n=0,i=new Array(e.length),o=new Array(e.length),s=0;s<e.length;s++){var u=e[s].dataCount,l=e[s].totalCount-u;r=Math.max(r,u),n=Math.max(n,l),i[s]=new Array(u);for(var L=0;L<i[s].length;L++)i[s][L]=255&t.buffer[L+a];a+=u;var p=B.getErrorCorrectPolynomial(l),o1=new f1(i[s],p.getLength()-1),y=o1.mod(p);o[s]=new Array(p.getLength()-1);for(var P=0;P<o[s].length;P++){var Q=P+y.getLength()-o[s].length;o[s][P]=Q>=0?y.get(Q):0}}for(var H=0,C=0;C<e.length;C++)H+=e[C].totalCount;for(var k=new Array(H),S=0,D=0;D<r;D++)for(var M=0;M<e.length;M++)D<i[M].length&&(k[S++]=i[M][D]);for(var _=0;_<n;_++)for(var R=0;R<e.length;R++)_<o[R].length&&(k[S++]=o[R][_]);return k};a1.exports=T});var l1=i1(),g1=O();window.PSS_QR=function(t){var e=new l1(-1,g1.M);e.addData(t),e.make();for(var a=e.getModuleCount(),r=[],n=0;n<a;n++){for(var i=[],o=0;o<a;o++)i.push(e.isDark(n,o));r.push(i)}return r};})();
+</script>
+<script>
+/* ============ paliers ============ */
+const PALIERS=[
+ {id:'free',name:'Free',logic:"Je m'oriente",depth:16,price:'Gratuit',
+  deliv:"Rapport d'orientation : profil qualifié, domaines réglementaires concernés, premières orientations et documents probablement nécessaires."},
+ {id:'essential',name:'Essential',logic:'Je diagnostique',depth:33,price:'Sur devis',
+  deliv:"Diagnostic guidé : obligations, risques et points bloquants d'un axe, avec les références légales applicables."},
+ {id:'pro',name:'Pro',logic:"J'analyse mon dossier",depth:50,price:'Sur devis',
+  deliv:"Analyse documentaire : pièces confrontées à la réglementation, incohérences et lacunes, documents complémentaires à fournir."},
+ {id:'project',name:'Project',logic:'Je construis mon montage',depth:66,price:'Sur devis',
+  deliv:"Dossier de montage multidisciplinaire : architecture juridique, foncière, financière et administrative, avec cheminement de réalisation."},
+ {id:'dmo',name:'Dmo',logic:'Je pilote mon projet',depth:83,price:'Sur devis',
+  deliv:"Dossier personnalisé et évolutif : le montage renseigné avec les données réelles du projet, en outil de pilotage et de suivi décisionnel."},
+ {id:'entreprise',name:'Entreprise Dmo',logic:'Je déploie de A à Z',depth:100,price:'Sur devis',
+  deliv:"Schéma directeur complet : plusieurs projets pilotés ensemble, interactions entre institutions et acteurs, flux documentaires et points de contrôle."}
+];
+
+const strata=document.getElementById('strata');
+strata.innerHTML=PALIERS.map((p,i)=>
+ `<li class="stratum" data-p="${p.id}" data-on="${i===0?1:0}">
+    <span class="dot"></span>
+    <button type="button">
+      <span class="s-name">${p.name}</span>
+      <span class="s-logic">${p.logic}</span>
+      <span class="s-price">${p.price}</span>
+      <span class="depthbar"><i style="width:${p.depth}%"></i></span>
+    </button>
+  </li>`).join('');
+
+function show(id){
+  PALIERS.forEach(p=>{
+    document.querySelector(`.stratum[data-p="${p.id}"]`).dataset.on = p.id===id?1:0;
+  });
+  const vid = id==='free' ? 'free' : 'locked';
+  document.querySelectorAll('.view').forEach(v=>{ v.dataset.on = v.dataset.view===vid?1:0; });
+  const p=PALIERS.find(x=>x.id===id);
+  if(vid==='locked'){
+    document.getElementById('lockHead').textContent='Palier '+p.name+' — accès réservé';
+    document.getElementById('lockDeliv').textContent=p.deliv;
+  }
+  document.getElementById('pTitle').textContent=p.name;
+  document.getElementById('pLogic').textContent=p.logic;
+  document.getElementById('pDeliv').textContent=p.deliv;
+  document.getElementById('pPrice').textContent=p.price;
+  if(typeof renderAssist==='function') renderAssist(id);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+strata.addEventListener('click',e=>{
+  const li=e.target.closest('.stratum'); if(li) show(li.dataset.p);
+});
+document.getElementById('pDeliv').textContent=PALIERS[0].deliv;
+document.getElementById('pPrice').textContent=PALIERS[0].price;
+
+/* ============ téléchargement ============ */
+function grab(el){return el.innerText.replace(/\nTélécharger\n/g,'\n').trim();}
+document.addEventListener('click',async e=>{
+  const b=e.target.closest('[data-dl]'); if(!b) return;
+  if(b.dataset.dl==='freeOut'){ downloadCarto(); return; }
+  const src=document.getElementById(b.dataset.dl);
+  const head='PRAETORIAN SENTINEL SMART\n'+b.dataset.name.replace(/-/g,' ')+'\n'+new Date().toLocaleDateString('fr-FR')+'\n'+'='.repeat(46)+'\n\n';
+  const foot='\n\n'+'='.repeat(46)+'\nContact : WhatsApp +213 555 37 23 45 · men-ay_pro-managment@outlook.fr';
+  const blob=new Blob([head+grab(src)+foot],{type:'text/plain;charset=utf-8'});
+  const filename=b.dataset.name+'.txt';
+  try{
+    const dl = window.claude && window.claude.use ? await window.claude.use('downloads') : null;
+    if(dl){ await dl.save({filename, data:blob}); return; }
+  }catch(err){ if(err && err.code==='declined') return; }
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download=filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+});
+
+/* ============ FREE ============ */
+const NEEDS={
+ promoteur:[['Éligibilité aux avantages','AAPI et investissement'],['Recherche de foncier ou concession','Foncier économique'],['Permis et conformité','Urbanisme et construction'],['Crédit promotion immobilière','Crédit et financement'],['Fiscalité de la promotion','Fiscalité'],['Maîtrise d\u2019ouvrage publique','Marchés publics'],['Contrats de réalisation, VEFA','Gestion contractuelle'],['Dommages ouvrage, décennale','Assurance et risques'],['Structure de portage','Création et vie de l\u2019entreprise']],
+ industriel:[['Enregistrement AAPI','AAPI et investissement'],['Création, extension, modernisation','Industrie et implantation'],['Foncier industriel','Foncier économique'],['Importation d\u2019équipements','Commerce extérieur'],['Fournisseurs ou financement étrangers','Change et transferts'],['Financement du projet','Crédit et financement'],['Installations classées','HSE'],['Recrutement, main-d\u2019œuvre','Travail et ressources humaines'],['Avantages fiscaux','Fiscalité']],
+ investNat:[['Enregistrement AAPI','AAPI et investissement'],['Entrée en Algérie si étranger','International Investor Gateway'],['Structuration juridique','Création et vie de l\u2019entreprise'],['Financement','Crédit et financement'],['Fiscalité et avantages','Fiscalité'],['Capitaux étrangers','Change et transferts'],['Pacte d\u2019associés','Gestion contractuelle']],
+ entrepriseDev:[['Litige ou différend','Contentieux et litiges'],['Révision de contrats','Gestion contractuelle'],['Contrôle ou contentieux fiscal','Fiscalité'],['Ressources humaines','Travail et ressources humaines'],['Sinistres','Assurance et risques'],['Soumissions régulières','Marchés publics'],['Incident sécurité','HSE']],
+ betMarches:[['Réponse à un marché','Marchés publics'],['Contrats de maîtrise d\u2019œuvre','Gestion contractuelle'],['Conformité technique','Urbanisme et construction'],['Réserves et réception','Contentieux et litiges'],['Responsabilité technique','HSE']],
+ importateur:[['Régime et classification douanière','Commerce extérieur'],['Paiement fournisseur','Change et transferts'],['Crédit documentaire','Banque'],['Fiscalité des importations','Fiscalité'],['Structure de la société','Création et vie de l\u2019entreprise']],
+ entrepreneur:[['Choix de la forme juridique','Création et vie de l\u2019entreprise'],['Investissement associé','AAPI et investissement'],['Fiscalité de départ','Fiscalité'],['Compte professionnel','Banque']],
+ diaspora:[['Transfert de fonds','Change et transferts'],['Achat immobilier ou foncier','Foncier économique'],['Création d\u2019une structure','Création et vie de l\u2019entreprise'],['Projet d\u2019investissement','AAPI et investissement'],['Statut résident ou non-résident','Fiscalité']],
+ holding:[['Structuration multi-projets','International Investor Gateway'],['Pilotage de plusieurs entités','Création et vie de l\u2019entreprise'],['Financement consolidé','Crédit et financement'],['Optimisation consolidée','Fiscalité'],['Groupement et gouvernance','Gestion contractuelle'],['Risques du groupe','Assurance et risques']],
+ avocat:[['Dossier de contentieux','Contentieux et litiges'],['Conformité contractuelle','Gestion contractuelle'],['Recherche documentaire','Base documentaire juridique'],['Client soumissionnaire','Marchés publics'],['Dossier factuel avant plaidoirie','Génération documentaire']],
+ expertComptable:[['Fiscalité d\u2019un client','Fiscalité'],['Constitution de société','Création et vie de l\u2019entreprise'],['Montage d\u2019un dossier de crédit','Crédit et financement'],['Avantages AAPI','AAPI et investissement']],
+ notaire:[['Statuts et cessions de parts','Création et vie de l\u2019entreprise'],['Actes fonciers','Foncier économique'],['Contrats entre parties','Gestion contractuelle']],
+ conseilFDI:[['Accompagnement d\u2019un investisseur','International Investor Gateway'],['Enregistrement AAPI du client','AAPI et investissement'],['Structuration multi-clients','Création et vie de l\u2019entreprise'],['Transferts de capitaux','Change et transferts']],
+ courtier:[['Dossier d\u2019assurance','Assurance et risques'],['Dossier de financement','Crédit et financement'],['Relation bancaire du client','Banque']],
+ betConseil:[['Permis de construire','Urbanisme et construction'],['Réponse à un marché','Marchés publics'],['Contrats de maîtrise d\u2019œuvre','Gestion contractuelle'],['Responsabilité de chantier','HSE']],
+ cci:[['Orientation des adhérents','International Investor Gateway'],['Information générale','Base documentaire juridique']],
+ banque:[['Pré-qualification d\u2019un crédit','Crédit et financement'],['Éligibilité AAPI du dossier','AAPI et investissement'],['Conformité des transferts','Change et transferts'],['Situation fiscale','Fiscalité']],
+ agenceDev:[['Orientation d\u2019investisseurs','AAPI et investissement'],['Disponibilité foncière','Foncier économique'],['Projets industriels','Industrie et implantation']],
+ societeEtrangere:[['Comprendre le cadre réglementaire','International Investor Gateway'],['Trouver un partenaire algérien','International Investor Gateway'],['Structurer l\u2019entrée de capital','Change et transferts'],['Importer des équipements','Commerce extérieur'],['Filiale, succursale ou joint-venture','Création et vie de l\u2019entreprise'],['Contractualiser le partenariat','Gestion contractuelle']],
+ consultantEtranger:[['Accompagner un client','International Investor Gateway'],['Vérification de sources','Base documentaire juridique']]
+};
+const profilSel=document.getElementById('profil');
+profilSel.addEventListener('change',()=>{
+  const v=profilSel.value, w=document.getElementById('needsWrap');
+  document.getElementById('freeOut').dataset.on=0;
+  if(!v){w.style.display='none';return;}
+  document.getElementById('needs').innerHTML=(NEEDS[v]||[]).map(n=>
+    `<li><label><input type="checkbox" value="${n[1]}"><span>${n[0]}</span></label></li>`).join('');
+  w.style.display='block';
+});
+/* Notices de fond par axe — contenu générique, sans analyse du dossier de l'utilisateur */
+const AXES={
+ 'Contentieux et litiges':{
+  comp:["Le contrat lui-même : acte d'engagement, conditions particulières, prix et délais.",
+        "Le CCAG (cahier des clauses administratives générales) : règles de droit commun applicables au marché — ordres de service, délais, pénalités, réception, résiliation.",
+        "Le CCTP (cahier des clauses techniques particulières) : spécifications techniques, normes, prescriptions d'exécution propres à l'ouvrage.",
+        "Les pièces d'exécution : ordres de service, comptes rendus, correspondances, attachements, procès-verbaux.",
+        "Les pièces financières : situations, décomptes, retenues de garantie, cautions."],
+  cas:["Retard d'exécution : imputable au titulaire (pénalités) ou au maître d'ouvrage (prolongation de délai, préjudice).",
+       "Ordres de service non émis, tardifs ou contradictoires.",
+       "Travaux supplémentaires exécutés sans avenant.",
+       "Non-conformité aux clauses techniques du CCTP.",
+       "Réception avec réserves non levées, ou refus de réception.",
+       "Non-paiement ou retard de paiement des situations.",
+       "Résiliation unilatérale et son indemnisation.",
+       "Désordres apparus après réception, relevant des garanties.",
+       "Accident ou incident sur site, engageant les responsabilités civile, administrative et pénale simultanément."],
+  circ:"FAIT → <b>chronologie</b> → obligation prévue au contrat → obligation réellement exécutée → <b>écart</b> → partie responsable → préjudice → <b>preuves</b> → fondement de la réclamation → mise en demeure → recours amiable, expertise ou juridiction",
+  piece:"Contrat et ses annexes, CCAG, CCTP, ordres de service, correspondances datées, procès-verbaux, situations et décomptes, constats, rapports d'expertise."},
+ 'Gestion contractuelle':{
+  comp:["Obligations de chaque partie, telles qu'écrites et telles qu'exécutées.",
+        "Chronologie des événements et de leurs preuves.",
+        "Clauses de prix, de révision, de délai et de pénalité.",
+        "Clauses de résiliation, de règlement des différends et de droit applicable."],
+  cas:["Clause manquante ou ambiguë découverte en cours d'exécution.",
+       "Obligation exécutée sans trace écrite mobilisable.",
+       "Avenant nécessaire mais non formalisé.",
+       "Contradiction entre pièces contractuelles de rang différent."],
+  circ:"CONTRAT → obligations → chronologie → <b>preuves</b> → écart → responsabilité → préjudice → réclamation ou négociation",
+  piece:"Contrat signé et annexes, avenants, correspondances, procès-verbaux, preuves d'exécution."},
+ 'AAPI et investissement':{
+  comp:["Le régime applicable selon le montant et la nature du projet.",
+        "L'attestation d'enregistrement, délivrée par le guichet unique.",
+        "La liste des biens et services éligibles aux avantages.",
+        "Les obligations de l'investisseur pendant et après la réalisation."],
+  cas:["Éligibilité au régime des investissements structurants ou au régime général.",
+       "Biens importés absents de la liste visée, faisant perdre l'avantage.",
+       "Délai de réalisation non respecté.",
+       "Objet social incompatible avec le projet déclaré."],
+  circ:"PROJET → régime applicable → <b>guichet unique</b> → attestation d'enregistrement → liste des biens éligibles → réalisation → procès-verbal d'entrée en exploitation → durée des avantages",
+  piece:"Statuts, justificatif de capital, description du projet, liste des équipements, attestation d'enregistrement."},
+ 'Foncier économique':{
+  comp:["Le régime juridique du terrain : domaine privé de l'État, concession, propriété privée.",
+        "La destination : zone industrielle, zone d'activités, parc technologique.",
+        "Le cahier des charges attaché à la concession.",
+        "Les obligations de réalisation et de mise en valeur."],
+  cas:["Terrain disponible mais non viabilisé.",
+       "Changement d'affectation nécessaire.",
+       "Non-respect des obligations de réalisation entraînant un retrait.",
+       "Concurrence entre demandeurs sur la même assiette."],
+  circ:"PROJET → recherche du terrain → éligibilité → demande → <b>évaluation</b> → attribution → acte de concession → cahier des charges → réalisation → mise en exploitation",
+  piece:"Demande, dossier de projet, plan de masse, acte de concession, cahier des charges."},
+ 'Urbanisme et construction':{
+  comp:["Le certificat d'urbanisme et les règles du plan applicable.",
+        "Le permis de construire ou de lotir, et ses modificatifs.",
+        "Le certificat de conformité et l'achèvement des travaux.",
+        "Les normes techniques de construction applicables."],
+  cas:["Projet non conforme aux prescriptions du plan.",
+       "Travaux entamés avant obtention du permis.",
+       "Modification en cours de chantier sans permis modificatif.",
+       "Refus de conformité en fin de chantier."],
+  circ:"TERRAIN → certificat d'urbanisme → dépôt du permis → <b>instruction</b> → permis délivré → travaux → conformité → achèvement",
+  piece:"Titre de propriété ou concession, plans, notice descriptive, permis, procès-verbaux de chantier."},
+ 'Crédit et financement':{
+  comp:["Le type de concours : investissement, équipement, trésorerie, crédit-bail.",
+        "Les garanties exigées : hypothèque, nantissement, caution.",
+        "Le plan de financement et la capacité de remboursement.",
+        "Les conditions de déblocage et d'amortissement."],
+  cas:["Garantie insuffisante ou non mobilisable.",
+       "Plan de financement incohérent avec le montant du projet.",
+       "Délai d'inscription de la garantie retardant le chantier.",
+       "Coût du crédit-bail supérieur à l'achat financé."],
+  circ:"BESOIN → type de concours → <b>dossier bancaire</b> → garanties → accord de crédit → inscription de la garantie → déblocage → remboursement",
+  piece:"Plan de financement, états financiers, titre de propriété ou concession, devis, accord de principe."},
+ 'Fiscalité':{
+  comp:["Les impôts applicables à l'activité et à sa forme juridique.",
+        "Les avantages liés au régime d'investissement.",
+        "Les obligations déclaratives périodiques.",
+        "Les droits d'enregistrement et de timbre sur les actes."],
+  cas:["Avantage revendiqué sans base déclarative correspondante.",
+       "Franchise de TVA sollicitée hors liste visée.",
+       "Contrôle fiscal portant sur une période antérieure.",
+       "Régime différent selon le statut résident ou non-résident."],
+  circ:"ACTIVITÉ → forme juridique → régime fiscal → <b>avantages applicables</b> → obligations déclaratives → contrôle éventuel → contentieux",
+  piece:"Numéro d'identification fiscale, déclarations, attestation d'enregistrement, extrait de rôle."},
+ 'Marchés publics':{
+  comp:["Le mode de passation : appel d'offres, consultation, gré à gré.",
+        "Le cahier des charges et ses composantes administratives et techniques.",
+        "L'offre : dossier de candidature, offre technique, offre financière.",
+        "Les suites : attribution, notification, ordre de service, réception."],
+  cas:["Offre écartée pour dossier incomplet.",
+       "Contestation de l'attribution.",
+       "Travaux supplémentaires sans avenant régulier.",
+       "Pénalités de retard contestées.",
+       "Réception refusée ou assortie de réserves."],
+  circ:"BESOIN PUBLIC → cahier des charges → publication → <b>soumission</b> → évaluation → attribution → notification → ordre de service → exécution → réception → règlement financier",
+  piece:"Cahier des charges, dossier de candidature, offres technique et financière, lettre de soumission, cautions."},
+ 'Création et vie de l\u2019entreprise':{
+  comp:["La forme sociale et ses conséquences sur le capital et la gouvernance.",
+        "Les statuts et le pacte d'associés éventuel.",
+        "L'immatriculation au registre du commerce.",
+        "Les événements de la vie sociale : cession, augmentation de capital, transformation, dissolution."],
+  cas:["Forme juridique inadaptée au projet ou au partenariat visé.",
+       "Objet social trop étroit pour l'activité réelle.",
+       "Répartition du capital non sécurisée entre associés.",
+       "Délai d'immatriculation retardant les démarches suivantes."],
+  circ:"PROJET → forme juridique → statuts → capital → <b>dépôt et immatriculation</b> → publication → identifiants fiscaux → vie sociale",
+  piece:"Projet de statuts, justificatif de capital, pièces d'identité des associés, justificatif de siège."},
+ 'Commerce extérieur':{
+  comp:["Le régime d'importation applicable au produit.",
+        "La classification tarifaire et les droits correspondants.",
+        "La domiciliation bancaire de l'opération.",
+        "Les autorisations préalables éventuelles."],
+  cas:["Produit soumis à autorisation non obtenue.",
+       "Classification tarifaire contestée à l'arrivée.",
+       "Domiciliation incomplète bloquant le paiement.",
+       "Équipements hors liste visée, perdant la franchise."],
+  circ:"FOURNISSEUR → contrat → facture → <b>domiciliation bancaire</b> → transport → douane → contrôle → dédouanement → paiement → justificatifs → comptabilité",
+  piece:"Facture proforma, contrat fournisseur, documents de transport, déclaration en douane, justificatifs bancaires."},
+ 'Change et transferts':{
+  comp:["La nature de l'opération : apport en capital, paiement d'importation, transfert de revenus.",
+        "Les justificatifs exigés à l'appui de chaque opération.",
+        "Les obligations déclaratives auprès des autorités compétentes.",
+        "Les conditions de transfert des dividendes et du produit de cession."],
+  cas:["Apport en devises non tracé, compromettant le transfert ultérieur.",
+       "Justificatif manquant bloquant une opération.",
+       "Transfert de revenus demandé sans base déclarative antérieure."],
+  circ:"OPÉRATION → qualification → <b>banque domiciliataire</b> → justificatifs → exécution → déclaration → conservation des preuves → transfert ultérieur",
+  piece:"Justificatifs d'apport, factures, contrats, attestations bancaires, déclarations."},
+ 'Banque':{
+  comp:["Le compte et sa domiciliation.",
+        "Les instruments de paiement international.",
+        "Les garanties et cautions bancaires.",
+        "Les obligations de conformité."],
+  cas:["Ouverture de compte conditionnée à des pièces non réunies.",
+       "Crédit documentaire mal adossé au contrat commercial.",
+       "Caution appelée sur un marché en litige."],
+  circ:"BESOIN → ouverture de compte → domiciliation → <b>instrument de paiement</b> → garanties → exécution → justificatifs",
+  piece:"Statuts, registre du commerce, identifiants fiscaux, contrats commerciaux."},
+ 'Assurance et risques':{
+  comp:["Les couvertures obligatoires selon l'activité et l'ouvrage.",
+        "Les couvertures facultatives adaptées au risque réel.",
+        "Les déclarations de sinistre et les délais.",
+        "Les recours et la subrogation de l'assureur."],
+  cas:["Ouvrage réceptionné sans couverture décennale.",
+       "Sinistre déclaré hors délai.",
+       "Exclusion de garantie découverte au moment du sinistre.",
+       "Recours de l'assureur contre un intervenant du chantier."],
+  circ:"ACTIVITÉ → risques identifiés → <b>polices souscrites</b> → sinistre → déclaration → expertise → indemnisation → recours éventuel",
+  piece:"Polices, attestations, déclarations de sinistre, rapports d'expertise."},
+ 'HSE':{
+  comp:["Les obligations de sécurité sur le site et le chantier.",
+        "Les études d'impact et les autorisations environnementales.",
+        "Le régime des installations classées.",
+        "Les registres et plans de prévention."],
+  cas:["Accident du travail engageant plusieurs responsabilités.",
+       "Installation exploitée sans autorisation requise.",
+       "Registres de sécurité non tenus, fragilisant la défense en cas d'incident.",
+       "Rejet ou déchet non conforme constaté lors d'un contrôle."],
+  circ:"ACTIVITÉ → classement de l'installation → <b>autorisations</b> → plans de prévention → registres → contrôles → incident éventuel → responsabilités administrative, civile et pénale",
+  piece:"Étude d'impact, autorisation d'exploitation, plans de prévention, registres, constats."},
+ 'Travail et ressources humaines':{
+  comp:["Les formes de contrat de travail et leurs conditions.",
+        "Les obligations de déclaration et de cotisation.",
+        "Les règles de rupture et leurs conséquences.",
+        "Le régime de la main-d'œuvre étrangère."],
+  cas:["Recours à la sous-traitance requalifié.",
+       "Rupture contestée devant la juridiction sociale.",
+       "Accident du travail et obligations de l'employeur.",
+       "Emploi de personnel étranger sans autorisation."],
+  circ:"BESOIN → forme de contrat → <b>déclaration</b> → cotisations → exécution → modification ou rupture → contentieux éventuel",
+  piece:"Contrats de travail, déclarations sociales, registres du personnel, autorisations de travail."},
+ 'Industrie et implantation':{
+  comp:["La nature de l'opération : création, extension, modernisation.",
+        "Le classement de l'installation et les autorisations associées.",
+        "Les raccordements énergie, eau et assainissement.",
+        "Les normes de production applicables."],
+  cas:["Installation classée exploitée sans autorisation.",
+       "Raccordements non disponibles sur le site retenu.",
+       "Équipements importés hors liste visée.",
+       "Extension nécessitant une nouvelle autorisation."],
+  circ:"PROJET INDUSTRIEL → site → <b>classement</b> → autorisations → raccordements → équipements → construction → mise en service → exploitation",
+  piece:"Dossier technique, étude d'impact, autorisations, contrats de raccordement."},
+ 'International Investor Gateway':{
+  comp:["La structure d'entrée : société, filiale, succursale, prise de participation, joint-venture.",
+        "L'intégration du capital étranger et ses justificatifs.",
+        "Le partenaire algérien et la forme du partenariat.",
+        "Les obligations permanentes après implantation."],
+  cas:["Structure d'entrée inadaptée à l'activité visée.",
+       "Apport en capital mal tracé, compromettant les transferts futurs.",
+       "Partenariat engagé sans pacte d'associés.",
+       "Importations d'équipements non rattachées au projet enregistré."],
+  circ:"PAYS D'ORIGINE → profil → secteur → projet → <b>partenaire algérien</b> → structure juridique → capital → financement → foncier → autorisations → importation → douane → banque → change → fiscalité → contrats → construction → exploitation → obligations permanentes",
+  piece:"Statuts de la société d'origine, justificatif d'apport, projet d'accord de partenariat, description du projet."},
+ 'Base documentaire juridique':{
+  comp:["Les textes de rang supérieur, lois et ordonnances.",
+        "Les décrets et arrêtés d'application.",
+        "Les textes modificatifs et abrogés.",
+        "Le versionnage : quelle règle était applicable à quelle date."],
+  cas:["Texte d'application annoncé mais non publié.",
+       "Régime transitoire maintenant en vigueur d'anciens textes.",
+       "Opération ancienne examinée au regard du droit actuel, à tort."],
+  circ:"QUESTION → domaine → texte pivot → article → <b>version applicable à la date</b> → textes modificatifs → texte d'application → statut de fiabilité",
+  piece:"Références de publication, textes consolidés, dates d'entrée en vigueur."},
+ 'Génération documentaire':{
+  comp:["Les modèles types par famille de contrat et de procédure.",
+        "Les clauses à adapter au régime applicable.",
+        "Les pièces annexes à constituer.",
+        "Le contrôle de cohérence entre pièces."],
+  cas:["Modèle appliqué sans vérification du régime applicable.",
+       "Clause manquante identifiée après signature.",
+       "Annexe visée au contrat mais jamais produite."],
+  circ:"BESOIN → modèle type → <b>adaptation au régime applicable</b> → personnalisation → annexes → contrôle de cohérence → signature",
+  piece:"Modèle retenu, données du dossier, annexes visées."}
+};
+
+function axisBlock(name){
+  const a=AXES[name];
+  if(!a) return `<div class="axis"><h5>${name}</h5><p>Notice de fond non encore rédigée pour cet axe.</p></div>`;
+  return `<div class="axis">
+    <h5>${name}</h5>
+    <p class="sub">Composition du domaine</p><ul>${a.comp.map(x=>`<li>${x}</li>`).join('')}</ul>
+    <p class="sub">Situations fréquemment rencontrées</p><ul>${a.cas.map(x=>`<li>${x}</li>`).join('')}</ul>
+    <p class="sub">Circuit</p><div class="circuit">${a.circ}</div>
+    <p class="sub">Pièces habituellement mobilisées</p><p>${a.piece}</p>
+  </div>`;
+}
+
+document.getElementById('freeGo').addEventListener('click',()=>{
+  const v=profilSel.value;
+  const picked=[...document.querySelectorAll('#needs input:checked')].map(i=>i.value);
+  const err=document.getElementById('freeErr');
+  if(!v||!picked.length){err.dataset.on=1;return;} err.dataset.on=0;
+  cartoRender(cartoCtx());
+  document.getElementById('freeOut').dataset.on=1;
+});
+
+/* =================== LIVRABLE PDF — kit commun (pdf-lib, chargé à la demande) =================== */
+const PSS_PDFLIB = ["https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js", "https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"];
+function pssScript(src){ return new Promise((ok, ko) => { const s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = ko; document.head.appendChild(s); }); }
+async function pssPdfLib(){
+  for(const src of PSS_PDFLIB){ if(window.PDFLib) break; try{ await pssScript(src); }catch(e){} }
+  return window.PDFLib || null;
+}
+function pssDate(){ return new Date().toLocaleDateString("fr-FR", {day:"numeric", month:"long", year:"numeric"}); }
+function pssRef(code){ const d = new Date(), z = n => String(n).padStart(2, "0"); return `PSS-${code}-${String(d.getFullYear()).slice(2)}${z(d.getMonth() + 1)}${z(d.getDate())}-01`; }
+async function pssKit(o){
+  const J = window.jspdf && window.jspdf.jsPDF; if(!J) return null;
+  const doc = new J({unit:"pt", format:"a4", compress:true});
+  doc.setProperties({title:o.title, author:"Praetorian Sentinel Smart", creator:"Praetorian Sentinel Smart", subject:o.title});
+  try{ doc.setLanguage("fr-FR"); }catch(e){}
+  const RS = window.PSS_PDF || {};
+  let fam = "helvetica";
+  if(RS.reg && RS.semi){ try{
+    doc.addFileToVFS("Jura-Regular.ttf", RS.reg); doc.addFont("Jura-Regular.ttf", "Jura", "normal"); doc.addFont("Jura-Regular.ttf", "Jura", "italic");
+    doc.addFileToVFS("Jura-SemiBold.ttf", RS.semi); doc.addFont("Jura-SemiBold.ttf", "Jura", "bold"); fam = "Jura"; }catch(e){ fam = "helvetica"; } }
+  const STY = {r:"normal", b:"bold", i:"italic"};
+  /* charte PSS : couleurs de l'original converties selon leur rôle (texte, fond, trait) */
+  const MT = {"#0C2949":"#EAF7FD","#13263C":"#E6EEF4","#16242E":"#E6EEF4","#4A6076":"#B3C2CD","#3E515C":"#B3C2CD","#7B8FA3":"#8597A6","#6F818B":"#8597A6",
+    "#B8912E":"#5ACEF6","#9A7233":"#5ACEF6","#9A6414":"#F0C070","#D9B65C":"#8FE0FF","#C9A25A":"#8FE0FF","#1D6B4E":"#5FF0B0","#3A6B4D":"#5FF0B0","#2E5A3F":"#7FE8B8",
+    "#9B2C2C":"#F2A6A6","#9B3B2E":"#F2A6A6","#6E2C23":"#F2B8B8","#B3701F":"#F0C070","#1F5A96":"#8FD8FB","#1F4E7A":"#8FD8FB","#2E5C8A":"#8FD8FB",
+    "#C8D6E6":"#9FB3C2","#D9CDB2":"#9FB3C2","#000000":"#E6EEF4"};
+  const MF = {"#FFFFFF":"#0B1826","#F4F7FB":"#0A1826","#F6F5F0":"#0A1826","#EDEBE4":"#0C1C2C","#F6EEDA":"#0C2438","#EFE6D2":"#0C2438","#E8F0F9":"#0C2438",
+    "#E6F2EC":"#0B2A22","#FBF1E0":"#2A2412","#F8E9E9":"#2C1616","#DCE4EE":"#12283A","#0C2949":"#0F2F48","#16242E":"#0F2F48","#B8912E":"#39C3FF","#9A7233":"#2A8FC4",
+    "#9A6414":"#F0C070","#CFCBBF":"#1E3A50","#D6E1EC":"#1E3A50","#E0CB94":"#2A6A8F","#DCCBA5":"#2A6A8F","#D9B65C":"#5ACEF6","#C9A25A":"#5ACEF6",
+    "#1D6B4E":"#5FF0B0","#3A6B4D":"#5FF0B0","#9B2C2C":"#F2A6A6","#9B3B2E":"#F2A6A6","#B3701F":"#F0C070","#1F5A96":"#5ACEF6","#000000":"#E6EEF4"};
+  const MS = {"#D6E1EC":"#24465E","#CFCBBF":"#24465E","#E0CB94":"#2A6A8F","#DCCBA5":"#2A6A8F","#B8912E":"#39C3FF","#9A7233":"#39C3FF","#FFFFFF":"#24465E",
+    "#F4F7FB":"#24465E","#E6F2EC":"#1E5A46","#FBF1E0":"#5A4A20","#F8E9E9":"#5A2A2A","#E8F0F9":"#24465E"};
+  const hex = h => "#" + String(h).replace("#", "").toUpperCase();
+  const rgb = h => { const n = parseInt(String(h).replace("#", ""), 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; };
+  const col = h => rgb(h);
+  const ct = h => rgb(MT[hex(h)] || h), cf = h => rgb(MF[hex(h)] || h), cs = h => rgb(MS[hex(h)] || MT[hex(h)] || h);
+  const clean = s => String(s ?? "").replace(/[    ]/g, " ").replace(/[‐‑]/g, "-").replace(/→/g, "->").replace(/↗/g, "").replace(/⋯/g, "…").replace(/[\u0000-\u001f]/g, "");
+  const CS = {has:c => c >= 32};
+  const F = {}; ["r", "b", "i"].forEach(k => F[k] = {widthOfTextAtSize:(s, sz) => { doc.setFont(fam, STY[k]); doc.setFontSize(sz); return doc.getTextWidth(String(s)); }});
+  const K = {doc, F, col, clean, W:595.28, H:841.89, M:50, CW:487, R:537, BOT:772, y:0, n:0, page:doc, fam, RS};
+  const paint = (p, fill) => { const st = (p.fill ? "F" : "") + (p.stroke ? "D" : ""); if(p.fill) doc.setFillColor(...(fill ? fill(p.fill) : cf(p.fill))); if(p.stroke){ doc.setDrawColor(...cs(p.stroke)); doc.setLineWidth(p.bw || .6); } return st; };
+  K.wd = (s, sz, f = "r") => F[f].widthOfTextAtSize(clean(s), sz);
+  K.t = (s, x, y, p = {}) => {
+    const txt = clean(s); if(!txt) return 0;
+    const k = p.f || "r", sz = p.s || 9; doc.setFont(fam, STY[k]); doc.setFontSize(sz);
+    const w = doc.getTextWidth(txt), xx = p.a === "r" ? x - w : p.a === "c" ? x - w / 2 : x;
+    doc.setTextColor(...(p.raw ? rgb(p.c || "#E6EEF4") : ct(p.c || "#000000"))); doc.text(txt, xx, y);
+    return w;
+  };
+  K.wrap = (s, w, sz, f = "r") => {
+    const out = [];
+    String(s ?? "").split("\n").forEach(par => {
+      const words = clean(par).split(/\s+/).filter(Boolean); let line = "";
+      words.forEach(wd => { const tr = line ? line + " " + wd : wd; if(!line || F[f].widthOfTextAtSize(tr, sz) <= w) line = tr; else { out.push(line); line = wd; } });
+      out.push(line);
+    });
+    return out;
+  };
+  K.para = (s, x, y, w, p = {}) => { const sz = p.s || 9, lh = p.lh || sz * 1.55, ls = K.wrap(s, w, sz, p.f || "r"); ls.forEach((l, i) => K.t(l, x, y + i * lh, p)); return ls.length * lh; };
+  K.rich = (runs, w, sz, ind = 0) => {
+    const lines = [[]]; let lw = ind;
+    runs.forEach(r => clean(r.t).split(/(\s+)/).forEach(tok => {
+      if(!tok) return;
+      const sp = /^\s+$/.test(tok), tw = F[r.f || "r"].widthOfTextAtSize(sp ? " " : tok, r.s || sz), cur = lines[lines.length - 1];
+      if(sp){ if(cur.length){ cur.push({t:" ", f:r.f, c:r.c, s:r.s, w:tw}); lw += tw; } return; }
+      if(lw + tw > w && cur.length){ while(cur.length && cur[cur.length - 1].t === " ") lw -= cur.pop().w; lines.push([]); lw = 0; }
+      lines[lines.length - 1].push({t:tok, f:r.f, c:r.c, s:r.s, w:tw}); lw += tw;
+    }));
+    return lines;
+  };
+  K.drawRich = (lines, x, y, sz, lh, dc, ind = 0) => { lines.forEach((ln, i) => { let xx = x + (i ? 0 : ind); ln.forEach(tk => { if(tk.t !== " ") K.t(tk.t, xx, y + i * lh, {s:tk.s || sz, f:tk.f || "r", c:tk.c || dc}); xx += tk.w; }); }); return lines.length * lh; };
+  K.rect = (x, y, w, h, p = {}) => { const st = paint(p, p.raw ? rgb : null); if(!st) return; if(p.r){ const r = Math.min(p.r, h / 2, w / 2); doc.roundedRect(x, y, w, h, r, r, st); } else doc.rect(x, y, w, h, st); };
+  K.line = (x1, y1, x2, y2, c, w = .5) => { doc.setDrawColor(...cs(c)); doc.setLineWidth(w); doc.line(x1, y1, x2, y2); };
+  K.circle = (x, y, r, p = {}) => { const st = paint(p); if(st) doc.circle(x, y, r, st); };
+  K.path = (d, x, y, p = {}) => {
+    const pts = []; let closed = false;
+    String(d).replace(/([MLZ])\s*(-?[\d.]+)?[\s,]*(-?[\d.]+)?/gi, (m, c, a, b) => { if(c.toUpperCase() === "Z") closed = true; else pts.push([+a, +b]); return m; });
+    if(pts.length < 2) return;
+    const st = paint(p) || "D";
+    doc.lines(pts.slice(1).map((q, i) => [q[0] - pts[i][0], q[1] - pts[i][1]]), x + pts[0][0], y + pts[0][1], [1, 1], st, closed);
+  };
+  K.arrow = (x, y, c, w = 7) => { K.line(x, y - 2.1, x + w - 1.2, y - 2.1, c, .55); K.path(`M0 0 L2.4 1.5 L0 3 Z`, x + w - 2.2, y - 3.6, {fill:c}); return w; };
+  K.check = (x, y, c) => K.path("M0 2.6 L2.1 4.8 L6 0.6", x, y, {stroke:c, bw:1.2});
+  K.blocks = (x, y, c) => { for(let i = 0; i < 5; i++) K.rect(x + i * 3.1, y - 5.6, 2.3, 5.8, {fill:c}); return 15.5; };
+  K.qr = (text, x, y, size) => {
+    if(typeof window.PSS_QR !== "function") return false;
+    let m; try{ m = window.PSS_QR(text); }catch(e){ return false; }
+    const n = m.length, q = 3, cell = size / (n + 2 * q);
+    doc.setFillColor(255, 255, 255); doc.rect(x, y, size, size, "F"); doc.setFillColor(0, 0, 0);
+    m.forEach((row, r) => { let c = 0; while(c < n){ if(!row[c]){ c++; continue; } let e = c; while(e < n && row[e]) e++;
+      doc.rect(x + (c + q) * cell, y + (r + q) * cell, (e - c) * cell + .05, cell + .05, "F"); c = e; } });
+    return true;
+  };
+  K.newPage = () => { if(K.n > 0) doc.addPage([K.W, K.H], "p"); K.n++; doc.setFillColor(0, 0, 0); doc.rect(0, 0, K.W, K.H, "F"); o.header(K); o.footer(K); K.y = o.top || 100; };
+  K.need = h => { if(K.y + h > K.BOT){ K.newPage(); return true; } return false; };
+  K.blob = async () => doc.output("blob");
+  return K;
+}
+/* charte PSS des documents : emblème complet en haut, bloc de contacts en bas (mêmes sur toutes les pages) */
+function pssCharterHead(K, sous, date, ref){
+  const M = K.M, R = K.R;
+  let x = M;
+  if(K.RS.emb){ try{ K.doc.addImage(K.RS.emb, "JPEG", M - 6, 7, 82, 56.6, "pss-emb", "FAST"); x = M + 84; }catch(e){} }
+  K.t("Praetorian Sentinel Smart", x, 31, {s:12.5, f:"b", c:"#E8EDFA", raw:1});
+  K.t(sous, x, 45.5, {s:7.6, c:"#7FA9EE", raw:1});
+  K.t(date, R, 31, {s:7.6, c:"#8A97AD", a:"r", raw:1}); K.t(ref, R, 45.5, {s:7.6, c:"#8A97AD", a:"r", raw:1});
+  K.doc.setDrawColor(57, 195, 255); K.doc.setLineWidth(.6); K.doc.line(M, 70, R, 70);
+}
+function pssCharterFoot(K){
+  const M = K.M, R = K.R, d = K.doc;
+  d.setDrawColor(36, 70, 94); d.setLineWidth(.5); d.line(M, 782, R, 782);
+  let x = M; x += K.t("WhatsApp Business", x, 795, {s:7, f:"b", c:"#5A8FE0", raw:1}) + 5; x += K.t("+213 555 37 23 45", x, 795, {s:7, c:"#E6EEF4", raw:1}) + 14;
+  x += K.t("Email", x, 795, {s:7, f:"b", c:"#5A8FE0", raw:1}) + 5; K.t("men-ay_pro-managment@outlook.fr", x, 795, {s:7, c:"#E6EEF4", raw:1});
+  K.t("Algérie - France - Espagne - Allemagne - Belgique - Québec", M, 807, {s:6.5, c:"#5F78B0", raw:1});
+  K.t("Document établi pour son seul destinataire · page " + K.n, R, 807, {s:6.5, c:"#8597A6", a:"r", raw:1});
+}
+async function pssDeliver(blob, filename, msg){
+  try{
+    const dl = window.claude && window.claude.use ? await window.claude.use("downloads") : null;
+    if(dl){ await dl.save({filename, data:blob}); msg("Document téléchargé.", true); return; }
+  }catch(e){ if(e && e.code === "declined") return; }
+  try{
+    const u = URL.createObjectURL(blob), a = document.createElement("a");
+    a.href = u; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(u), 4000); msg("Document téléchargé.", true);
+  }catch(e){ msg("Le téléchargement a été bloqué par votre navigateur."); }
+}
+
+/* ============ LIVRABLE FREE — cartographie institutionnelle ============ */
+const CARTO_PHASES = ["Constituer la structure", "Financer et faire entrer les capitaux", "Enregistrer l'investissement", "Obtenir le foncier et les autorisations", "Importer les équipements", "Réaliser et exploiter"];
+const INSTITUTIONS = [
+ {id:"notaire", ph:0, n:"Notaire", r:"Rédige et authentifie les statuts, les cessions de parts et les actes fonciers.", t:"Droit des sociétés ; règles du notariat"},
+ {id:"cnrc", ph:0, n:"CNRC (Centre national du registre du commerce)", r:"Immatricule la société au registre du commerce et publie ses actes au BOAL (Bulletin officiel des annonces légales).", t:"Code de commerce ; loi n° 04-08 relative aux conditions d'exercice des activités commerciales"},
+ {id:"dgi", ph:0, n:"DGI (Direction générale des impôts)", r:"Attribue le NIF (numéro d'identification fiscale), fixe le régime d'imposition, applique les avantages fiscaux et reçoit les déclarations.", t:"Codes fiscaux ; loi de finances de l'exercice"},
+ {id:"cnas", ph:0, n:"CNAS (Caisse nationale des assurances sociales des travailleurs salariés)", r:"Affilie l'employeur et reçoit la déclaration des salariés.", t:"Législation de sécurité sociale"},
+ {id:"banque", ph:1, n:"Banque domiciliataire", r:"Ouvre le compte, domicilie les opérations, instruit le crédit et prend les garanties.", t:"Loi n° 23-09 portant loi monétaire et bancaire"},
+ {id:"ba", ph:1, n:"Banque d'Algérie", r:"Fixe les règles de change — apport en devises, paiements à l'étranger, transferts et rapatriement des revenus — appliquées par l'intermédiaire de votre banque.", t:"Règlement n° 07-01 ; réglementation des changes"},
+ {id:"aapi", ph:2, n:"AAPI (Agence algérienne de promotion de l'investissement)", r:"Enregistre l'investissement, accorde les avantages, vise la liste des biens et constate l'entrée en exploitation.", t:"Loi n° 22-18 ; décret exécutif n° 22-299"},
+ {id:"foncier", ph:3, n:"Organisme foncier compétent", r:"Attribue le foncier économique : acte de concession et cahier des charges.", t:"Loi n° 23-17 ; décrets exécutifs n° 23-486 et 23-487"},
+ {id:"urba", ph:3, n:"Services de l'urbanisme (APC — assemblée populaire communale — et direction de l'urbanisme de wilaya)", r:"Délivrent le certificat d'urbanisme, le permis de construire et le certificat de conformité.", t:"Loi n° 90-29 relative à l'aménagement et l'urbanisme ; décret exécutif n° 15-19"},
+ {id:"env", ph:3, n:"Administration de l'environnement", r:"Instruit les installations classées, les études d'impact et les autorisations d'exploitation.", t:"Réglementation des installations classées"},
+ {id:"commext", ph:4, n:"Services du commerce extérieur", r:"Autorisations et régimes particuliers à l'importation, selon le produit.", t:"Réglementation du commerce extérieur"},
+ {id:"douanes", ph:4, n:"Douanes algériennes", r:"Classement tarifaire, dédouanement, et franchises liées à l'investissement enregistré.", t:"Code des douanes ; loi n° 22-18 pour les franchises"},
+ {id:"travail", ph:5, n:"Inspection du travail", r:"Contrôle les contrats de travail, le règlement intérieur et les conditions de sécurité.", t:"Législation du travail"},
+ {id:"assur", ph:5, n:"Compagnie d'assurance", r:"Souscrit les couvertures obligatoires — dont la responsabilité décennale — et instruit les sinistres.", t:"Ordonnance n° 95-07 relative aux assurances"},
+ {id:"sc", ph:5, n:"Service contractant (maître d'ouvrage public)", r:"Publie l'appel d'offres, attribue le marché, émet les ordres de service et prononce la réception.", t:"Loi n° 23-12 fixant les règles générales relatives aux marchés publics"},
+ {id:"juri", ph:5, n:"Juridictions compétentes", r:"Tranchent les litiges : tribunal, pôle commercial spécialisé ou juridiction administrative, selon la nature du différend.", t:"Code de procédure civile et administrative"}
+];
+const AXIS_INST = {
+ 'AAPI et investissement':['aapi','dgi','douanes'], 'Industrie et implantation':['aapi','foncier'], 'Foncier économique':['foncier','notaire'],
+ 'Commerce extérieur':['commext','douanes','ba','banque'], 'Change et transferts':['banque','ba'], 'Crédit et financement':['banque'],
+ 'HSE':['env'], 'Travail et ressources humaines':['cnas','travail'], 'Fiscalité':['dgi'], 'Urbanisme et construction':['urba'],
+ 'Marchés publics':['sc'], 'Gestion contractuelle':['notaire'], 'Contentieux et litiges':['juri'],
+ 'Création et vie de l\u2019entreprise':['notaire','cnrc','dgi'], 'Banque':['banque','ba'], 'Assurance et risques':['assur'],
+ 'International Investor Gateway':['notaire','cnrc','banque','ba','aapi'], 'Base documentaire juridique':[], 'Génération documentaire':[]
+};
+const CARTO_INTL = ['societeEtrangere','consultantEtranger','diaspora','conseilFDI'];
+const CARTO_PORTEE = "Rapport d'orientation — palier Free, gratuit. Il identifie les institutions et les textes que votre projet est susceptible de mobiliser, à partir du profil et des besoins déclarés ; il ne constitue ni un avis juridique, ni une analyse de votre dossier. Les références citées doivent être vérifiées sur source officielle avant tout usage. Aucune donnée saisie n'est conservée.";
+const CARTO_ESS = n => [`Pour votre statut exact : les pièces à déposer auprès de ${n > 1 ? "chacune de ces " + n + " institutions" : "cette institution"}`,
+  "Le texte qui fonde chaque pièce, mis en regard de la réglementation de la Banque d'Algérie qui traverse tout le parcours",
+  "Les obligations, les points bloquants et les délais, domaine par domaine",
+  "Les références légales avec leur statut de fiabilité : vérifié, transitoire, non identifié"];
+const CARTO_PAL = [["Free","Gratuit","Cartographie institutionnelle"],["Essential","Sur devis","Pièces par institution, textes, interaction Banque d'Algérie"],["Pro","Sur devis","Vos pièces réelles confrontées à la réglementation"],
+  ["Project","Sur devis","Montage juridique, foncier, financier et administratif"],["Dmo","Sur devis","Pilotage et simulateurs paramétrés"],["Entreprise Dmo","Sur devis","Plusieurs projets pilotés ensemble"]];
+const pl = (n, s, p) => n + " " + (n > 1 ? (p || s + "s") : s);
+
+function cartoCtx(){
+  const v = profilSel.value, label = profilSel.options[profilSel.selectedIndex].text;
+  const axes = [...new Set([...document.querySelectorAll('#needs input:checked')].map(i => i.value))];
+  const cnt = {};
+  axes.forEach(a => (AXIS_INST[a] || []).forEach(id => { cnt[id] = (cnt[id] || 0) + 1; }));
+  const phases = CARTO_PHASES.map((t, i) => ({t, n:i + 1, inst:INSTITUTIONS.filter(x => x.ph === i && cnt[x.id]).map(x => Object.assign({dbl:cnt[x.id] > 1}, x))})).filter(p => p.inst.length);
+  const ni = phases.reduce((a, p) => a + p.inst.length, 0);
+  return {v, label, axes, intl:CARTO_INTL.includes(v), phases, ni, np:phases.length, nd:axes.length,
+    projet:v === 'industriel' ? "votre projet industriel" : v === 'promoteur' ? "votre projet immobilier" : "votre projet",
+    objet:v === 'industriel' ? "projet industriel" : v === 'promoteur' ? "projet immobilier" : label.charAt(0).toLowerCase() + label.slice(1),
+    ref:pssRef("INV"), date:pssDate()};
+}
+function cartoOrient(X){
+  return X.intl ? ["Le parcours investisseur non résident s'applique", "Le porteur du projet réside à l'étranger : la structure d'entrée, l'intégration du capital en devises et, le cas échéant, le partenaire algérien restent à préciser. Vos flux en devises — apport, importation d'équipements, transfert des revenus — traversent plusieurs phases et obéissent tous aux règles de change de la Banque d'Algérie, appliquées par l'intermédiaire de votre banque."]
+                : ["Première orientation", "Un enregistrement ou une mise à jour auprès de l'AAPI (Agence algérienne de promotion de l'investissement) constituerait probablement la première étape. Les institutions ci-dessous suivent l'ordre dans lequel votre projet les traverse."];
+}
+function cartoDomaines(X){ return `${X.nd} — ${X.axes.slice(0, 3).join(", ")}${X.nd > 3 ? "…" : ""}`; }
+function cartoRender(X){
+  const o = cartoOrient(X);
+  const phases = X.ni ? X.phases.map(p => `<div class="carto-ph"><h5><span>Phase ${p.n}</span>${p.t}</h5>${p.inst.map(x => `
+      <div class="carto-inst"><p class="nm">${x.n}${x.dbl ? '<span class="dbl">— doublement sollicitée</span>' : ''}</p>
+        <p class="rl">${x.r}</p><p class="tx">Textes : ${x.t}</p><p class="pc"><i aria-hidden="true"></i>Pièces à déposer : remises au palier Essential</p></div>`).join('')}</div>`).join('')
+    : `<p>Les besoins retenus relèvent de la recherche et de la production documentaires : ils ne font traverser aucune institution de façon directe.</p>`;
+  document.getElementById('freeBody').innerHTML = `<div class="carto">
+    <div class="seg"><h4>Votre besoin a été identifié</h4>
+      <p>Voici les institutions que votre projet va traverser, dans l'ordre, avec le rôle de chacune et les textes qui la gouvernent — puis ce que chaque palier suivant y ajoute.</p>
+      <dl class="carto-meta"><dt>Profil déclaré</dt><dd>${X.label}</dd>${X.intl ? '<dt>Résidence du porteur de projet</dt><dd>à l\'étranger</dd>' : ''}
+        <dt>Domaines réglementaires concernés</dt><dd>${cartoDomaines(X)}</dd><dt>Institutions à traverser</dt><dd>${X.ni}, en ${pl(X.np, "phase")}</dd></dl></div>
+    <div class="seg"><div class="carto-call"><b>${o[0]}</b><p>${o[1]}</p></div></div>
+    <div class="seg"><h4>Votre cartographie institutionnelle — ${pl(X.ni, "institution")}, en ${pl(X.np, "phase")}</h4>
+      <p>Chacune a ses propres pièces, ses propres textes et ses propres délais. Les institutions marquées doublement sollicitées interviennent pour plusieurs de vos besoins : un même dossier y sera présenté plusieurs fois.</p>
+      ${phases}
+      ${X.ni ? '<p class="note">Pièces à déposer auprès de chaque institution : remises au palier Essential, pour votre statut exact.</p>' : ''}</div>
+    <div class="seg"><h4>Le circuit de chaque domaine</h4>
+      <p>L'étape mise en évidence est celle où se joue la décision. Le contenu détaillé de chaque étape — délais, pièces, formulaires — est remis au palier Essential.</p>
+      ${X.axes.filter(a => AXES[a]).map(a => `<div class="axis"><h5>${a}</h5><div class="circuit">${AXES[a].circ}</div></div>`).join('')}</div>
+    <div class="seg"><h4>Ce que le palier Essential vous remettra</h4><ul class="carto-ess">${CARTO_ESS(X.ni).map(x => `<li>${x}</li>`).join('')}</ul></div>
+    <p class="nextstep">Téléchargez cette cartographie — le document complet ajoute les questions courantes et les paliers, dans l'ordre — puis demandez votre devis : nous précisons avec vous l'ampleur réelle du projet et vous adressons un devis pour le palier Essential. <a href="../contact.html" target="_top">Demander un devis</a></p>
+    <p class="carto-msg" id="cartoMsg" role="status" hidden></p></div>`;
+}
+function cartoMsg(m, ok){ const el = document.getElementById('cartoMsg'); if(!el) return; el.hidden = false; el.dataset.ok = ok ? 1 : 0; el.textContent = m; }
+async function downloadCarto(){
+  if(!profilSel.value) return;
+  cartoMsg("Préparation de votre cartographie…", true);
+  let blob = null;
+  try{ blob = await cartoBuild(cartoCtx()); }catch(err){ console.error(err); blob = null; }
+  if(!blob){ cartoMsg("La cartographie n'a pas pu être produite. Réessayez, ou demandez-la par WhatsApp."); return; }
+  await pssDeliver(blob, `cartographie-institutionnelle-free-${new Date().toISOString().slice(0,10)}.pdf`, (m, ok) => cartoMsg(ok ? "Cartographie téléchargée." : m, ok));
+}
+async function cartoBuild(X){
+  const C = {ink:"#16242E", brass:"#9A7233", brassLt:"#C9A25A", paper:"#EDEBE4", wash:"#EFE6D2", raised:"#F6F5F0", rule:"#CFCBBF", soft:"#3E515C", faint:"#6F818B", ok:"#3A6B4D", tr:"#B3701F", no:"#9B3B2E", sub:"#D9CDB2", white:"#FFFFFF"};
+  const K = await pssKit({title:"Cartographie institutionnelle — palier 1 — Praetorian Sentinel Smart", top:100,
+    header:K => pssCharterHead(K, "Cartographie institutionnelle — palier 1, Free — investir en Algérie", X.date, "Réf. " + X.ref),
+    footer:K => pssCharterFoot(K)});
+  if(!K) return null;
+  const M = K.M, CW = K.CW, R = K.R;
+  const eyebrow = s => { K.t(s.toUpperCase(), M, K.y, {s:6.4, f:"b", c:C.brass}); K.y += 14; };
+  const h2 = s => { K.need(60); K.t(s, M, K.y, {s:11.2, f:"b", c:C.ink}); K.rect(M, K.y + 9.5, 45, 1.3, {fill:C.brass}); K.y += 27; };
+
+  /* ---------- page 1 : synthèse ---------- */
+  K.newPage(); K.y = 114;
+  K.t("Votre besoin a été identifié.", M, K.y, {s:17.5, f:"b", c:C.ink}); K.y += 16;
+  K.y += K.para("Voici les institutions que votre projet va traverser, dans l'ordre, avec le rôle de chacune et les textes qui la gouvernent — puis ce que chaque palier suivant y ajoute.", M, K.y, CW, {s:9.3, lh:14.2, c:C.soft});
+  K.y += 3;
+  const meta = [["Profil déclaré", X.label]].concat(X.intl ? [["Résidence du porteur de projet", "à l'étranger"]] : [],
+               [["Domaines réglementaires concernés", cartoDomaines(X)], ["Institutions à traverser", `${X.ni}, en ${pl(X.np, "phase")}`]])
+               .map(m => ({a:K.wrap(m[0], 104, 7), b:K.wrap(m[1], R - 215 - 14, 8.6, "b")}));
+  const mh = 14 + meta.reduce((s, m) => s + Math.max(m.a.length * 10.8, m.b.length * 11.5) + 6, 0) + 2;
+  K.rect(M, K.y, CW, mh, {fill:C.paper});
+  let my = K.y + 16;
+  meta.forEach(m => { m.a.forEach((l, i) => K.t(l, M + 14, my + i * 10.8, {s:7, c:C.faint})); m.b.forEach((l, i) => K.t(l, 215, my + i * 11.5, {s:8.6, f:"b", c:C.ink})); my += Math.max(m.a.length * 10.8, m.b.length * 11.5) + 6; });
+  K.y += mh + 14;
+  const o = cartoOrient(X), ot = K.wrap(o[1], CW - 30, 8.6), oh = 22 + 18 + (ot.length - 1) * 14.2 + 18;
+  K.rect(M, K.y, CW, oh, {fill:C.wash, stroke:C.brass, bw:.8});
+  K.t(o[0], M + 15, K.y + 21, {s:10.5, f:"b", c:C.ink});
+  ot.forEach((l, i) => K.t(l, M + 15, K.y + 39 + i * 14.2, {s:8.6, c:C.soft}));
+  K.y += oh + 21;
+  h2("Vos domaines réglementaires");
+  const gc = CW / 3, rows = Math.ceil(X.axes.length / 3);
+  K.rect(M, K.y - 11, CW, rows * 20.7, {fill:C.raised, stroke:C.rule, bw:.6});
+  X.axes.forEach((a, i) => { const r = Math.floor(i / 3), c = i % 3; K.t("• " + a, M + 13 + c * gc, K.y + 2.5 + r * 20.7, {s:6.9, c:C.ink}); });
+  for(let r = 1; r < rows; r++) K.line(M, K.y - 11 + r * 20.7, R, K.y - 11 + r * 20.7, C.rule, .4);
+  K.y += rows * 20.7;
+
+  /* ---------- pages 2 et suivantes : cartographie ---------- */
+  K.newPage(); K.y = 90;
+  eyebrow(`${pl(X.ni, "institution")}, en ${pl(X.np, "phase")}`); h2("Votre cartographie institutionnelle");
+  const ci = K.rich([{t:"Chacune a ses propres pièces, ses propres textes et ses propres délais. Les institutions marquées "}, {t:"doublement sollicitées", f:"b", c:C.brass}, {t:" interviennent pour plusieurs de vos besoins : un même dossier y sera présenté plusieurs fois."}], CW, 8.8);
+  K.y += K.drawRich(ci, M, K.y, 8.8, 13.8, C.soft) + 2;
+  if(!X.ni){ K.y += K.para("Les besoins retenus relèvent de la recherche et de la production documentaires : ils ne font traverser aucune institution de façon directe.", M, K.y, CW, {s:8.6, lh:13.8, c:C.ink}); }
+  X.phases.forEach(p => {
+    const blocks = p.inst.map(x => {
+      const nm = K.rich([{t:x.n, f:"b", c:C.ink}].concat(x.dbl ? [{t:" — doublement sollicitée", f:"b", c:C.brass}] : []), CW - 22, 7.5);
+      const rl = K.wrap(x.r, CW - 22, 7.1), tx = K.wrap("Textes : " + x.t, CW - 22, 6.6);
+      return {x, nm, rl, tx, h:10.5 + (nm.length - 1) * 10 + 12 + (rl.length - 1) * 11 + 12.6 + (tx.length - 1) * 10 + 12.6 + 10};
+    });
+    const bar = suite => { K.rect(M, K.y, CW, 19, {fill:C.brass}); K.t("Phase " + p.n, M + 9, K.y + 12.3, {s:6.4, f:"b", c:C.white}); K.t(p.t + (suite ? " (suite)" : ""), M + 70, K.y + 12.8, {s:9, f:"b", c:C.white}); K.y += 19; };
+    K.need(19 + blocks[0].h + 4); bar(false);
+    blocks.forEach(b => {
+      if(K.need(b.h + 2)) bar(true);
+      K.rect(M, K.y, CW, b.h, {fill:C.raised, stroke:C.rule, bw:.5});
+      let yy = K.y + 10.5;
+      yy += K.drawRich(b.nm, M + 11, yy, 7.5, 10, C.ink) - 10 + 12;
+      b.rl.forEach((l, i) => K.t(l, M + 11, yy + i * 11, {s:7.1, c:C.soft})); yy += (b.rl.length - 1) * 11 + 12.6;
+      b.tx.forEach((l, i) => K.t(l, M + 11, yy + i * 10, {s:6.6, c:C.faint})); yy += (b.tx.length - 1) * 10 + 12.6;
+      let xx = M + 11 + K.t("Pièces à déposer : ", M + 11, yy, {s:6.6, c:C.brass});
+      xx += K.blocks(xx, yy, C.brass) + 2.5;
+      K.t("remises au palier Essential", xx, yy, {s:6.6, f:"i", c:C.brass});
+      K.y += b.h;
+    });
+    K.y += 10;
+  });
+  if(X.ni){
+    K.need(34);
+    const pn = K.rich([{t:"Pièces à déposer auprès de chaque institution :", f:"b", c:C.ink}, {t:" remises au palier Essential, pour votre statut exact."}], CW - 22, 7.8);
+    const ph = 12 + pn.length * 12 + 6;
+    K.rect(M, K.y, CW, ph, {fill:C.wash, stroke:"#DCCBA5", bw:.6});
+    K.drawRich(pn, M + 11, K.y + 15.5, 7.8, 12, C.ink);
+    K.y += ph;
+  }
+
+  /* ---------- questions courantes ---------- */
+  K.newPage(); K.y = 90;
+  eyebrow("Ce que l'assistant répond dès le palier Free"); h2("Questions courantes");
+  K.y += K.para("Trois questions que se posent la plupart des porteurs de projet à ce stade — avec, pour chacune, le fait, les textes, le risque à surveiller et l'action à en tirer.", M, K.y, CW, {s:8.8, lh:14, c:C.soft}) + 6;
+  const strip = s => String(s).replace(/<[^>]+>/g, "");
+  const qaRuns = t => { const out = []; String(t).split(/(<span class="badge b-(?:ok|tr|no)">[^<]*<\/span>)/).forEach(seg => { const m = seg.match(/b-(ok|tr|no)">([^<]*)</); if(m) out.push({t:m[2].toUpperCase(), s:5.6, c:{ok:C.ok, tr:C.tr, no:C.no}[m[1]]}); else if(seg) out.push({t:strip(seg)}); }); return out; };
+  const LBL = [["CE QUE DIT LE CADRE", C.brass, C.ink], ["TEXTES ET STATUT", C.brass, C.soft], ["RISQUE À SURVEILLER", C.no, "#6E2C23"], ["ACTION LOGIQUE", C.ok, "#2E5A3F"]];
+  (QA.free || []).forEach((q, qi) => {
+    const qt = K.wrap(`Q${qi + 1}.  ${q.q}`, CW - 26, 9.2, "b");
+    const rowsQ = [q.f, q.t, q.r, q.a].map((v, i) => ({l:K.wrap(LBL[i][0], 72, 6, "b"), c:K.rich(qaRuns(v).map(r => Object.assign({c:r.c || LBL[i][2]}, r)), CW - 26 - 92, 7.6)}));
+    const rh = rowsQ.map(r => Math.max(r.l.length * 10.8, r.c.length * 12.6) + 9);
+    const qh = 18 + (qt.length - 1) * 12.5 + 16 + rh.reduce((a, b) => a + b, 0) + 6;
+    K.need(qh + 12);
+    K.rect(M, K.y, CW, qh, {fill:C.raised, stroke:C.rule, bw:.6});
+    qt.forEach((l, i) => K.t(l, M + 13, K.y + 18 + i * 12.5, {s:9.2, f:"b", c:C.ink}));
+    let yy = K.y + 18 + (qt.length - 1) * 12.5 + 22;
+    rowsQ.forEach((r, i) => { r.l.forEach((l, j) => K.t(l, M + 14, yy + j * 10.8, {s:6, f:"b", c:LBL[i][1]})); K.drawRich(r.c, M + 105, yy, 7.6, 12.6, LBL[i][2]); yy += rh[i]; });
+    K.y += qh + 12;
+  });
+  K.para("Ces trois réponses sont représentatives : chaque question posée à l'assistant reçoit le même traitement en quatre temps.", M, K.y + 4, CW, {s:6.8, lh:11, c:C.faint});
+
+  /* ---------- circuits ---------- */
+  K.newPage(); K.y = 90;
+  const ax = X.axes.filter(a => AXES[a]);
+  eyebrow(`Vos ${pl(ax.length, "axe réglementaire", "axes réglementaires")}, étape par étape`); h2("Le circuit de chaque domaine");
+  K.y += K.para("L'étape mise en évidence est celle où se joue la décision. Le contenu détaillé de chaque étape — délais, pièces, formulaires — est remis au palier Essential.", M, K.y, CW, {s:8.8, lh:14, c:C.soft}) + 8;
+  ax.forEach(a => {
+    const toks = AXES[a].circ.split("→").map(s => s.trim()).filter(Boolean).map(s => ({t:s.replace(/<\/?b>/g, "").trim(), hl:/<b>/.test(s)}));
+    const lines = [[]]; let lw = 0;
+    toks.forEach((tk, i) => { const w = K.wd(tk.t, 6.3, tk.hl ? "b" : "r") + (tk.hl ? 7 : 0), aw = i < toks.length - 1 ? 13 : 0;
+      if(lw + w + aw > CW && lw > 0){ lines.push([]); lw = 0; } lines[lines.length - 1].push(Object.assign({w, last:!aw}, tk)); lw += w + aw; });
+    const bh = 19 + (lines.length - 1) * 15.3 + 20;
+    K.need(bh);
+    K.t(a, M, K.y, {s:8.4, f:"b", c:C.ink});
+    lines.forEach((ln, li) => { let x = M; const y = K.y + 19 + li * 15.3;
+      ln.forEach(tk => { if(tk.hl){ K.rect(x, y - 7.4, tk.w, 10.6, {fill:C.wash, r:2}); K.t(tk.t, x + 3.5, y, {s:6.3, f:"b", c:C.brass}); } else K.t(tk.t, x, y, {s:6.3, c:C.soft});
+        x += tk.w; if(!tk.last){ x += 3; K.arrow(x, y, C.soft, 7); x += 10; } }); });
+    K.y += bh;
+  });
+
+  /* ---------- palier Essential et suite ---------- */
+  K.newPage(); K.y = 94;
+  h2("Ce que le palier Essential vous remettra");
+  CARTO_ESS(X.ni).forEach(s => { const ls = K.wrap(s, CW - 24, 8.2); K.rect(M + 8.5, K.y - 5.6, 5.4, 5.4, {fill:C.brass}); ls.forEach((l, i) => K.t(l, M + 23.7, K.y + i * 12.6, {s:8.2, c:C.ink})); K.y += (ls.length - 1) * 12.6 + 19.7; });
+  K.y += 16;
+  h2("Les paliers, dans l'ordre");
+  const pw = CW / 3, pd = CARTO_PAL.map(q => K.wrap(q[2], pw - 22, 6.4)), ph = Math.max(...pd.map(d => 11 + 12.6 + 11.7 + (d.length - 1) * 10.8 + 13));
+  K.y -= 11;
+  CARTO_PAL.forEach((q, i) => {
+    const x = M + (i % 3) * pw, y = K.y + Math.floor(i / 3) * ph, dark = i === 0;
+    K.rect(x, y, pw, ph, {fill:dark ? C.ink : C.raised, stroke:dark ? C.ink : C.rule, bw:.5});
+    K.t(q[0], x + 11, y + 13, {s:8.8, f:"b", c:dark ? C.white : C.ink});
+    K.t(q[1], x + 11, y + 25.6, {s:9.4, f:"b", c:dark ? C.brassLt : C.brass});
+    pd[i].forEach((l, j) => K.t(l, x + 11, y + 37.3 + j * 10.8, {s:6.4, c:dark ? C.sub : C.soft}));
+  });
+  K.y += 2 * ph + 17;
+  const jt = K.wrap(`${pl(X.ni, "institution")}, ${pl(X.np, "phase")}, ${pl(X.nd, "domaine réglementaire", "domaines réglementaires")} : c'est ce que ${X.projet} va réellement traverser. Chaque palier suivant est établi sur devis, au regard de l'ampleur réelle de votre dossier.`, CW - 36, 8.6);
+  const jh = 21 + 18.5 + (jt.length - 1) * 15.3 + 19;
+  K.need(jh);
+  K.rect(M, K.y, CW, jh, {fill:C.wash, stroke:C.brass, bw:.8});
+  K.t("Cette cartographie justifie l'assistance qui suit", M + 18, K.y + 21, {s:10.5, f:"b", c:C.ink});
+  jt.forEach((l, i) => K.t(l, M + 18, K.y + 39.5 + i * 15.3, {s:8.6, c:C.ink}));
+  K.y += jh + 16;
+  const dh = 147.5; K.need(dh + 90);
+  K.rect(M, K.y, CW, dh, {fill:C.ink});
+  let yy = K.y + 34;
+  K.t("Pour recevoir votre devis pour le palier Essential :", M + 18, yy, {s:8.4, c:C.paper}); yy += 18;
+  ["Envoyez-nous cette cartographie sur WhatsApp.", "Nous précisons avec vous l'ampleur réelle du projet.", "Nous vous adressons un devis pour le palier Essential."].forEach((s, i) => { K.t(String(i + 1), M + 18, yy, {s:8.4, f:"b", c:C.brassLt}); K.t(s, M + 29, yy, {s:8.4, c:C.paper}); yy += 13.5; });
+  yy += 8.6;
+  K.t("WhatsApp : +213 555 37 23 45", M + 18, yy, {s:8.6, f:"b", c:C.brassLt});
+  K.t("Courriel : men-ay_pro-managment@outlook.fr", M + 18, yy + 11.6, {s:7.2, c:C.paper});
+  const qs = 94, qx = R - 22 - qs, qy = K.y + (dh - qs - 14) / 2;
+  const wa = "https://wa.me/213555372345?text=" + encodeURIComponent(`Bonjour, je souhaite un devis pour le palier Essential — investissement, ${X.objet}. Réf. ${X.ref}`);
+  if(K.qr(wa, qx, qy, qs)) K.t("Scannez pour écrire", qx + qs / 2, qy + qs + 11.5, {s:6.8, c:C.paper, a:"c"});
+  K.y += dh + 17;
+  const po = K.wrap(CARTO_PORTEE, CW - 26, 6.8);
+  K.need(14 + po.length * 10.8 + 6);
+  K.rect(M, K.y, CW, 14 + po.length * 10.8 + 6, {fill:C.paper});
+  po.forEach((l, i) => K.t(l, M + 13, K.y + 15 + i * 10.8, {s:6.8, c:C.faint}));
+  return await K.blob();
+}
+
+/* ============ ASSISTANT ============ */
+const OK='<span class="badge b-ok">vérifié</span>';
+const TR='<span class="badge b-tr">transitoire</span>';
+const NO='<span class="badge b-no">non identifié</span>';
+
+const CONTACT='<a href="../contact.html" target="_top">Demander un devis</a> · <a href="mailto:men-ay_pro-managment@outlook.fr">men-ay_pro-managment@outlook.fr</a>';
+const RESERVE=pal=>"Réponse réservée aux abonnés du palier "+pal+".";
+
+const QA={
+ free:[
+  {q:"Par où commencer si rien n'est encore engagé ?",
+   f:"Trois choses se décident avant tout dépôt : la forme juridique qui portera le projet, le régime d'investissement visé, et la façon dont le foncier sera obtenu. Elles se conditionnent mutuellement — une forme juridique choisie trop tôt peut fermer une option de partenariat.",
+   t:"Loi n° 22-18 relative à l'investissement "+OK+" · Droit des sociétés "+OK,
+   r:"Engager des frais de constitution avant d'avoir arrêté le régime visé, et devoir modifier les statuts ensuite.",
+   a:"Qualifier le projet (montant, secteur, partenaires) avant toute démarche, puis passer au palier Essential pour le diagnostic de l'axe prioritaire."},
+  {q:"Quelle différence entre régime général et investissements structurants ?",
+   f:"Le régime des investissements structurants correspond à un seuil de montant, au-delà duquel le dossier relève d'un traitement et d'un niveau de décision différents de ceux du régime général.",
+   t:"Loi n° 22-18 — seuil de 10 milliards de dinars (DZD) "+OK+" · Décret exécutif n° 22-299 "+OK,
+   r:"Revendiquer un régime sans en remplir les conditions, ce qui fait perdre le bénéfice des avantages au moment du contrôle.",
+   a:"Chiffrer précisément l'investissement avant de choisir le régime. Le palier Essential trace la branche selon le montant réel."},
+  {q:"Quels documents préparer avant un premier rendez-vous ?",
+   f:"Le socle commun à presque tous les dossiers : identité ou statuts, justificatif de capital, description écrite du projet, et le cas échéant l'accord de principe du partenaire.",
+   t:"Exigences documentaires par procédure "+OK+" · Pièces complémentaires selon le secteur "+TR,
+   r:"Se présenter avec un dossier incomplet, ce qui décale le traitement sans que le délai réglementaire ait commencé à courir.",
+   a:"Réunir les pièces du socle, puis déposer le dossier au palier Pro pour en vérifier la cohérence avant démarche."}]
+};
+
+const qlist=document.getElementById('qlist');
+function renderAssist(id){
+  document.getElementById('assistScope').textContent='Palier '+PALIERS.find(p=>p.id===id).name;
+  document.getElementById('answer').dataset.on=0;
+  document.getElementById('askMsg').dataset.on=0;
+  if(id!=='free'){ qlist.innerHTML=`<p class="assist-lede" style="margin:0">Les questions de ce palier sont réservées. Contact : ${CONTACT}</p>`; return; }
+  qlist.innerHTML=(QA[id]||[]).map((x,i)=>`<button type="button" data-i="${i}">${x.q}</button>`).join('');
+}
+qlist.addEventListener('click',e=>{
+  const b=e.target.closest('button[data-i]'); if(!b)return;
+  const cur='free';
+  const a=QA[cur][+b.dataset.i];
+  document.getElementById('aQ').textContent=a.q;
+  document.getElementById('aF').textContent=a.f;
+  document.getElementById('aT').innerHTML=a.t;
+  document.getElementById('aR').textContent=a.r;
+  document.getElementById('aA').innerHTML=a.a;
+  const fields=document.querySelectorAll('#answer .afield');
+  const locked=cur!=='free';
+  fields[1].style.display=locked?'none':'';
+  fields[2].style.display=locked?'none':'';
+  document.querySelector('#answer .row').style.display=locked?'none':'';
+  document.getElementById('answer').dataset.on=1;
+});
+document.getElementById('askGo').addEventListener('click',()=>{
+  document.getElementById('askMsg').dataset.on=1;
+});
+document.getElementById('askIn').addEventListener('keydown',e=>{
+  if(e.key==='Enter') document.getElementById('askMsg').dataset.on=1;
+});
+renderAssist('free');
+</script>
+</body>
+</html>
