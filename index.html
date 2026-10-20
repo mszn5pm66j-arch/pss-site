@@ -85,6 +85,11 @@
   <!-- ===== Navigation en profondeur ===== -->
   <section class="scene" id="scene" aria-label="Rubriques">
    <canvas id="links" aria-hidden="true"></canvas>
+   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <radialGradient id="fx-pool"><stop offset="0" stop-color="#8fe2ff" stop-opacity=".75"/><stop offset=".5" stop-color="#39c3ff" stop-opacity=".18"/><stop offset="1" stop-color="#39c3ff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="fx-beam" cx=".5" cy="1" r="1"><stop offset="0" stop-color="#d6f6ff" stop-opacity=".6"/><stop offset=".3" stop-color="#5fd4ff" stop-opacity=".18"/><stop offset=".75" stop-color="#39c3ff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="fx-core"><stop offset="0" stop-color="#f2fcff"/><stop offset=".35" stop-color="#6fd8ff" stop-opacity=".8"/><stop offset="1" stop-color="#39c3ff" stop-opacity="0"/></radialGradient>
+   </defs></svg>
   </section>
 
  </div>
@@ -108,11 +113,26 @@
     offres:'<rect x="5" y="4" width="14" height="17" rx="1.5"/><path d="M9 4V2.8h6V4M8.5 12.5l2.5 2.5 4.5-5"/>',
     avis:'<path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/>',
     contact:'<rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3 7l9 6.5L21 7"/>'};
+  /* socle qui tourne et éclaire + contour du pictogramme qui brille (visible sur la rubrique au centre) */
+  var FX='<svg class="fx" viewBox="0 0 810 1085" preserveAspectRatio="none" aria-hidden="true">'+
+    '<ellipse class="pool" cx="389" cy="910" rx="330" ry="105" fill="url(#fx-pool)"/>'+
+    '<ellipse class="beam" cx="389" cy="740" rx="95" ry="170" fill="url(#fx-beam)"/>'+
+    '<ellipse class="ring rip" cx="389" cy="900" rx="259" ry="65"/>'+
+    '<ellipse class="ring f1" cx="389" cy="900" rx="259" ry="65" pathLength="1000"/>'+
+    '<ellipse class="ring f2" cx="389" cy="900" rx="200" ry="50" pathLength="1000"/>'+
+    '<ellipse class="ring f3g" cx="389" cy="900" rx="259" ry="65" pathLength="1000"/>'+
+    '<ellipse class="ring f3" cx="389" cy="900" rx="259" ry="65" pathLength="1000"/>'+
+    '<ellipse class="ring fb" cx="397" cy="1000" rx="222" ry="17" pathLength="1000"/>'+
+    '<circle class="core" cx="390" cy="898" r="46" fill="url(#fx-core)"/>'+
+    '<circle class="ring ic0" cx="385" cy="140" r="80"/>'+
+    '<circle class="ring ic1g" cx="385" cy="140" r="80" pathLength="1000"/>'+
+    '<circle class="ring ic1" cx="385" cy="140" r="80" pathLength="1000"/>'+
+    '</svg>';
   var cards=[null];
   for(var j=1;j<S.length;j++){
     var s=S[j], w=WORLD[s.id], c=document.createElement('a');
     c.className='rub'; c.href=s.href; c.draggable=false; c.setAttribute('data-k',j); c.setAttribute('aria-label',s.t);
-    c.innerHTML='<img src="assets/carte.webp" alt="" draggable="false"><svg class="ri" viewBox="0 0 24 24">'+ICON[s.id]+'</svg>'+
+    c.innerHTML='<img src="assets/carte.webp" alt="" draggable="false">'+FX+'<svg class="ri" viewBox="0 0 24 24">'+ICON[s.id]+'</svg>'+
       '<div class="rt">'+PSS.esc(s.t.toUpperCase())+'</div><div class="rs">'+PSS.esc(s.s||'')+'</div><div class="re">ENTRER ▷</div>';
     scene.appendChild(c);
     cards.push({el:c,x:w[0],y:w[1],z:w[2],vis:true});
@@ -120,15 +140,27 @@
   /* titres longs : on réduit la taille pour tenir dans le cadre */
   function fitTitles(){cards.forEach(function(c){if(!c)return;var t=c.el.querySelector('.rt');t.style.fontSize='';var k=0;while(t.scrollWidth>t.clientWidth+1&&k<12){t.style.fontSize=(parseFloat(getComputedStyle(t).fontSize)*0.94)+'px';k++;}});}
 
-  /* liaisons lumineuses entre socles : tracé « éclair » fixé une fois pour toutes */
+  /* liaisons entre socles : pistes rectilignes à angles cassés (45°), comme le tracé de la carte ; pastilles aux angles */
   var LINKS=[[1,2],[2,3],[3,4],[4,5],[5,6],[3,5]], PATHS=[];
-  var seed=7; function rnd(){seed=(seed*16807)%2147483647;return seed/2147483647;}
+  function chamfer(co,r){var out=[co[0]];
+    for(var i=1;i<co.length-1;i++){var p=co[i],a=co[i-1],b=co[i+1],l1=Math.hypot(p[0]-a[0],p[1]-a[1])||1,l2=Math.hypot(b[0]-p[0],b[1]-p[1])||1,k=Math.min(r,l1/2,l2/2);
+      out.push([p[0]+(a[0]-p[0])/l1*k,p[1]+(a[1]-p[1])/l1*k]);out.push([p[0]+(b[0]-p[0])/l2*k,p[1]+(b[1]-p[1])/l2*k]);}
+    out.push(co[co.length-1]);return out;}
   LINKS.forEach(function(l,i){
-    var a=cards[l[0]], b=cards[l[1]], A=[a.x,a.y+DISK,a.z], B=[b.x,b.y+DISK,b.z];
-    var dx=B[0]-A[0], dy=B[1]-A[1], len=Math.sqrt(dx*dx+dy*dy)||1, nx=-dy/len, ny=dx/len, bend=(i%2?1:-1)*0.16*len, pts=[];
-    for(var n=0;n<=18;n++){var t=n/18, e=Math.sin(Math.PI*t), j=(n===0||n===18)?0:(rnd()-.5)*46*e;
-      pts.push([A[0]+dx*t+nx*(bend*4*t*(1-t)+j), A[1]+dy*t+ny*(bend*4*t*(1-t)+j), A[2]+(B[2]-A[2])*t]);}
-    PATHS.push({a:l[0],b:l[1],pts:pts,ph:rnd()});
+    var a=cards[l[0]], b=cards[l[1]], A=[a.x,a.y+DISK], B=[b.x,b.y+DISK], dx=B[0]-A[0];
+    /* départ à l'horizontale depuis le socle, montée verticale dans l'intervalle entre les cartes, arrivée à l'horizontale dans le socle suivant */
+    var X=Math.abs(dx)>400?A[0]+dx*(0.5+(i%2?0.06:-0.06)):Math.max(A[0],B[0])+380;
+    var pl=chamfer([A,[X,A[1]],[X,B[1]],B],70), L=[0];
+    for(var n=1;n<pl.length;n++)L.push(L[n-1]+Math.hypot(pl[n][0]-pl[n-1][0],pl[n][1]-pl[n-1][1]));
+    /* les paliers horizontaux restent à la profondeur de leur socle : ils restent horizontaux à l'écran ; la profondeur change dans la montée */
+    var tot=L[L.length-1]||1, Ls=L[1], Le=L[L.length-2], pts=[], kinks=[];
+    for(var n=0;n<pl.length-1;n++){
+      if(n>0)kinks.push(pts.length);
+      var seg=L[n+1]-L[n], m=Math.max(1,Math.round(seg/40));
+      for(var q=0;q<m;q++){var t=q/m, f=Math.max(0,Math.min(1,(L[n]+seg*t-Ls)/((Le-Ls)||1)));pts.push([pl[n][0]+(pl[n+1][0]-pl[n][0])*t, pl[n][1]+(pl[n+1][1]-pl[n][1])*t, a.z+(b.z-a.z)*f]);}
+    }
+    pts.push([B[0],B[1],b.z]);
+    PATHS.push({a:l[0],b:l[1],pts:pts,kinks:kinks,ph:(i*0.37)%1});
   });
 
   /* ---- caméra ---- */
@@ -163,6 +195,7 @@
     var cw=CW*geo.u, ch=CH*geo.u;
     for(var j=1;j<cards.length;j++){
       var c=cards[j], q=proj(c.x,c.y,c.z,C), op=0;
+      var isOn=Math.abs(j-p)<0.4; if(isOn!==c.on){c.el.classList.toggle('on',isOn);c.on=isOn;}
       if(q){
         var near=sm((q[3]-450)/450), far=sm((5200-q[3])/1400), dd=Math.abs(j-p), foc=1-Math.min(0.5,Math.max(0,dd-0.15)*0.38);
         op=near*far*foc;
@@ -178,7 +211,7 @@
   function draw(now){
     var d=geo.dpr; ctx.setTransform(1,0,0,1,0,0); ctx.clearRect(0,0,cv.width,cv.height);
     if(vis<0.01)return;
-    ctx.setTransform(d,0,0,d,0,0); ctx.globalCompositeOperation='lighter'; ctx.lineJoin='round'; ctx.lineCap='round';
+    ctx.setTransform(d,0,0,d,0,0); ctx.globalCompositeOperation='lighter'; ctx.lineJoin='miter'; ctx.miterLimit=3; ctx.lineCap='butt';
     PATHS.forEach(function(pa){
       var al=Math.min(cop[pa.a]||0,cop[pa.b]||0); if(al<0.02)return;
       var pts=[],ss=0,ok=true;
@@ -188,6 +221,9 @@
       ctx.strokeStyle='rgba(57,170,255,'+(0.10*al)+')';ctx.lineWidth=16*ss;line();
       ctx.strokeStyle='rgba(80,205,255,'+(0.38*al)+')';ctx.lineWidth=4.5*ss;line();
       ctx.strokeStyle='rgba(225,248,255,'+(0.85*al)+')';ctx.lineWidth=1.6*ss;line();
+      pa.kinks.forEach(function(k){var p=pts[k],r=3.2*ss;
+        ctx.fillStyle='rgba(80,205,255,'+(0.35*al)+')';ctx.beginPath();ctx.arc(p[0],p[1],r*2.4,0,6.2832);ctx.fill();
+        ctx.fillStyle='rgba(230,248,255,'+(0.9*al)+')';ctx.beginPath();ctx.arc(p[0],p[1],r,0,6.2832);ctx.fill();});
       /* impulsion qui parcourt la liaison */
       var t=((now/2400)+pa.ph)%1, f=t*(pts.length-1), i0=Math.floor(f), fr=f-i0, a=pts[i0], b=pts[Math.min(pts.length-1,i0+1)];
       var x=a[0]+(b[0]-a[0])*fr, y=a[1]+(b[1]-a[1])*fr, r=14*ss;

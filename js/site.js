@@ -52,9 +52,7 @@
     '<a class="pill contact" href="contact.html">CONTACT ' + I_MAIL + '</a>' +
     '<div class="hline"></div><span class="scout"></span></header>');
   stage.appendChild(hd);
-  var scout = hd.querySelector('.scout');
-  function setScout(k) { scout.style.left = 'calc(' + (915 - k * 80) + ' * var(--u))'; }
-  setScout(secIdx);
+  /* l'étoile de la ligne du haut va et vient en permanence (animation CSS « scoutgo ») */
 
   /* ---- pied de page ---- */
   function footer() {
@@ -132,8 +130,6 @@
       st.style.opacity = (ad < 0.3 ? ad / 0.3 : (ad > 1.6 ? clamp(1 - (ad - 1.6) * 2.5, 0, 1) : 1)).toFixed(3);
     }
     if (isHome) arc.style.opacity = clamp(pos / 0.7, 0, 1).toFixed(3);
-    scout.style.transitionDuration = '0s';
-    scout.style.left = 'calc(' + (915 - pos * 80).toFixed(1) + ' * var(--u))';
     var k = Math.round(pos), still = !drag && !anim && Math.abs(pos - k) < 0.01;
     if (still && showCap && k > 0) {
       if (capK !== k) { cap.innerHTML = '<div class="t">' + esc(items[k].t.toUpperCase()) + '</div><div class="s">' + esc(items[k].s || '') + '</div>'; capK = k; }

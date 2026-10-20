@@ -36,7 +36,8 @@ button{font-family:inherit}
 .open .pill.menu{background:rgba(57,195,255,.18)}
 .hline{position:absolute;left:calc(18*var(--u));right:calc(18*var(--u));top:calc(210*var(--u));height:1px;background:linear-gradient(90deg,rgba(70,80,90,.35),rgba(80,90,100,.6),rgba(70,80,90,.35))}
 .scout{position:absolute;top:calc(211*var(--u));width:calc(12*var(--u));height:calc(12*var(--u));transform:translate(-50%,-50%);border-radius:50%;background:#fff;
-  box-shadow:0 0 calc(12*var(--u)) 2px rgba(200,230,255,.9);transition:left 1.4s cubic-bezier(.4,0,.2,1)}
+  box-shadow:0 0 calc(12*var(--u)) 2px rgba(200,230,255,.9);left:calc(583*var(--u));animation:scoutgo 7s ease-in-out infinite alternate}
+@keyframes scoutgo{from{left:calc(110*var(--u))}to{left:calc(1056*var(--u))}}
 .scout::before,.scout::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:linear-gradient(90deg,transparent,rgba(230,245,255,.95),transparent)}
 .scout::before{width:calc(120*var(--u));height:1px}.scout::after{width:1px;height:calc(80*var(--u));background:linear-gradient(transparent,rgba(230,245,255,.95),transparent)}
 
@@ -199,6 +200,31 @@ button{font-family:inherit}
 .rub .rt{position:absolute;left:6%;right:9%;top:31.3%;font-size:calc(51*var(--u));line-height:calc(66*var(--u));font-weight:200;white-space:nowrap;color:#eaf7fd;text-shadow:0 0 calc(10*var(--u)) rgba(57,195,255,.45)}
 .rub .rs{position:absolute;left:16%;right:19%;top:43.2%;font-size:calc(21*var(--u));line-height:calc(32*var(--u));font-weight:300;color:#d9e8ef}
 .rub .re{position:absolute;left:0;right:3%;top:58.2%;font-size:calc(20*var(--u));letter-spacing:calc(7.5*var(--u));font-weight:300;color:#bfe6f7}
+/* rubrique au centre : le socle tourne et éclaire, le contour du pictogramme brille */
+.rub .fx{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;opacity:0;transition:opacity .7s}
+.rub.on .fx{opacity:1}
+.rub:not(.on) .fx *{animation-play-state:paused}
+.rub .ri{transition:filter .7s}
+.rub.on .ri{filter:drop-shadow(0 0 calc(7*var(--u)) #39c3ff)}
+.fx .ring{fill:none}
+.fx .f1{stroke:#7fdcff;stroke-width:5;stroke-dasharray:14 18;opacity:.75;animation:fx1 9s linear infinite}
+.fx .f2{stroke:#c4f0ff;stroke-width:3;stroke-dasharray:4 12;opacity:.6;animation:fx2 6s linear infinite}
+.fx .f3{stroke:#effbff;stroke-width:9;stroke-linecap:round;stroke-dasharray:90 910;animation:fx3 3.2s linear infinite}
+.fx .f3g{stroke:#39c3ff;stroke-width:30;stroke-linecap:round;stroke-dasharray:90 910;opacity:.28;animation:fx3 3.2s linear infinite}
+.fx .fb{stroke:#7fdcff;stroke-width:3;stroke-dasharray:10 16;opacity:.55;animation:fx1 7s linear infinite reverse}
+.fx .rip{stroke:#5fd4ff;stroke-width:5;transform-box:fill-box;transform-origin:center;animation:fxrip 3s ease-out infinite}
+.fx .core{transform-box:fill-box;transform-origin:center;animation:fxcore 2.4s ease-in-out infinite}
+.fx .pool,.fx .beam,.fx .ic0{animation:fxbr 2.4s ease-in-out infinite}
+.fx .ic0{stroke:#7fdcff;stroke-width:3}
+.fx .ic1{stroke:#f2fcff;stroke-width:7;stroke-linecap:round;stroke-dasharray:150 350;animation:fxic 4s linear infinite}
+.fx .ic1g{stroke:#39c3ff;stroke-width:24;stroke-linecap:round;stroke-dasharray:150 350;opacity:.3;animation:fxic 4s linear infinite}
+@keyframes fx1{to{stroke-dashoffset:-320}}
+@keyframes fx2{to{stroke-dashoffset:160}}
+@keyframes fx3{to{stroke-dashoffset:-1000}}
+@keyframes fxic{to{stroke-dashoffset:-1000}}
+@keyframes fxrip{0%{transform:scale(.3);opacity:.9}80%{opacity:.12}100%{transform:scale(1.18);opacity:0}}
+@keyframes fxcore{0%,100%{transform:scale(.75);opacity:.55}50%{transform:scale(1.2);opacity:1}}
+@keyframes fxbr{0%,100%{opacity:.55}50%{opacity:1}}
 
 /* ---------- menu plein écran ---------- */
 .ov{position:absolute;inset:0;z-index:50;background:#02060b;opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s}
