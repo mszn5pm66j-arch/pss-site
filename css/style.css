@@ -95,7 +95,7 @@ button{font-family:inherit}
 .ico.on svg,.ico:hover svg{filter:drop-shadow(0 0 6px var(--glow))}
 .ico.on span{color:var(--blue)}
 .where{position:absolute;left:calc(40*var(--u));width:calc(660*var(--u));top:calc(316*var(--u));text-align:center;font-family:'PSS',sans-serif;font-size:calc(16*var(--u));letter-spacing:calc(4*var(--u));color:var(--mono)}
-.zones{position:absolute;left:calc(122*var(--u));top:calc(356*var(--u));display:flex;gap:calc(17*var(--u))}
+.zones{position:absolute;left:calc(40*var(--u));width:calc(660*var(--u));justify-content:center;top:calc(356*var(--u));display:flex;gap:calc(17*var(--u))}
 .zone{height:calc(47*var(--u));padding:0 calc(28*var(--u));border:calc(2*var(--u)) solid #34505f;border-radius:calc(24*var(--u));background:rgba(3,10,18,.6);color:#d7dde2;
   font-family:'PSS',sans-serif;font-size:calc(16*var(--u));letter-spacing:calc(3*var(--u));cursor:pointer;transition:all .3s}
 .zone.on{border-color:var(--cyan);color:var(--blue);box-shadow:0 0 calc(12*var(--u)) rgba(57,195,255,.35)}
@@ -333,5 +333,18 @@ button{font-family:inherit}
 .card-prev{margin:16px 0 0 12px;border:1px solid var(--edge);border-radius:10px;overflow:hidden}
 .card-prev img{width:100%;display:block}
 
+/* menu : question sous le titre de rubrique */
+.ov .top.hasq{flex-direction:column;align-items:flex-start}
+.ov .top .q{font-family:'PSS',sans-serif;font-size:11.5px;line-height:15px;letter-spacing:1.6px;color:var(--blue);text-transform:uppercase;margin-top:6px;min-width:0}
+.ov .top.on .q{color:var(--soft)}
+/* filtres graduels (Votre parcours, IA métier) */
+.flt .fld .lb{margin-top:4px}
+.flt .chip:disabled{opacity:.3;cursor:default}
+.res{margin:18px 0 0 12px;padding:14px 14px 4px;border:1px solid var(--edge);border-radius:10px;background:var(--panel);display:none}
+.res.on{display:block;animation:rise .45s both}
+.res h3{margin:0;font-weight:500;font-size:15px;line-height:21px;color:var(--blue)}
+.res p{margin:8px 0 0;font-size:13.5px;line-height:20px;font-weight:300}
+.res .lnk{margin-left:0}
+.hint{margin:10px 0 0 12px;font-size:12.5px;line-height:18px;color:var(--soft);min-height:18px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media (min-width:600px){body{background:#000 url('../assets/fond-profond.jpg') center/cover fixed}body::before{content:"";position:fixed;inset:0;background:rgba(0,3,6,.85)}.stage{box-shadow:0 0 60px rgba(0,0,0,.7)}}

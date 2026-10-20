@@ -112,27 +112,27 @@ PAGES = {
                             p('L\'agent AIT (Artificial Intelligence Talk) n\'est pas encore relié à un service d\'intelligence artificielle : vous poursuivez l\'échange sur WhatsApp.'),
                             [('Politique de confidentialité', 'confidentialite.html')])),
 
-    'divisions': ('segments', 'Nos segments · Quatre pôles d\'excellence', 'Des expertises combinées pour piloter un projet de bout en bout en Algérie.',
-                  head('03 · Nos segments', 'Quatre pôles d\'excellence', 'Des expertises combinées pour piloter un projet de bout en bout en Algérie.') +
+    'divisions': ('cabinet', 'Nos domaines d\'expertise · Quatre pôles d\'excellence', 'Des expertises combinées pour piloter un projet de bout en bout en Algérie.',
+                  head('Le cabinet · Nos domaines d\'expertise', 'Quatre pôles d\'excellence', 'Des expertises combinées pour piloter un projet de bout en bout en Algérie.', ('Le cabinet', 'cabinet.html')) +
                   sec('3.1 / Réglementaire &amp; investissement', p('Cadre légal &amp; autorisations.'), [('Découvrir ce pôle', 'division-2.html'), ('Algérie Horizon · logement &amp; crédit diaspora', HORIZON, True)], first=True) +
                   sec('3.2 / Maîtrise d\'ouvrage', p('Pilotage opérationnel.'), [('Découvrir ce pôle', 'division-3.html')]) +
                   sec('3.3 / Ingénierie financière', p('Montages &amp; banques.'), [('Découvrir ce pôle', 'division-4.html'), ('Algérie Horizon · logement &amp; crédit diaspora', HORIZON, True)]) +
                   sec('3.4 / Architecture intelligente augmentée', p('Assistants &amp; automatisation.'), [('Découvrir ce pôle', 'division-1.html')])),
 
-    'division-2': ('segments', 'Réglementaire & investissement', 'Foncier, autorisations et montages juridiques pour votre projet en Algérie.',
-                   head('3.1 · Réglementaire', 'Réglementaire &amp; investissement', 'Foncier, autorisations et montages juridiques pour votre projet en Algérie.', ('Nos segments', 'divisions.html')) +
+    'division-2': ('cabinet', 'Réglementaire & investissement', 'Foncier, autorisations et montages juridiques pour votre projet en Algérie.',
+                   head('3.1 · Réglementaire', 'Réglementaire &amp; investissement', 'Foncier, autorisations et montages juridiques pour votre projet en Algérie.', ('Nos domaines d\'expertise', 'divisions.html')) +
                    sec('Cadre légal &amp; autorisations', p('Foncier, autorisations et montages juridiques pour votre projet en Algérie.'), DIAG_CONTACT, first=True) + CREDIT),
 
-    'division-3': ('segments', 'Maîtrise d\'ouvrage', 'Un accompagnement du cahier des charges à la réception des travaux.',
-                   head('3.2 · Chantier', 'Maîtrise d\'ouvrage', 'Un accompagnement du cahier des charges à la réception des travaux.', ('Nos segments', 'divisions.html')) +
+    'division-3': ('cabinet', 'Maîtrise d\'ouvrage', 'Un accompagnement du cahier des charges à la réception des travaux.',
+                   head('3.2 · Chantier', 'Maîtrise d\'ouvrage', 'Un accompagnement du cahier des charges à la réception des travaux.', ('Nos domaines d\'expertise', 'divisions.html')) +
                    sec('Pilotage opérationnel', p('Un accompagnement du cahier des charges à la réception des travaux.'), DIAG_CONTACT, first=True) + HUD),
 
-    'division-4': ('segments', 'Ingénierie financière', 'Structuration de votre société, montages financiers et préparation des échanges avec les banques.',
-                   head('3.3 · Finance', 'Ingénierie financière', 'Structuration de votre société, montages financiers et préparation des échanges avec les banques.', ('Nos segments', 'divisions.html')) +
+    'division-4': ('cabinet', 'Ingénierie financière', 'Structuration de votre société, montages financiers et préparation des échanges avec les banques.',
+                   head('3.3 · Finance', 'Ingénierie financière', 'Structuration de votre société, montages financiers et préparation des échanges avec les banques.', ('Nos domaines d\'expertise', 'divisions.html')) +
                    sec('Montages &amp; banques', p('Structuration de votre société, montages financiers et préparation des échanges avec les banques.'), DIAG_CONTACT, first=True) + CREDIT),
 
-    'division-1': ('segments', 'Architecture intelligente augmentée', 'Des assistants et des automatisations adaptés à votre activité.',
-                   head('3.4 · IA augmentée', 'Architecture intelligente augmentée', 'Des assistants et des automatisations adaptés à votre activité.', ('Nos segments', 'divisions.html')) +
+    'division-1': ('cabinet', 'Architecture intelligente augmentée', 'Des assistants et des automatisations adaptés à votre activité.',
+                   head('3.4 · IA augmentée', 'Architecture intelligente augmentée', 'Des assistants et des automatisations adaptés à votre activité.', ('Nos domaines d\'expertise', 'divisions.html')) +
                    sec('Assistants &amp; automatisation', p('Des assistants et des automatisations adaptés à votre activité.'), DIAG_CONTACT, first=True)),
 
     'academie': ('academie', 'Académie PSS · Apprendre et progresser', 'Formations et accompagnement métier avec Praetorian Sentinel Smart.',
@@ -141,15 +141,15 @@ PAGES = {
                  sec('Veille', p('Suivi des évolutions de votre métier.'), [('Parlons de vos besoins', 'contact.html')]) +
                  sec('Mise en pratique', p('Application des connaissances à votre projet.'), [('Parlons de vos besoins', 'contact.html')]) + HUD),
 
-    'toutes-les-offres': ('offres', 'Nos offres · Un accompagnement adapté', 'Diagnostic, conseil et pilotage.',
-                          head('05 · Nos offres', 'Un accompagnement adapté', 'Diagnostic, conseil et pilotage.') +
+    'toutes-les-offres': ('parcours', 'Nos offres · Un accompagnement adapté', 'Diagnostic, conseil et pilotage.',
+                          head('Votre parcours · Nos offres', 'Un accompagnement adapté', 'Diagnostic, conseil et pilotage.', ('Votre parcours', 'parcours.html')) +
                           sec('5.1 / Diagnostic', p('Clarifier le besoin et choisir la première étape.'), [('Demander un diagnostic', 'diagnostic.html')], first=True) +
                           sec('5.2 / Formules d\'accompagnement', p('Deux volets : Conseil et Pilotage.'), [('Parlons de votre projet', 'contact.html')]) +
                           sec('Les trois étapes', steps([('01', 'Diagnostic', 'Clarifier le besoin.'), ('02', 'Conseil', 'Définir les priorités.'), ('03', 'Pilotage', 'Accompagner la réalisation.')]),
                               [('Commencer', 'diagnostic.html')])),
 
-    'diagnostic': ('offres', 'Diagnostic · Faire le point sur votre projet', 'Clarifiez vos besoins et votre première étape avec le cabinet PSS.',
-                   head('5.1 · Diagnostic', 'Faire le point sur votre projet', 'Clarifiez vos besoins et votre première étape avec le cabinet PSS.', ('Nos offres', 'toutes-les-offres.html')) +
+    'diagnostic': ('parcours', 'Diagnostic · Faire le point sur votre projet', 'Clarifiez vos besoins et votre première étape avec le cabinet PSS.',
+                   head('Votre parcours · Diagnostic', 'Faire le point sur votre projet', 'Clarifiez vos besoins et votre première étape avec le cabinet PSS.', ('Votre parcours', 'parcours.html')) +
                    sec('Votre première étape', p('Échangeons sur votre situation, vos objectifs et les démarches à préparer.'), [('Demander un diagnostic', 'contact.html')], first=True)),
 
     'contact': ('contact', 'Contactez-nous · Parlons de votre projet', 'Écrivez au cabinet PSS par WhatsApp, par e-mail ou parlez à notre agent.',
@@ -191,11 +191,182 @@ PAGES = {
                        [('Contacter le cabinet', 'contact.html')], first=True)),
 }
 
+
+# ---- Votre parcours · À qui nous adressons-nous ? ----
+INV = 'https://mszn5pm66j-arch.github.io/Cr-dit-22/Invvv.html'
+
+
+def card(href, icon, title, text):
+    return f'<a class="dcard" href="{href}">{ico(icon)}<span><b>{title}</b><i>{text}</i></span>{AR}</a>'
+
+
+I_HOME = '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10M10 20v-5h4v5"/>'
+I_BARS = '<path d="M4 20h16M6 20v-6h3v6M11 20V9h3v11M16 20V5h3v15"/>'
+I_SHIELD = '<path d="M12 2.5l7 3v5.5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V5.5z"/><path d="M8.8 11.5l2.2 2.2 4.2-4.4"/>'
+I_CHIP = '<rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/>'
+I_DOC = '<path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 16h5"/>'
+I_EYE = '<circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5M11 7.5v3.5l2.2 1.4"/>'
+
+PARCOURS = (head('Votre parcours', 'À qui nous adressons-nous ?', 'Quatre profils, un livrable concret pour chacun. Repérez le vôtre, ou laissez le filtre en bas de page vous guider.') +
+            '<div class="dgrid" style="margin-top:18px">' +
+            card('#particuliers', I_HOME, 'Particuliers de la diaspora', 'Logement et crédit en Algérie depuis l\'étranger') +
+            card('#investisseurs', I_BARS, 'Investisseurs', 'Fonds disponibles ou projet identifié') +
+            card('#porteurs', I_SHIELD, 'Porteurs de projet', 'Pré-lancement ou activité en développement') +
+            card('#professionnels', I_CHIP, 'Professionnels et entreprises', 'L\'IA adaptée à votre métier') + '</div>' +
+            '<section class="sec" id="particuliers"><div class="sub">Particuliers · crédit depuis l\'étranger</div>' +
+            p('Vous vivez en France, en Espagne, en Allemagne, en Belgique ou au Québec et vous voulez acheter un logement en Algérie avec un crédit bancaire.') +
+            p('La plateforme crédit vous accompagne en quatre niveaux :', True) +
+            steps([('01', 'Gratuit', 'Faisabilité réglementaire, fiche de synthèse et liste des banques ouvertes aux non-résidents.'),
+                   ('02', 'Diagnostic', 'Consultation en visioconférence et rapport écrit : documents à réunir, plan d\'action.'),
+                   ('03', 'Pré-dépôt', 'Dossier complet selon votre pays : pièces, revenus, apostilles, traductions.'),
+                   ('04', 'Banque', 'Dépôt du dossier jusqu\'à l\'accord de principe écrit. La décision revient à la banque.')]) +
+            '<div class="row">' + lnk('Commencer gratuitement · niveau 1', HORIZON, True) + '</div></section>' +
+            '<section class="sec" id="investisseurs"><div class="sub">Investisseurs · diagnostic initial</div>' +
+            p('Vous disposez de fonds sans projet arrêté, ou vous avez un projet identifié et voulez savoir comment le réaliser en Algérie.') +
+            '<div class="cadre"><div class="ct">Le diagnostic initial couvre</div><div class="c4"><span>Cadre légal et autorisations</span><span>Institutions : AAPI, banques, CNRC, impôts, douanes</span><span>Structure de la société</span><span>Pistes de financement</span></div></div>' +
+            p('AAPI : Agence algérienne de promotion de l\'investissement. CNRC : Centre national du registre du commerce.', True) +
+            '<div class="row">' + lnk('Obtenir ma fiche de diagnostic initial (PDF)', INV, True) + '</div></section>' +
+            '<section class="sec" id="porteurs"><div class="sub">Porteurs de projet · diagnostic de lancement</div>' +
+            p('Vous préparez le lancement d\'une activité, ou votre activité existe et doit franchir une étape.') +
+            steps([('01', 'Pré-lancement', 'Faisabilité, démarches légales avec lien direct vers l\'institution, budget et calendrier.'),
+                   ('02', 'Développement', 'Points bloquants, organisation, financement de l\'étape suivante.')]) +
+            '<div class="row"><button type="button" class="lnk" data-wa="Je souhaite mon diagnostic de lancement (PDF).">Demander mon diagnostic de lancement (PDF) ' + AR + '</button></div></section>' +
+            '<section class="sec" id="professionnels"><div class="sub">Professionnels et entreprises · IA métier</div>' +
+            p('Vous voulez que l\'intelligence artificielle travaille pour votre métier : documenter, surveiller les évolutions, automatiser les tâches répétitives.') +
+            '<div class="row">' + lnk('Découvrir IA métier', 'ia-metier.html') + '</div></section>' +
+            '<section class="sec flt" id="filtre"><div class="sub">Pas sûr de votre profil ? · trouver mon offre en 3 étapes</div>' +
+            '<div class="fld"><div class="lb">1 · Vous êtes</div><div class="chips" id="f1">' +
+            ''.join(f'<button type="button" class="chip" data-v="{v}">{t}</button>' for v, t in [('particulier', 'Particulier'), ('investisseur', 'Investisseur'), ('porteur', 'Porteur de projet'), ('pro', 'Professionnel')]) + '</div></div>' +
+            '<div class="fld"><div class="lb">2 · Où en êtes-vous ?</div><div class="chips" id="f2"></div></div>' +
+            '<div class="fld"><div class="lb">3 · Que cherchez-vous ?</div><div class="chips" id="f3"></div></div>' +
+            '<div class="hint" id="fh">Commencez par votre profil : les choix suivants s\'adaptent.</div>' +
+            '<div class="res" id="fr"></div></section>' +
+            '<section class="sec" id="devis"><div class="sub">Ensuite · accompagnement sur devis</div>' +
+            steps([('01', 'Orientation gratuite', 'Avec AIT (Artificial Intelligence Talk), notre agent conversationnel.'),
+                   ('02', 'Diagnostic', 'Le livrable de votre profil.'),
+                   ('03', 'Accompagnement sur devis', 'Cahier des charges, consultation des intervenants, pilotage jusqu\'à la réalisation.'),
+                   ('04', 'Suivi après réalisation', 'Selon votre projet.')]) + '</section>')
+
+PARCOURS_JS = """<script>
+(function(){
+var HZ='""" + HORIZON + """',INV='""" + INV + """';
+var S2={particulier:['Je vis à l\\u2019étranger','Je vis en Algérie'],investisseur:['Fonds disponibles, sans projet arrêté','Projet identifié'],porteur:['Pré-lancement','Activité en développement'],pro:['Professionnel indépendant','Entreprise en développement']};
+var S3={particulier:['Acheter un logement avec un crédit','Démarches et autorisations'],investisseur:['Connaître le cadre légal','Structurer la société','Préparer le financement'],porteur:['Valider la faisabilité','Monter le dossier','Piloter le projet'],pro:['Documenter','Surveiller les évolutions','Automatiser']};
+var PRIO=['documenter','surveiller','automatiser'];
+var f1=document.getElementById('f1'),f2=document.getElementById('f2'),f3=document.getElementById('f3'),fh=document.getElementById('fh'),fr=document.getElementById('fr'),st={p:null,a:null,b:null};
+function chips(el,list,cur){el.innerHTML=list.map(function(t,i){return '<button type="button" class="chip'+(i===cur?' on':'')+'" data-i="'+i+'">'+t+'</button>';}).join('');}
+function L(t,h,x){return '<a class="lnk" href="'+h+'"'+(x?' target="_blank" rel="noopener"':'')+'>'+t+' '+PSS.ARROW+'</a>';}
+function wa(t){return '<button type="button" class="lnk" data-wa="'+t.replace(/"/g,'&quot;')+'">Demander par WhatsApp '+PSS.ARROW+'</button>';}
+function result(){var p=st.p,a=st.a,b=st.b,r;
+  if(p==='particulier'){r=(a===0&&b===0)?['Plateforme crédit · 5 pays','Depuis la France, l\\u2019Espagne, l\\u2019Allemagne, la Belgique ou le Québec : quatre niveaux, le premier gratuit, jusqu\\u2019à l\\u2019accord de principe de la banque.',L('Commencer gratuitement · niveau 1',HZ,1)+L('Voir les quatre niveaux','#particuliers')]
+    :['Diagnostic','Nous faisons le point sur votre logement ou vos démarches et vous indiquons la première étape.',L('Faire le point sur votre projet','diagnostic.html')+L('Réglementaire &amp; investissement','division-2.html')];}
+  else if(p==='investisseur')r=['Diagnostic initial investisseur (PDF)','Cadre légal, institutions, structure de la société et financement : votre fiche de diagnostic initial, générée par notre plateforme investissement.',L('Obtenir ma fiche de diagnostic initial (PDF)',INV,1)+L('Ce que couvre le diagnostic','#investisseurs')];
+  else if(p==='porteur')r=['Diagnostic de lancement (PDF)',(a===0?'Faisabilité, démarches légales, budget et calendrier.':'Points bloquants, organisation et financement de l\\u2019étape suivante.')+' Il précède l\\u2019accompagnement sur devis.',wa('Je souhaite mon diagnostic de lancement (PDF). Situation : '+S2.porteur[a]+'. Besoin : '+S3.porteur[b]+'.')+L('Voir l\\u2019accompagnement sur devis','#devis')];
+  else r=['IA métier','Votre priorité : '+S3.pro[b].toLowerCase()+'. Le schéma de principe de votre dispositif se prépare sur la page IA métier.',L('Préparer mon schéma de principe','ia-metier.html#'+PRIO[b])];
+  fr.innerHTML='<h3>'+r[0]+'</h3><p>'+r[1]+'</p><div class="row">'+r[2]+'</div>';fr.classList.remove('on');void fr.offsetWidth;fr.classList.add('on');fh.textContent='';}
+function draw(){chips(f2,st.p?S2[st.p]:[],st.a);chips(f3,st.p&&st.a!==null?S3[st.p]:[],st.b);
+  if(!st.p)fh.textContent='Commencez par votre profil : les choix suivants s\\u2019adaptent.';else if(st.a===null)fh.textContent='Où en êtes-vous ?';else if(st.b===null)fh.textContent='Que cherchez-vous ?';
+  if(st.b===null){fr.classList.remove('on');fr.innerHTML='';}else result();}
+f1.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;st={p:b.getAttribute('data-v'),a:null,b:null};f1.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('on',c===b);});draw();});
+f2.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;st.a=+b.getAttribute('data-i');st.b=null;draw();});
+f3.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;st.b=+b.getAttribute('data-i');draw();});
+document.addEventListener('click',function(e){var b=e.target.closest('[data-wa]');if(!b)return;window.open(PSS.wa('Bonjour Praetorian Sentinel Smart, '+b.getAttribute('data-wa')),'_blank');});
+draw();
+})();
+</script>"""
+
+# ---- IA métier ----
+IA = (head('IA métier', 'L\'intelligence artificielle, adaptée à votre métier', 'Un même socle, des options selon votre activité : documenter, surveiller les évolutions, automatiser.') +
+      '<section class="sec first"><div class="sub">Ce que nous mettons en place</div><div class="dgrid">' +
+      card('#filtre-ia" id="documenter" data-prio="0', I_DOC, 'Documentaire interactif', 'Votre base de documents interrogée en langage courant : modèles, textes, procédures.') +
+      card('#filtre-ia" id="surveiller" data-prio="1', I_EYE, 'Veille métier', 'Un agent qui suit en continu les évolutions de votre secteur et vous signale ce qui change.') +
+      card('#filtre-ia" id="automatiser" data-prio="2', I_CHIP, 'Assistants et automatisation', 'Les tâches répétitives de vos circuits de travail prises en charge.') + '</div></section>' +
+      '<section class="sec"><div class="sub">Le socle commun</div>' +
+      p('Toutes nos solutions reposent sur les mêmes fondations : un serveur et sa base de données, un agent qui actualise les informations en arrière-plan, un orchestrateur qui coordonne les agents, et une interface qui génère et régénère vos documents. Les options s\'ajoutent selon votre métier.') + '</section>' +
+      '<section class="sec flt" id="filtre-ia"><div class="sub">Préparer mon schéma de principe</div>' +
+      '<div class="fld"><div class="lb">1 · Votre profil</div><div class="chips" data-g="profil">' + ''.join(f'<button type="button" class="chip">{t}</button>' for t in ['Professionnel', 'Entreprise en développement', 'Investisseur']) + '</div></div>' +
+      '<div class="fld"><div class="lb">2 · Votre métier</div><div class="chips" data-g="metier">' + ''.join(f'<button type="button" class="chip">{t}</button>' for t in ['Juridique', 'BTP et marchés', 'Commerce extérieur', 'Santé', 'Immobilier', 'Autre']) + '</div></div>' +
+      '<div class="fld"><div class="lb">3 · Votre priorité</div><div class="chips" data-g="prio">' + ''.join(f'<button type="button" class="chip">{t}</button>' for t in ['Documenter', 'Surveiller', 'Automatiser']) + '</div></div>' +
+      '<div class="hint" id="ih">Trois choix, puis votre schéma de principe se télécharge en PDF.</div>' +
+      '<div class="res" id="ir"></div></section>')
+
+IA_JS = """<script>
+(function(){
+var OPT=[['Documentaire interactif','agent conversationnel relié à votre base de documents'],['Veille métier','agent qui surveille les textes et les évolutions de votre secteur'],['Assistants et automatisation','agents qui prennent en charge vos tâches répétitives']];
+var sel={profil:null,metier:null,prio:null},ih=document.getElementById('ih'),ir=document.getElementById('ir');
+var groups=[].slice.call(document.querySelectorAll('#filtre-ia [data-g]'));
+function txt(g){var c=document.querySelector('#filtre-ia [data-g="'+g+'"] .chip.on');return c?c.textContent:null;}
+function update(){sel.profil=txt('profil');sel.metier=txt('metier');sel.prio=txt('prio');
+  var miss=['profil','metier','prio'].filter(function(k){return !sel[k];});
+  if(miss.length){ih.textContent=miss.length===3?'Trois choix, puis votre schéma de principe se télécharge en PDF.':'Encore '+miss.length+' choix.';ir.classList.remove('on');return;}
+  ih.textContent='';var i=['Documenter','Surveiller','Automatiser'].indexOf(sel.prio);
+  ir.innerHTML='<h3>Votre schéma de principe</h3><p>Socle commun + '+OPT[i][0].toLowerCase()+' ('+OPT[i][1]+'), pour le métier : '+sel.metier.toLowerCase()+'.</p><div class="row"><button type="button" class="lnk" id="ipdf">Télécharger mon schéma de principe (PDF) '+PSS.ARROW+'</button><button type="button" class="lnk" id="iwa">Demander une démonstration '+PSS.ARROW+'</button></div>';
+  ir.classList.remove('on');void ir.offsetWidth;ir.classList.add('on');}
+groups.forEach(function(g){g.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;g.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('on',c===b);});update();});});
+function pick(i){var g=document.querySelector('#filtre-ia [data-g="prio"]');g.querySelectorAll('.chip').forEach(function(c,j){c.classList.toggle('on',j===i);});update();}
+document.querySelectorAll('[data-prio]').forEach(function(a){a.addEventListener('click',function(){pick(+a.getAttribute('data-prio'));});});
+var hm={documenter:0,surveiller:1,automatiser:2};if(location.hash.slice(1) in hm)pick(hm[location.hash.slice(1)]);
+/* ---- schéma de principe : dessin dans la charte puis PDF d'une page ---- */
+function img(src){return new Promise(function(r){var i=new Image();i.onload=function(){r(i);};i.onerror=function(){r(null);};i.src=src;});}
+function wrap(g,t,x,y,w,lh){var ws=t.split(' '),l='';ws.forEach(function(m){var k=l?l+' '+m:m;if(g.measureText(k).width>w&&l){g.fillText(l,x,y);y+=lh;l=m;}else l=k;});if(l)g.fillText(l,x,y);return y+lh;}
+function node(g,x,y,w,h,t1,t2,on){g.fillStyle=on?'rgba(57,195,255,.16)':'rgba(6,14,24,.9)';g.strokeStyle=on?'#39c3ff':'rgba(90,190,240,.45)';g.lineWidth=on?3:2;g.beginPath();g.rect(x,y,w,h);g.fill();g.stroke();
+  g.fillStyle=on?'#eaf7fd':'#cfe0ea';g.font='500 23px PSS, sans-serif';g.textAlign='center';g.fillText(t1,x+w/2,y+h/2-(t2?6:-9));if(t2){g.fillStyle=on?'#8fe0ff':'#7f93a3';g.font='300 19px PSS, sans-serif';g.fillText(t2,x+w/2,y+h/2+26);}g.textAlign='left';}
+function track(g,pts,on){g.strokeStyle=on?'#5fd4ff':'rgba(90,170,210,.5)';g.lineWidth=on?3:2;g.beginPath();pts.forEach(function(p,i){i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1]);});g.stroke();
+  [pts[0],pts[pts.length-1]].forEach(function(p){g.fillStyle='#02060b';g.beginPath();g.arc(p[0],p[1],7,0,6.283);g.fill();g.strokeStyle=on?'#8fe0ff':'rgba(120,200,240,.7)';g.lineWidth=2;g.stroke();});}
+async function schema(){var W=1240,H=1754,c=document.createElement('canvas');c.width=W;c.height=H;var g=c.getContext('2d');
+  var bg=await img('assets/fond-profond.jpg'),em=await img('assets/emblem-cadre.png'),wm=await img('assets/praetorian.png');
+  g.fillStyle='#02060b';g.fillRect(0,0,W,H);if(bg){g.globalAlpha=.22;var s=Math.max(W/bg.width,H/bg.height);g.drawImage(bg,(W-bg.width*s)/2,(H-bg.height*s)/2,bg.width*s,bg.height*s);g.globalAlpha=1;}
+  if(em)g.drawImage(em,70,60,146,138);if(wm)g.drawImage(wm,240,88,385,82);
+  g.strokeStyle='rgba(90,170,210,.35)';g.lineWidth=2;g.beginPath();g.moveTo(70,230);g.lineTo(W-70,230);g.stroke();
+  g.fillStyle='#5baacb';g.font='400 22px PSS, sans-serif';g.fillText('SCHÉMA DE PRINCIPE · IA MÉTIER',70,290);
+  g.fillStyle='#f2f5f7';g.font='300 52px PSS, sans-serif';g.fillText(sel.metier,70,360);
+  g.fillStyle='#a9b8c4';g.font='300 24px PSS, sans-serif';g.fillText('Profil : '+sel.profil+'  ·  Priorité : '+sel.prio,70,405);
+  var i=['Documenter','Surveiller','Automatiser'].indexOf(sel.prio);
+  /* socle */
+  g.fillStyle='#5acef6';g.font='400 22px PSS, sans-serif';g.fillText('LE SOCLE COMMUN',70,490);
+  g.strokeStyle='rgba(90,190,240,.25)';g.lineWidth=2;g.strokeRect(70,515,W-140,560);
+  node(g,470,740,300,110,'Orchestrateur','coordonne les agents',true);
+  node(g,120,560,300,110,'Serveur','et base de données');node(g,820,560,300,110,'Agent arrière-plan','actualisation');
+  node(g,120,920,300,110,'Interface','génération, régénération');node(g,820,920,300,110,'API','échanges entre agents');
+  track(g,[[420,615],[520,615],[560,655],[560,740]]);track(g,[[820,615],[720,615],[680,655],[680,740]]);
+  track(g,[[420,975],[520,975],[560,935],[560,850]]);track(g,[[820,975],[720,975],[680,935],[680,850]]);
+  /* options */
+  g.fillStyle='#5acef6';g.font='400 22px PSS, sans-serif';g.fillText('LES OPTIONS POUR VOTRE MÉTIER',70,1150);
+  for(var k=0;k<3;k++){var y=1180+k*120,on=k===i;node(g,70,y,W-140,96,'','',on);
+    g.fillStyle=on?'#eaf7fd':'#7f93a3';g.font='500 27px PSS, sans-serif';g.fillText((on?'Retenue · ':'En option · ')+OPT[k][0],100,y+42);
+    g.fillStyle=on?'#8fe0ff':'#5f7383';g.font='300 21px PSS, sans-serif';g.fillText(OPT[k][1],100,y+76);}
+  track(g,[[620,1075],[620,1180]],true);
+  g.fillStyle='#a9b8c4';g.font='300 21px PSS, sans-serif';wrap(g,'Document indicatif, établi à partir de vos réponses. Il est précisé lors du diagnostic, puis chiffré sur devis.',70,1580,W-140,30);
+  g.fillStyle='#5a8fe0';g.font='500 22px PSS, sans-serif';g.fillText('WhatsApp Business',70,1665);g.fillStyle='#e6eef4';g.fillText('+213 555 37 23 45',90+g.measureText('WhatsApp Business').width,1665);
+  g.fillStyle='#5a8fe0';g.fillText('Email',70,1700);g.fillStyle='#e6eef4';g.fillText(PSS.MAIL,90+g.measureText('Email').width,1700);
+  return c;}
+function pdf(jpeg,w,h){var b=atob(jpeg.split(',')[1]),im=new Uint8Array(b.length);for(var i=0;i<b.length;i++)im[i]=b.charCodeAt(i);
+  var enc=new TextEncoder(),parts=[],off=[],len=0;function add(x){if(typeof x==='string')x=enc.encode(x);parts.push(x);len+=x.length;}
+  var PW=595.28,PH=841.89;add('%PDF-1.4\\n');
+  off[1]=len;add('1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj\\n');off[2]=len;add('2 0 obj<</Type/Pages/Kids[3 0 R]/Count 1>>endobj\\n');
+  off[3]=len;add('3 0 obj<</Type/Page/Parent 2 0 R/MediaBox[0 0 '+PW+' '+PH+']/Resources<</XObject<</Im0 4 0 R>>>>/Contents 5 0 R>>endobj\\n');
+  off[4]=len;add('4 0 obj<</Type/XObject/Subtype/Image/Width '+w+'/Height '+h+'/ColorSpace/DeviceRGB/BitsPerComponent 8/Filter/DCTDecode/Length '+im.length+'>>stream\\n');add(im);add('\\nendstream endobj\\n');
+  var cs='q '+PW+' 0 0 '+PH+' 0 0 cm /Im0 Do Q';off[5]=len;add('5 0 obj<</Length '+cs.length+'>>stream\\n'+cs+'\\nendstream endobj\\n');
+  var x=len,t='xref\\n0 6\\n0000000000 65535 f \\n';for(var k=1;k<=5;k++)t+=String(off[k]).padStart(10,'0')+' 00000 n \\n';
+  add(t+'trailer<</Size 6/Root 1 0 R>>\\nstartxref\\n'+x+'\\n%%EOF');return new Blob(parts,{type:'application/pdf'});}
+ir.addEventListener('click',async function(e){
+  if(e.target.closest('#iwa')){window.open(PSS.wa('Bonjour Praetorian Sentinel Smart, je souhaite une démonstration IA métier. Profil : '+sel.profil+'. Métier : '+sel.metier+'. Priorité : '+sel.prio+'.'),'_blank');return;}
+  if(!e.target.closest('#ipdf'))return;
+  var c=await schema(),blob=pdf(c.toDataURL('image/jpeg',.92),c.width,c.height),a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download='PSS-schema-de-principe-'+sel.metier.toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9]+/g,'-')+'.pdf';document.body.appendChild(a);a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},4000);});
+})();
+</script>"""
+
+PAGES['parcours'] = ('parcours', 'Votre parcours · À qui nous adressons-nous ?', 'Particuliers, investisseurs, porteurs de projet, professionnels : votre profil, votre livrable.', PARCOURS)
+PAGES['ia-metier'] = ('ia', 'IA métier · L\'intelligence artificielle adaptée à votre métier', 'Documentaire interactif, veille métier, assistants et automatisation : un socle commun et des options selon votre métier.', IA)
+EXTRA_JS = {'parcours': PARCOURS_JS, 'ia-metier': IA_JS}
+
 FAQ = [('Où intervenez-vous ?', 'Le cabinet accompagne les projets liés à l\'Algérie, depuis l\'Algérie et depuis l\'étranger : France, Espagne, Allemagne, Belgique, Québec.'),
        ('Faut-il créer un compte ?', 'Non. Le parcours d\'avis fonctionne sans inscription.'),
        ('Ma photo est-elle envoyée au cabinet ?', 'Non. La photo reste sur votre appareil et est intégrée à votre fiche en image (PNG).'),
        ('Comment partager mon avis ?', 'Vous préparez votre fiche, puis vous la téléchargez ou choisissez le partage proposé par votre téléphone. Vous confirmez vous-même la publication.'),
-       ('Comment accéder à Algérie Horizon ?', 'Le lien logement et crédit diaspora se trouve dans les pôles Réglementaire &amp; investissement et Ingénierie financière.')]
+       ('Comment accéder à la plateforme crédit ?', 'Dans Votre parcours, section Particuliers · crédit depuis l\'étranger : quatre niveaux, le premier gratuit, pour la France, l\'Espagne, l\'Allemagne, la Belgique et le Québec.')]
 
 PAGES['faq'] = ('contact', 'Questions fréquentes · Vos questions, nos réponses', 'Questions fréquentes sur le cabinet Praetorian Sentinel Smart.',
                 head('Questions fréquentes', 'Vos questions, nos réponses', None, ('Contactez-nous', 'contact.html')) +
@@ -203,12 +374,12 @@ PAGES['faq'] = ('contact', 'Questions fréquentes · Vos questions, nos réponse
                 '<div class="row">' + lnk('Poser une autre question', 'contact.html') + '</div></section>')
 
 PLAN_EXTRA = [('·', 'Espace client', 'espace.html', [('Base documentaire', 'documentation.html')])]
-SECS = [('01', 'Accueil', 'index.html', [('Pour qui ?', 'index.html#pour-qui'), ('Nos solutions', 'index.html#services'), ('AIT', 'index.html#agent')]),
-        ('02', 'Le cabinet', 'cabinet.html', [('Notre méthode', 'methode.html'), ('Nos références', 'references.html'), ('Notre conformité', 'notreconformite.html'), ('Nous rejoindre', 'carrieres.html')]),
-        ('03', 'Nos segments', 'divisions.html', [('3.1 Réglementaire &amp; investissement', 'division-2.html'), ('3.2 Maîtrise d\'ouvrage', 'division-3.html'), ('3.3 Ingénierie financière', 'division-4.html'), ('3.4 Architecture intelligente augmentée', 'division-1.html')]),
-        ('04', 'Académie PSS', 'academie.html', []),
-        ('05', 'Nos offres', 'toutes-les-offres.html', [('Diagnostic', 'diagnostic.html'), ('Toutes les offres', 'toutes-les-offres.html')]),
-        ('06', 'Avis clients', 'avis.html', [('6.1 Références professionnelles', 'references.html'), ('6.2 Donner votre avis', 'donner-mon-avis.html')]),
+SECS = [('01', 'Accueil', 'index.html', [('Vous êtes ?', 'index.html#pour-qui'), ('Nos solutions', 'index.html#services'), ('AIT', 'index.html#agent')]),
+        ('02', 'Le cabinet', 'cabinet.html', [('Notre méthode', 'methode.html'), ('Nos domaines d\'expertise', 'divisions.html'), ('Nos références', 'references.html'), ('Notre conformité', 'notreconformite.html'), ('Nous rejoindre', 'carrieres.html')]),
+        ('03', 'Votre parcours · À qui nous adressons-nous ?', 'parcours.html', [('Particuliers · crédit depuis l\'étranger (5 pays)', 'parcours.html#particuliers'), ('Investisseurs · diagnostic initial (PDF)', 'parcours.html#investisseurs'), ('Porteurs de projet · diagnostic de lancement (PDF)', 'parcours.html#porteurs'), ('Professionnels et entreprises · IA métier', 'parcours.html#professionnels'), ('Trouver mon offre en 3 étapes', 'parcours.html#filtre'), ('Accompagnement sur devis', 'parcours.html#devis')]),
+        ('04', 'IA métier', 'ia-metier.html', [('Documentaire interactif', 'ia-metier.html#documenter'), ('Veille métier', 'ia-metier.html#surveiller'), ('Assistants et automatisation', 'ia-metier.html#automatiser')]),
+        ('05', 'Académie PSS', 'academie.html', [('Nos formations', 'academie.html')]),
+        ('06', 'Avis clients', 'avis.html', [('Références professionnelles', 'references.html'), ('Donner votre avis', 'donner-mon-avis.html')]),
         ('07', 'Contactez-nous', 'contact.html', [('Contact', 'contact.html'), ('Questions fréquentes', 'faq.html')])]
 LEG = [('Mentions légales', 'mentions.html'), ('Confidentialité', 'confidentialite.html'), ('Conditions', 'conditions.html'), ('Conformité', 'notreconformite.html'), ('FAQ', 'faq.html'), ('Plan du site', 'plan.html')]
 tree = '<ul class="tree">' + ''.join(
@@ -247,6 +418,6 @@ document.querySelectorAll('.qa button').forEach(function(b){b.addEventListener('
 
 for name, (s, title, desc, content) in PAGES.items():
     html = TPL.format(title=title.replace('&amp;', '&'), desc=desc.replace('"', '&quot;'), name=name, sec=s, content=content,
-                      extra=FAQ_JS if name == 'faq' else '')
+                      extra=FAQ_JS if name == 'faq' else EXTRA_JS.get(name, ''))
     open(os.path.join(ROOT, name + '.html'), 'w', encoding='utf-8').write(html)
     print('ok', name)

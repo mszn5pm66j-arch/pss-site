@@ -4,12 +4,12 @@
   var MAIL = 'men-ay_pro-managment@outlook.fr';
   var FB = 'https://www.facebook.com/search/top?q=Praetorian%20Sentinel%20Smart';
   var SECTIONS = [
-    { id: 'accueil', n: '01', t: 'Accueil', href: 'index.html', subs: [['Pour qui ?', 'index.html#pour-qui'], ['Nos solutions', 'index.html#services'], ['AIT', 'index.html#agent']] },
-    { id: 'cabinet', n: '02', t: 'Le cabinet', href: 'cabinet.html', s: 'Qui nous sommes et comment nous travaillons', subs: [['Notre méthode', 'methode.html'], ['Nos références', 'references.html'], ['Notre conformité', 'notreconformite.html'], ['Nous rejoindre', 'carrieres.html']] },
-    { id: 'segments', n: '03', t: 'Nos segments', href: 'divisions.html', s: "Pour qui travaillons-nous et nos domaines d'intervention", subs: [['3.1 Réglementaire & investissement', 'division-2.html'], ["3.2 Maîtrise d'ouvrage", 'division-3.html'], ['3.3 Ingénierie financière', 'division-4.html'], ['3.4 Architecture intelligente augmentée', 'division-1.html']] },
-    { id: 'academie', n: '04', t: 'Académie PSS', href: 'academie.html', s: 'Transmettre, former, élever les standards', subs: [] },
-    { id: 'offres', n: '05', t: 'Nos offres', href: 'toutes-les-offres.html', s: 'Ce que nous proposons et nos solutions', subs: [['Diagnostic', 'diagnostic.html'], ['Toutes les offres', 'toutes-les-offres.html']] },
-    { id: 'avis', n: '06', t: 'Avis clients', href: 'avis.html', s: 'Ce qu’ils disent de nous et nos résultats', subs: [['6.1 Références professionnelles', 'references.html'], ['6.2 Donner votre avis', 'donner-mon-avis.html']] },
+    { id: 'accueil', n: '01', t: 'Accueil', href: 'index.html', subs: [['Vous êtes ?', 'index.html#pour-qui'], ['Nos solutions', 'index.html#services'], ['AIT', 'index.html#agent']] },
+    { id: 'cabinet', n: '02', t: 'Le cabinet', href: 'cabinet.html', s: 'Qui nous sommes et comment nous travaillons', subs: [['Notre méthode', 'methode.html'], ["Nos domaines d'expertise", 'divisions.html'], ['Nos références', 'references.html'], ['Notre conformité', 'notreconformite.html'], ['Nous rejoindre', 'carrieres.html']] },
+    { id: 'parcours', n: '03', t: 'Votre parcours', q: 'À qui nous adressons-nous ?', href: 'parcours.html', s: 'À qui nous adressons-nous ?', subs: [['Particuliers · crédit depuis l’étranger (5 pays)', 'parcours.html#particuliers'], ['Investisseurs · diagnostic initial (PDF)', 'parcours.html#investisseurs'], ['Porteurs de projet · diagnostic de lancement (PDF)', 'parcours.html#porteurs'], ['Professionnels et entreprises · IA métier', 'parcours.html#professionnels'], ['Trouver mon offre en 3 étapes', 'parcours.html#filtre'], ['Accompagnement sur devis', 'parcours.html#devis']] },
+    { id: 'ia', n: '04', t: 'IA métier', href: 'ia-metier.html', s: 'L’intelligence artificielle augmentée, adaptée à votre métier', subs: [['Documentaire interactif', 'ia-metier.html#documenter'], ['Veille métier', 'ia-metier.html#surveiller'], ['Assistants et automatisation', 'ia-metier.html#automatiser']] },
+    { id: 'academie', n: '05', t: 'Académie PSS', href: 'academie.html', s: 'Transmettre, former, élever les standards', subs: [['Nos formations', 'academie.html']] },
+    { id: 'avis', n: '06', t: 'Avis clients', href: 'avis.html', s: 'Ce qu’ils disent de nous et nos résultats', subs: [['Références professionnelles', 'references.html'], ['Donner votre avis', 'donner-mon-avis.html']] },
     { id: 'contact', n: '07', t: 'Contactez-nous', href: 'contact.html', s: 'Entrer en relation avec le cabinet', subs: [['Contact', 'contact.html'], ['Questions fréquentes', 'faq.html']] }
   ];
   var EXTRA = [{ id: 'espace', n: '··', t: 'Espace client', href: 'espace.html', subs: [['Base documentaire', 'documentation.html']] }];
@@ -71,7 +71,7 @@
   var here = location.pathname.split('/').pop() || 'index.html';
   var groups = SECTIONS.concat(EXTRA).map(function (s) {
     var on = s.id === secId;
-    return '<div class="grp"><a class="top' + (on ? ' on' : '') + '" href="' + (isHome && s.id !== 'accueil' && s.id !== 'espace' ? 'index.html#' + s.id : s.href) + '">' + s.t + '</a>' +
+    return '<div class="grp"><a class="top' + (on ? ' on' : '') + (s.q ? ' hasq' : '') + '" href="' + (isHome && s.id !== 'accueil' && s.id !== 'espace' ? 'index.html#' + s.id : s.href) + '">' + s.t + (s.q ? '<span class="q">' + s.q + '</span>' : '') + '</a>' +
       (s.subs.length ? '<div class="subs">' + s.subs.map(function (x) { return '<a href="' + x[1] + '"' + (x[1] === here ? ' class="on"' : '') + '>' + x[0].replace(/^\d+\.\d+\s+/, '') + '</a>'; }).join('') + '</div>' : '') + '</div>';
   }).join('');
   var ov = el('<nav class="ov" aria-label="Menu principal"><div class="ov-in">' + groups + footer() + '</div></nav>');
