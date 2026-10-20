@@ -95,22 +95,45 @@
   stage.appendChild(nav);
   var items = SECTIONS.map(function (s) { return { t: s.t, href: isHome ? (s.id === 'accueil' ? '#' : '#' + s.id) : s.href, s: s.s, n: s.n }; });
   var cur = secIdx;
+  var SLOT = 254, CX = 591;
+  function labPos(d) { return 'calc(' + (CX + d * SLOT) + ' * var(--u))'; }
+  function labCls(d) { return d === 0 ? ' on' : (Math.abs(d) === 1 ? ' side' : ' far'); }
+  function capHtml(k, caption) {
+    return caption ? '<div class="t">' + items[k].t.toUpperCase() + '</div><div class="s">' + (items[k].s || '') + '</div>' : '';
+  }
   function drawNav(k, caption) {
     cur = k;
-    var h = '<div class="cap' + (caption ? ' on' : '') + '">' + (caption ? '<div class="t">' + items[k].t.toUpperCase() + '</div><div class="s">' + (items[k].s || '') + '</div>' : '') + '</div><div class="labs">';
-    [k - 1, k, k + 1].forEach(function (j, p) {
-      if (j < 0 || j >= items.length) return;
-      h += '<a class="lab p' + p + (p === 1 ? ' on' : '') + '" href="' + items[j].href + '" data-k="' + j + '">' + (p === 1 ? items[j].t : items[j].t.replace('Nos segments', 'Nos<br>segments').replace('Académie PSS', 'Académie<br>PSS').replace('Contactez-nous', 'Contactez-<br>nous')) + '</a>';
-    });
+    var h = '<div class="cap' + (caption ? ' on' : '') + '">' + capHtml(k, caption) + '</div><div class="labs">';
+    for (var j = 0; j < items.length; j++) {
+      var d = j - k;
+      h += '<a class="lab' + labCls(d) + '" style="left:' + labPos(d) + '" href="' + items[j].href + '" data-k="' + j + '">' + items[j].t + '</a>';
+    }
     h += '</div><div class="track"></div>';
-    [0, 1, 2].forEach(function (p) { if (k - 1 + p >= 0 && k - 1 + p < items.length) h += '<span class="star p' + p + (p === 1 ? ' on' : '') + '"></span>'; });
-    var ic = page === 'espace' || page === 'documentation' ? 0 : (isHome || page === 'index' ? 1 : -1);
+    for (var s = 0; s < items.length; s++) h += '<span class="star' + labCls(s - k) + '" data-k="' + s + '" style="left:' + labPos(s - k) + '"></span>';
+    var ic = page === 'espace' || page === 'documentation' ? 0 : (isHome ? 1 : -1);
     h += '<button class="chev l" aria-label="Rubrique précédente">' + CL + '</button><button class="chev r" aria-label="Rubrique suivante">' + CR + '</button>' +
       '<a class="ic i0' + (ic === 0 ? ' on' : '') + '" href="espace.html" aria-label="Espace client">' + I_USER + '</a>' +
       '<a class="ic i1' + (ic === 1 ? ' on' : '') + '" href="' + (isHome ? '#services' : 'index.html#services') + '" aria-label="Nos solutions">' + I_CASE + '</a>' +
       '<a class="ic i2" href="' + PSS.wa('Bonjour Praetorian Sentinel Smart, ') + '" target="_blank" rel="noopener" aria-label="WhatsApp PSS">' + I_SCREEN + '</a>';
     nav.innerHTML = h;
     setScout(k);
+  }
+  /* glissement de la barre du bas au rythme de la caméra */
+  function slideNav(k, caption, ms) {
+    cur = k;
+    var cap = nav.querySelector('.cap'), t = (ms / 1000).toFixed(2) + 's';
+    if (cap) { cap.style.transition = 'opacity ' + Math.min(0.5, ms / 3000).toFixed(2) + 's'; cap.classList.remove('on'); }
+    nav.querySelectorAll('.lab,.star').forEach(function (e) {
+      var d = +e.getAttribute('data-k') - k;
+      e.style.transitionDuration = t;
+      e.className = e.className.replace(/ ?(on|side|far)\b/g, '') + labCls(d);
+      e.style.left = labPos(d);
+    });
+    scout.style.transitionDuration = t; setScout(k);
+    clearTimeout(slideNav.tm);
+    slideNav.tm = setTimeout(function () {
+      if (cap) { cap.innerHTML = capHtml(k, caption); cap.style.transition = 'opacity .6s'; if (caption) cap.classList.add('on'); }
+    }, Math.max(0, ms - 350));
   }
   window.PSS.go = null; /* l'accueil peut remplacer la navigation */
   function go(d) {
@@ -130,6 +153,7 @@
     if (Math.abs(dx) > 45) go(dx < 0 ? 1 : -1);
   });
   window.PSS.setNav = drawNav;
+  window.PSS.slideNav = slideNav;
   window.PSS.toggleMenu = toggle;
   window.PSS.items = items;
 })();

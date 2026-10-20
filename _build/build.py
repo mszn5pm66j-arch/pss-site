@@ -198,6 +198,7 @@ TPL = '''<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
+<meta name="theme-color" content="#02060b">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{title} · Praetorian Sentinel Smart</title>
 <meta name="description" content="{desc}">

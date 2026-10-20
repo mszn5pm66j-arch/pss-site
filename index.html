@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
+<meta name="theme-color" content="#02060b">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Praetorian Sentinel Smart</title>
 <meta name="description" content="Votre projet en Algérie : trouvez votre profil, découvrez nos solutions et échangez avec AIT.">
@@ -48,7 +49,7 @@
      </div>
     </div>
    </div>
-   <div class="monument" aria-hidden="true"><img src="assets/monument.png" alt=""></div>
+   <div class="monument" aria-hidden="true"><img src="assets/dessin-accueil.png" alt=""></div>
    <div class="dots" id="dots"><button class="on" aria-label="Diapositive 1"></button><button aria-label="Diapositive 2"></button><button aria-label="Diapositive 3"></button><span id="dotn">01 / 03</span></div>
    <form class="ait" id="ait">
     <div class="spark"><svg viewBox="0 0 24 24"><path d="M10 3l1.6 4.9L16.5 9.5l-4.9 1.6L10 16l-1.6-4.9L3.5 9.5l4.9-1.6zM18 13l.8 2.2 2.2.8-2.2.8L18 19l-.8-2.2-2.2-.8 2.2-.8z"/></svg></div>
@@ -82,24 +83,24 @@
   var k=0, busy=false;
   for(var j=0;j<6;j++){var im=new Image();im.src='media/stop-'+j+'.jpg';}
 
+  var RATE=1.6;
   function caption(){PSS.setNav(k,k>0);}
   function setHash(){history.replaceState(null,'',k===0?location.pathname:'#'+IDS[k]);}
   function showHome(){home.classList.remove('off');scene.classList.remove('on');}
   function showScene(){home.classList.add('off');scene.classList.add('on');stopAuto();}
 
   function play(v,from,to,done){
-    var fin=false;
+    var fin=false,started=false;
     function end(){if(fin)return;fin=true;v.pause();v.removeEventListener('playing',onp);done();}
     function onp(){v.classList.add('act');scene.classList.add('moving');}
-    function tick(){if(fin)return; if(v.currentTime>=to-0.04)end(); else requestAnimationFrame(tick);}
-    var started=false;
+    function tick(){if(fin)return; if(v.currentTime>=to-0.03)end(); else requestAnimationFrame(tick);}
     function start(){
       if(started)return;started=true;v.removeEventListener('seeked',start);
-      v.addEventListener('playing',onp);
+      v.addEventListener('playing',onp);v.playbackRate=RATE;
       var p=v.play();
       if(p&&p.then)p.then(function(){requestAnimationFrame(tick);}).catch(function(){end();});
       else requestAnimationFrame(tick);
-      setTimeout(end,(to-from)*1000+2500);
+      setTimeout(end,(to-from)/RATE*1000+2500);
     }
     if(Math.abs(v.currentTime-from)<0.05)start();
     else{v.addEventListener('seeked',start);try{v.currentTime=from;}catch(e){}setTimeout(start,1500);}
@@ -113,14 +114,14 @@
 
   function goTo(n,anim){
     if(busy||n===k)return;
-    var from=k; k=n; caption(); setHash();
-    if(n===0){showHome();return;}
-    if(from===0){still.src='media/stop-'+(n-1)+'.jpg';showScene();return;}
-    var a=from-1,b=n-1; busy=true;
-    if(anim!==false&&b===a+1){play(vf,MS[a],STOP[a+1],function(){arrive(b);});}
-    else if(anim!==false&&a===5&&b===0){play(vf,MS[5],STOP[6],function(){arrive(0);});}
-    else if(anim!==false&&b===a-1){vr.preload='auto';play(vr,D-ME[b],D-STOP[b]-0.05,function(){arrive(b);});}
-    else fadeTo(b);
+    var from=k; k=n; setHash();
+    if(n===0){PSS.slideNav(0,false,900);showHome();return;}
+    if(from===0){still.src='media/stop-'+(n-1)+'.jpg';PSS.slideNav(n,true,900);showScene();return;}
+    var a=from-1,b=n-1,dur; busy=true;
+    if(anim!==false&&b===a+1){dur=(ME[a]-MS[a])/RATE;PSS.slideNav(n,true,dur*1000);play(vf,MS[a],ME[a]+0.1,function(){arrive(b);});}
+    else if(anim!==false&&a===5&&b===0){dur=(ME[5]-MS[5])/RATE;PSS.slideNav(n,true,dur*1000);play(vf,MS[5],ME[5]+0.1,function(){arrive(0);});}
+    else if(anim!==false&&b===a-1){dur=(ME[b]-MS[b])/RATE;PSS.slideNav(n,true,dur*1000);vr.preload='auto';play(vr,D-ME[b]-0.1,D-MS[b],function(){arrive(b);});}
+    else {PSS.slideNav(n,true,700);fadeTo(b);}
   }
   PSS.go=function(d){
     if(k===6&&d===1)return goTo(1);      /* après « Contactez-nous », retour au cabinet comme dans la vidéo */
