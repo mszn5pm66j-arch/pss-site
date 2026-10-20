@@ -50,7 +50,26 @@
      </div>
     </div>
    </div>
-   <div class="monument" aria-hidden="true"><img src="assets/dessin-accueil.png" alt=""></div>
+   <div class="monument" aria-hidden="true">
+    <img class="base" src="assets/dessin-accueil.png" alt="">
+    <svg class="socle" viewBox="0 0 904 1088" preserveAspectRatio="none">
+     <defs>
+      <radialGradient id="sg-core"><stop offset="0" stop-color="#eafaff"/><stop offset=".35" stop-color="#5fd4ff" stop-opacity=".75"/><stop offset="1" stop-color="#39c3ff" stop-opacity="0"/></radialGradient>
+      <linearGradient id="sg-scan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5fd4ff" stop-opacity="0"/><stop offset=".5" stop-color="#9be6ff" stop-opacity=".55"/><stop offset="1" stop-color="#5fd4ff" stop-opacity="0"/></linearGradient>
+      <clipPath id="sg-disk"><ellipse cx="387" cy="917" rx="150" ry="86"/></clipPath>
+     </defs>
+     <g clip-path="url(#sg-disk)"><rect class="scan" x="230" y="800" width="320" height="34" fill="url(#sg-scan)"/></g>
+     <ellipse class="ring r1" cx="387" cy="917" rx="178" ry="102" pathLength="1000"/>
+     <ellipse class="ring r2" cx="387" cy="917" rx="138" ry="78" pathLength="1000"/>
+     <ellipse class="ring r3" cx="387" cy="917" rx="163" ry="93" pathLength="1000"/>
+     <ellipse class="ripple" cx="387" cy="917" rx="163" ry="93"/>
+     <circle class="core" cx="387" cy="913" r="58" fill="url(#sg-core)"/>
+    </svg>
+    <img class="mot w1" src="assets/mot-orienter.png" alt="" style="left:12.168%;top:31.526%;width:21.018%">
+    <img class="mot w2" src="assets/mot-piloter.png" alt="" style="left:62.832%;top:35.018%;width:18.695%">
+    <img class="mot w3" src="assets/mot-metier.png" alt="" style="left:64.381%;top:60.662%;width:23.23%">
+    <img class="mot w4" src="assets/mot-monter.png" alt="" style="left:14.712%;top:64.614%;width:17.588%">
+   </div>
    <div class="dots" id="dots"><button class="on" aria-label="Diapositive 1"></button><button aria-label="Diapositive 2"></button><button aria-label="Diapositive 3"></button><span id="dotn">01 / 03</span></div>
    <form class="ait" id="ait">
     <div class="spark"><svg viewBox="0 0 24 24"><path d="M10 3l1.6 4.9L16.5 9.5l-4.9 1.6L10 16l-1.6-4.9L3.5 9.5l4.9-1.6zM18 13l.8 2.2 2.2.8-2.2.8L18 19l-.8-2.2-2.2-.8 2.2-.8z"/></svg></div>

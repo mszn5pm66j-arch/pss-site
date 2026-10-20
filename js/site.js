@@ -96,7 +96,7 @@
   var items = SECTIONS.map(function (s) { return { t: s.t, href: isHome ? (s.id === 'accueil' ? '#' : '#' + s.id) : s.href, s: s.s, n: s.n }; });
   var N = items.length, SLOT = 254, CX = 591;
   var ic = page === 'espace' || page === 'documentation' ? 0 : (isHome ? 1 : -1);
-  var hh = '<div class="cap"></div><div class="labs">';
+  var hh = '<div class="navdrag"></div><div class="cap"></div><div class="labs">';
   items.forEach(function (it, j) { hh += '<a class="lab" draggable="false" href="' + it.href + '" data-k="' + j + '">' + esc(it.t) + '</a>'; });
   hh += '<span class="arc"></span></div><div class="track"></div>';
   items.forEach(function (it, j) { hh += '<span class="star" data-k="' + j + '"></span>'; });
@@ -106,7 +106,7 @@
     '<a class="ic i1' + (ic === 1 ? ' on' : '') + '" href="' + (isHome ? '#services' : 'index.html#services') + '" aria-label="Nos solutions">' + I_CASE + '</a>' +
     '<a class="ic i2" href="' + PSS.wa('Bonjour Praetorian Sentinel Smart, ') + '" target="_blank" rel="noopener" aria-label="WhatsApp PSS">' + I_SCREEN + '</a>';
   nav.innerHTML = hh;
-  var labs = [].slice.call(nav.querySelectorAll('.lab')), stars = [].slice.call(nav.querySelectorAll('.star')), cap = nav.querySelector('.cap');
+  var labs = [].slice.call(nav.querySelectorAll('.lab')), stars = [].slice.call(nav.querySelectorAll('.star')), cap = nav.querySelector('.cap'), arc = nav.querySelector('.arc');
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var pos = secIdx, anim = null, drag = null, listeners = [], settlers = [], showCap = false, capK = -1;
@@ -121,6 +121,7 @@
       var e = labs[j];
       var sc = mix(35 / 27, 1, t);
       var op = ad <= 1.15 ? 1 : clamp(1 - (ad - 1.15) * 2.2, 0, 1);
+      if (isHome && j === 0) op *= clamp(pos / 0.7, 0, 1);   /* sur l'accueil, pas d'étiquette « Accueil » */
       var c = Math.min(1, ad * 1.1);
       e.style.transform = 'translate3d(' + (d * SLOT * u).toFixed(2) + 'px,0,0) scale(' + sc.toFixed(3) + ')';
       e.style.opacity = op.toFixed(3);
@@ -130,6 +131,7 @@
       st.style.transform = 'translate3d(' + (d * SLOT * u).toFixed(2) + 'px,0,0)';
       st.style.opacity = (ad < 0.3 ? ad / 0.3 : (ad > 1.6 ? clamp(1 - (ad - 1.6) * 2.5, 0, 1) : 1)).toFixed(3);
     }
+    if (isHome) arc.style.opacity = clamp(pos / 0.7, 0, 1).toFixed(3);
     scout.style.transitionDuration = '0s';
     scout.style.left = 'calc(' + (915 - pos * 80).toFixed(1) + ' * var(--u))';
     var k = Math.round(pos), still = !drag && !anim && Math.abs(pos - k) < 0.01;
